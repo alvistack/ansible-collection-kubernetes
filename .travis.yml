@@ -17,7 +17,7 @@ before_install:
   - pip --version
 
 install:
-  - ./scripts/bootstrap-ansible.sh
+  - sudo ./scripts/bootstrap-ansible.sh
 
 script:
   - ./scripts/run-tests.sh
