@@ -46,3 +46,7 @@
     path = playbooks/roles/timezone
     url = https://github.com/alvistack/ansible-role-timezone.git
     branch = master
+[submodule "playbooks/roles/yum"]
+	path = playbooks/roles/yum
+	url = https://github.com/alvistack/ansible-role-yum.git
+	branch = master
