@@ -20,18 +20,18 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 
 # Prepare APT dependencies
 if [ -x "$(command -v apt-get)" ]; then
-    sudo apt-get update
-    sudo apt-get -y install build-essential curl git libffi-dev libssl-dev python-dev python-minimal
-    sudo apt-get -y purge python-pip python-openssl
-    sudo apt-get -y autoremove
+    apt-get update
+    apt-get -y install build-essential curl git libffi-dev libssl-dev python-dev python-minimal
+    apt-get -y purge python-pip python-openssl
+    apt-get -y autoremove
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
-    sudo yum -y install epel-release
-    sudo yum -y install curl gcc git libffi-devel openssl-devel python python python-devel python-urllib3 redhat-rpm-config
-    sudo yum -y remove python-pip pyOpenSSL
-    sudo yum -y autoremove
+    yum -y install epel-release
+    yum -y install curl gcc git libffi-devel openssl-devel python python python-devel python-urllib3 redhat-rpm-config
+    yum -y remove python-pip pyOpenSSL
+    yum -y autoremove
 fi
 
 # Install PIP
