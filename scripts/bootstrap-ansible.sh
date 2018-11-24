@@ -41,4 +41,4 @@ curl -skL https://bootstrap.pypa.io/get-pip.py | python
 pip install --upgrade -r requirements.txt
 
 # Bootstrap with Ansible
-ansible-playbook -i localhost, -c local playbooks/bootstrap-ansible.yml
+ansible-playbook -i localhost, -c local playbooks/bootstrap-ansible.yml --diff
