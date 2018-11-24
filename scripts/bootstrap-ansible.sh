@@ -36,7 +36,7 @@ fi
 curl -skL https://bootstrap.pypa.io/get-pip.py | python
 
 # Install PIP dependencies
-pip install -r requirements.txt
+pip install --upgrade -r requirements.txt
 
 # Bootstrap with Ansible
 ansible-playbook -i localhost, playbooks/bootstrap-ansible.yml

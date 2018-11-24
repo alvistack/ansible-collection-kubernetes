@@ -20,7 +20,7 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 
 export ANSIBLE_FORCE_COLOR=true
 export ANSIBLE_LOG_PATH="./ansible.log"
-export ANSIBLE_ROLES_PATH="~/.ansible/roles"
+export ANSIBLE_ROLES_PATH="roles:playbooks/roles:~/.ansible/roles"
 
 DOCKER_IMAGE=${DOCKER_IMAGE:-"hello-world"}
 docker pull $DOCKER_IMAGE
