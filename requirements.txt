@@ -13,4 +13,11 @@
 # limitations under the License.
 
 ansible
+chardet
+ndg-httpsclient
+pyasn1
+pycparser
+pyopenssl
+requests
+urllib3
 yamllint
