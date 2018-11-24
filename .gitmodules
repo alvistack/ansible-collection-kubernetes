@@ -1,48 +1,48 @@
-[submodule "roles/kubespray"]
+[submodule "playbooks/roles/kubespray"]
     path = playbooks/roles/kubespray
     url = https://github.com/kubernetes-incubator/kubespray.git
     branch = master
-[submodule "roles/ceph-ansible"]
+[submodule "playbooks/roles/ceph-ansible"]
     path = playbooks/roles/ceph-ansible
     url = https://github.com/ceph/ceph-ansible.git
     branch = stable-3.2
-[submodule "roles/python"]
+[submodule "playbooks/roles/python"]
     path = playbooks/roles/python
     url = https://github.com/alvistack/ansible-role-python.git
     branch = master
-[submodule "roles/apt"]
+[submodule "playbooks/roles/apt"]
     path = playbooks/roles/apt
     url = https://github.com/alvistack/ansible-role-apt.git
     branch = master
-[submodule "roles/ansible"]
+[submodule "playbooks/roles/ansible"]
     path = playbooks/roles/ansible
     url = https://github.com/alvistack/ansible-role-ansible.git
     branch = master
-[submodule "roles/docker"]
+[submodule "playbooks/roles/docker"]
     path = playbooks/roles/docker
     url = https://github.com/alvistack/ansible-role-docker.git
     branch = master
-[submodule "roles/git"]
+[submodule "playbooks/roles/git"]
     path = playbooks/roles/git
     url = https://github.com/alvistack/ansible-role-git.git
     branch = master
-[submodule "roles/kernel"]
+[submodule "playbooks/roles/kernel"]
     path = playbooks/roles/kernel
     url = https://github.com/alvistack/ansible-role-kernel.git
     branch = master
-[submodule "roles/locales"]
+[submodule "playbooks/roles/locales"]
     path = playbooks/roles/locales
     url = https://github.com/alvistack/ansible-role-locales.git
     branch = master
-[submodule "roles/ntp"]
+[submodule "playbooks/roles/ntp"]
     path = playbooks/roles/ntp
     url = https://github.com/alvistack/ansible-role-ntp.git
     branch = master
-[submodule "roles/sshd"]
+[submodule "playbooks/roles/sshd"]
     path = playbooks/roles/sshd
     url = https://github.com/alvistack/ansible-role-sshd.git
     branch = master
-[submodule "roles/timezone"]
+[submodule "playbooks/roles/timezone"]
     path = playbooks/roles/timezone
     url = https://github.com/alvistack/ansible-role-timezone.git
     branch = master
