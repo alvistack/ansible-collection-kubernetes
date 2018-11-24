@@ -31,6 +31,7 @@ if [ -x "$(command -v yum)" ]; then
     yum -y install epel-release
     yum -y install curl gcc git libffi-devel openssl-devel python python python-devel python-urllib3 redhat-rpm-config
     yum -y remove python-pip
+    yum -y autoremove
 fi
 
 # Install PIP
