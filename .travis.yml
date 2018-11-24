@@ -2,7 +2,7 @@
 
 dist: xenial
 
-language: python
+language: minimal
 
 services: docker
 
@@ -13,8 +13,8 @@ env:
     - DOCKER_IMAGE: 'centos/systemd:latest'
 
 before_install:
-  - python --version
-  - pip --version
+  - docker version
+  - docker info
 
 install:
   - sudo ./scripts/bootstrap-ansible.sh
