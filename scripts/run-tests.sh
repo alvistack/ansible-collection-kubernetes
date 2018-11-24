@@ -28,7 +28,7 @@ docker pull $DOCKER_IMAGE
 DOCKER_ID=${DOCKER_ID:-"$(docker run -itd --privileged -v /var/run/docker.sock:/var/run/docker.sock -v /sys/fs/cgroup:/sys/fs/cgroup:ro --tmpfs /run --tmpfs /run/lock $DOCKER_IMAGE | head -c12)"}
 docker start $DOCKER_ID
 
-yamllint -c .yamllint playbooks tests
+yamllint -c .yamllint playbooks/*.yml tests/*.yml
 ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --syntax-check
 ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff
 ansible-playbook -i $DOCKER_ID, -c docker tests/test.yml --diff
