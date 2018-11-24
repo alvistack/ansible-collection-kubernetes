@@ -22,14 +22,14 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 if [ -x "$(command -v apt-get)" ]; then
     apt-get update
     apt-get -y install build-essential curl git libffi-dev libssl-dev python-dev python-minimal
-    apt-get -y purge python-pip
+    apt-get -y purge python-pip python-openssl
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
     yum -y install epel-release
     yum -y install curl gcc git libffi-devel openssl-devel python python python-devel python-urllib3 redhat-rpm-config
-    yum -y remove python-pip
+    yum -y remove python-pip pyOpenSSL
 fi
 
 # Install PIP
