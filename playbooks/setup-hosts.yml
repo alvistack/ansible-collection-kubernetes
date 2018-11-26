@@ -28,3 +28,4 @@
     - role: timezone
     - role: ntp
     - role: sshd
+    - role: docker

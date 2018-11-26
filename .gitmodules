@@ -1,9 +1,9 @@
-[submodule "playbooks/roles/kubespray"]
-    path = playbooks/roles/kubespray
+[submodule "playbooks/kubespray"]
+    path = playbooks/kubespray
     url = https://github.com/kubernetes-incubator/kubespray.git
     branch = master
-[submodule "playbooks/roles/ceph-ansible"]
-    path = playbooks/roles/ceph-ansible
+[submodule "playbooks/ceph-ansible"]
+    path = playbooks/ceph-ansible
     url = https://github.com/ceph/ceph-ansible.git
     branch = stable-3.2
 [submodule "playbooks/roles/python"]
@@ -47,6 +47,6 @@
     url = https://github.com/alvistack/ansible-role-timezone.git
     branch = master
 [submodule "playbooks/roles/yum"]
-	path = playbooks/roles/yum
-	url = https://github.com/alvistack/ansible-role-yum.git
-	branch = master
+    path = playbooks/roles/yum
+    url = https://github.com/alvistack/ansible-role-yum.git
+    branch = master

@@ -2,22 +2,23 @@
 
 dist: xenial
 
-language: minimal
-
-services: docker
+language: python
 
 env:
   matrix:
-    - DOCKER_IMAGE: 'ubuntu:16.04'
-    - DOCKER_IMAGE: 'ubuntu:18.04'
-    - DOCKER_IMAGE: 'centos/systemd:latest'
+    - LXC_IMAGE: 'images:ubuntu/16.04'
+    - LXC_IMAGE: 'images:ubuntu/18.04'
+    - LXC_IMAGE: 'images:centos/7'
 
 before_install:
-  - docker version
-  - docker info
+  - sudo apt-get -y purge lxc-* lxd-* && sudo apt-get -y autoremove
+  - sudo snap install lxd && sudo lxd init --auto
+  - sudo apt-get -y purge python-openssl && sudo apt-get -y autoremove
+  - sudo -H pip install --upgrade --requirement requirements.txt
 
 install:
-  - sudo -H ./scripts/bootstrap-ansible.sh
+  - mkdir -p $HOME/.ansible/roles
+  - git clone https://github.com/ansible/galaxy-lint-rules.git $HOME/.ansible/galaxy-lint-rules
 
 script:
-  - sudo -H ./scripts/run-tests.sh
+  - sudo ./scripts/run-tests.sh
