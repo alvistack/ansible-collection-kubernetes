@@ -1,6 +1,6 @@
 [submodule "playbooks/kubespray"]
     path = playbooks/kubespray
-    url = https://github.com/kubernetes-incubator/kubespray.git
+    url = https://github.com/kubernetes-sigs/kubespray.git
     branch = master
 [submodule "playbooks/ceph-ansible"]
     path = playbooks/ceph-ansible
