@@ -1,11 +1,3 @@
-[submodule "playbooks/kubespray"]
-    path = playbooks/kubespray
-    url = https://github.com/kubernetes-incubator/kubespray.git
-    branch = master
-[submodule "playbooks/ceph-ansible"]
-    path = playbooks/ceph-ansible
-    url = https://github.com/ceph/ceph-ansible.git
-    branch = stable-3.2
 [submodule "playbooks/roles/python"]
     path = playbooks/roles/python
     url = https://github.com/alvistack/ansible-role-python.git
