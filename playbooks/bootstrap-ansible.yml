@@ -21,8 +21,4 @@
   gather_facts: no
   roles:
     - role: python
-    - role: apt
-    - role: yum
-    - role: ntp
-    - role: sshd
     - role: ansible
