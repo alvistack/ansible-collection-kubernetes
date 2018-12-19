@@ -14,4 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ../playbooks/setup-everythings.yml
+# Use `gather_faces: no` to initialize Python on system that not yet
+# pre-installed with Python (e.g. Ubuntu 16.04 Cloud Image and Docker Image).
+- hosts: all
+  remote_user: root
+  gather_facts: no
+  roles:
+    - role: python
+    - role: ansible

@@ -1,0 +1,24 @@
+---
+
+dist: xenial
+
+language: python
+
+env:
+  matrix:
+    - LXC_IMAGE: 'images:ubuntu/16.04'
+    - LXC_IMAGE: 'images:ubuntu/18.04'
+    - LXC_IMAGE: 'images:centos/7'
+
+before_install:
+  - sudo apt-get -y purge lxc-* lxd-* && sudo apt-get -y autoremove
+  - sudo snap install lxd && sudo lxd init --auto
+  - sudo apt-get -y purge python-openssl && sudo apt-get -y autoremove
+  - sudo -H pip install --upgrade --requirement requirements.txt
+
+install:
+  - mkdir -p $HOME/.ansible/roles
+  - git clone https://github.com/ansible/galaxy-lint-rules.git $HOME/.ansible/galaxy-lint-rules
+
+script:
+  - sudo ./scripts/run-tests.sh
