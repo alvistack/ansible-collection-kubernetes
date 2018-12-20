@@ -23,7 +23,4 @@
     - role: python
     - role: apt
     - role: yum
-    - role: kernel
-    - role: locales
-    - role: timezone
-    - role: ntp
+    - role: sshd
