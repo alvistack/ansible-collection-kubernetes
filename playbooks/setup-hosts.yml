@@ -20,9 +20,8 @@
   remote_user: root
   gather_facts: no
   roles:
+    - role: bootstrap
     - role: python
-    - role: apt
-    - role: yum
     - role: locales
     - role: timezone
     - role: ntp

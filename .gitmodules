@@ -6,13 +6,13 @@
     path = playbooks/ceph-ansible
     url = https://github.com/ceph/ceph-ansible.git
     branch = stable-3.2
+[submodule "playbooks/roles/bootstrap"]
+    path = playbooks/roles/bootstrap
+    url = https://github.com/alvistack/ansible-role-bootstrap.git
+    branch = develop
 [submodule "playbooks/roles/python"]
     path = playbooks/roles/python
     url = https://github.com/alvistack/ansible-role-python.git
-    branch = develop
-[submodule "playbooks/roles/apt"]
-    path = playbooks/roles/apt
-    url = https://github.com/alvistack/ansible-role-apt.git
     branch = develop
 [submodule "playbooks/roles/ansible"]
     path = playbooks/roles/ansible
@@ -45,8 +45,4 @@
 [submodule "playbooks/roles/timezone"]
     path = playbooks/roles/timezone
     url = https://github.com/alvistack/ansible-role-timezone.git
-    branch = develop
-[submodule "playbooks/roles/yum"]
-    path = playbooks/roles/yum
-    url = https://github.com/alvistack/ansible-role-yum.git
     branch = develop
