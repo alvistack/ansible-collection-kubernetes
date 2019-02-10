@@ -18,7 +18,6 @@ before_install:
 
 install:
   - mkdir -p $HOME/.ansible/roles
-  - git clone https://github.com/ansible/galaxy-lint-rules.git $HOME/.ansible/galaxy-lint-rules
 
 script:
   - sudo ./scripts/run-tests.sh

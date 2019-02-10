@@ -6,47 +6,43 @@
     path = playbooks/ceph-ansible
     url = https://github.com/ceph/ceph-ansible.git
     branch = stable-3.2
+[submodule "playbooks/roles/bootstrap"]
+    path = playbooks/roles/bootstrap
+    url = https://github.com/alvistack/ansible-role-bootstrap.git
+    branch = develop
 [submodule "playbooks/roles/python"]
     path = playbooks/roles/python
     url = https://github.com/alvistack/ansible-role-python.git
-    branch = master
-[submodule "playbooks/roles/apt"]
-    path = playbooks/roles/apt
-    url = https://github.com/alvistack/ansible-role-apt.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/ansible"]
     path = playbooks/roles/ansible
     url = https://github.com/alvistack/ansible-role-ansible.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/docker"]
     path = playbooks/roles/docker
     url = https://github.com/alvistack/ansible-role-docker.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/git"]
     path = playbooks/roles/git
     url = https://github.com/alvistack/ansible-role-git.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/kernel"]
     path = playbooks/roles/kernel
     url = https://github.com/alvistack/ansible-role-kernel.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/locales"]
     path = playbooks/roles/locales
     url = https://github.com/alvistack/ansible-role-locales.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/ntp"]
     path = playbooks/roles/ntp
     url = https://github.com/alvistack/ansible-role-ntp.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/sshd"]
     path = playbooks/roles/sshd
     url = https://github.com/alvistack/ansible-role-sshd.git
-    branch = master
+    branch = develop
 [submodule "playbooks/roles/timezone"]
     path = playbooks/roles/timezone
     url = https://github.com/alvistack/ansible-role-timezone.git
-    branch = master
-[submodule "playbooks/roles/yum"]
-    path = playbooks/roles/yum
-    url = https://github.com/alvistack/ansible-role-yum.git
-    branch = master
+    branch = develop
