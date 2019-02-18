@@ -6,18 +6,17 @@ language: python
 
 env:
   matrix:
-    - LXC_IMAGE: 'images:ubuntu/16.04'
-    - LXC_IMAGE: 'images:ubuntu/18.04'
-    - LXC_IMAGE: 'images:centos/7'
+    - MOLECULE_OPTIONS="-s centos-7"
+    - MOLECULE_OPTIONS="-s suse-15"
+    - MOLECULE_OPTIONS="-s suse-42"
+    - MOLECULE_OPTIONS="-s ubuntu-16.04"
+    - MOLECULE_OPTIONS="-s ubuntu-18.04"
 
 before_install:
   - sudo apt-get -y purge lxc-* lxd-* && sudo apt-get -y autoremove
-  - sudo snap install lxd && sudo lxd init --auto
+  - sudo snap install lxd && sudo lxd init --preseed < .travis.lxd.yml
   - sudo apt-get -y purge python-openssl && sudo apt-get -y autoremove
   - sudo -H pip install --upgrade --requirement requirements.txt
 
-install:
-  - mkdir -p $HOME/.ansible/roles
-
 script:
-  - sudo ./scripts/run-tests.sh
+  - sudo ./scripts/run-tests.sh $MOLECULE_OPTIONS
