@@ -1,4 +1,4 @@
-#!/bin/bash
+---
 
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
@@ -14,15 +14,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -o xtrace
-
-cd "$(cd "$(dirname "$0")"; pwd -P)/../"
-
-export ANSIBLE_FORCE_COLOR=true
-export ANSIBLE_LOG_PATH="$PWD/ansible.log"
-export ANSIBLE_ROLES_PATH="$HOME/.ansible/roles"
-
-export LXC_IMAGE=${LXC_IMAGE:-"ubuntu/bionic/amd64"}
-export LXC_ID=${LXC_ID:-"$(cat /dev/urandom | tr -dc a-z | head -c1)$(cat /dev/urandom | tr -dc a-z0-9 | head -c11)"}
-
-molecule test $@
+scenario:
+  name: ubuntu-18.04
+driver:
+  name: lxd
+platforms:
+  - name: ${LXC_ID}-1
+    url: unix:/var/snap/lxd/common/lxd/unix.socket
+    source:
+      server: https://images.linuxcontainers.org
+      protocol: simplestreams
+      alias: ubuntu/bionic/amd64
+lint:
+  name: yamllint
+dependency:
+  name: galaxy
+  options:
+    role-file: ansible-role-requirements.yml
+    roles-path: ${ANSIBLE_ROLES_PATH}
+    ignore-errors: true
+provisioner:
+  name: ansible
+  env:
+    ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}
+  lint:
+    name: ansible-lint
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

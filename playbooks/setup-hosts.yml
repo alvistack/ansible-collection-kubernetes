@@ -14,14 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Use `gather_faces: no` to initialize Python on system that not yet
-# pre-installed with Python (e.g. Ubuntu 16.04 Cloud Image and Docker Image).
 - hosts: all
   remote_user: root
-  gather_facts: no
   roles:
     - role: bootstrap
     - role: python
     - role: locales
     - role: timezone
     - role: ntp
+    - role: docker
