@@ -8,7 +8,6 @@ env:
   matrix:
     - MOLECULE_OPTIONS="-s centos-7"
     - MOLECULE_OPTIONS="-s suse-15"
-    - MOLECULE_OPTIONS="-s suse-42"
     - MOLECULE_OPTIONS="-s ubuntu-16.04"
     - MOLECULE_OPTIONS="-s ubuntu-18.04"
 
