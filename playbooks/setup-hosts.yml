@@ -16,10 +16,11 @@
 
 - hosts: all
   remote_user: root
+  become: true
   roles:
     - role: bootstrap
     - role: python
     - role: locales
     - role: timezone
     - role: ntp
-    - role: docker
+    - role: sshd

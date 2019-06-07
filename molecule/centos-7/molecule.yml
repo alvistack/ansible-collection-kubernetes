@@ -19,12 +19,27 @@ scenario:
 driver:
   name: lxd
 platforms:
-  - name: ${LXC_ID}-1
+  - name: ${MOLECULE_INSTANCE_NAME}-1
     url: unix:/var/snap/lxd/common/lxd/unix.socket
     source:
       server: https://images.linuxcontainers.org
       protocol: simplestreams
       alias: centos/7/amd64
+    groups:
+      - ceph-mon
+      - kube-master
+  - name: ${MOLECULE_INSTANCE_NAME}-4
+    url: unix:/var/snap/lxd/common/lxd/unix.socket
+    source:
+      server: https://images.linuxcontainers.org
+      protocol: simplestreams
+      alias: centos/7/amd64
+    groups:
+      - ceph-mgr
+      - ceph-osd
+      - ceph-mds
+      - ceph-rgw
+      - kube-node
 lint:
   name: yamllint
 dependency:

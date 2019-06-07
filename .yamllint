@@ -1,8 +1,6 @@
 extends: default
 
 ignore: |
-  ceph-ansible
-  kubespray
   roles
 
 rules:
