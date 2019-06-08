@@ -18,3 +18,4 @@
 - import_playbook: setup-kernel.yml
 - import_playbook: setup-ceph.yml
 - import_playbook: setup-kubernetes.yml
+- import_playbook: setup-kubernetes-cephfs-provisioner.yml
