@@ -1,0 +1,79 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- hosts: all
+  remote_user: root
+  become: true
+
+- hosts: kube-master:kube-node
+  remote_user: root
+  become: true
+  roles:
+    - role: ceph-common
+      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]]['ansible_machine_id'] | to_uuid }}"
+      ceph_mon_initial_members: >-
+        {%- for host in groups['ceph-mon'] -%}
+        {{ host }},
+        {%- endfor -%}
+      ceph_mon_host: >-
+        {%- for host in groups['ceph-mon'] -%}
+        {{ hostvars[host]['ansible_default_ipv4']['address'] }},
+        {%- endfor -%}
+
+  post_tasks:
+    - name: base64 encode keyring
+      shell: |
+        set -o pipefail
+        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
+      with_dict:
+        base64:
+          - "/etc/ceph/ceph.client.admin.keyring"
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      register: base64_encode_result
+      changed_when: base64_encode_result is not succeeded
+
+    - name: base64 decode certificates
+      shell: |
+        set -o pipefail
+        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
+      args:
+        executable: "/bin/bash"
+      register: base64_decode_result
+      changed_when: base64_decode_result is not succeeded
+
+- hosts: kube-master
+  remote_user: root
+  become: true
+  pre_tasks:
+    - name: fetch ceph client.admin key
+      shell: |
+        set -o pipefail
+        ceph auth get-key client.admin
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      register: ceph_client_admin_result
+      changed_when: ceph_client_admin_result is not succeeded
+
+  roles:
+    - role: kubernetes-cephfs-provisioner
+      cephfs_provisioner_monitors: >-
+        {%- for host in groups['ceph-mon'] -%}
+        {{ hostvars[host]['ansible_default_ipv4']['address'] }}:6789,
+        {%- endfor -%}
+      cephfs_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"

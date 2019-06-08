@@ -114,3 +114,7 @@
 	path = playbooks/roles/kubernetes-cert-manager
 	url = https://github.com/alvistack/ansible-role-kubernetes-cert-manager.git
 	branch = develop
+[submodule "playbooks/roles/kubernetes-cephfs-provisioner"]
+	path = playbooks/roles/kubernetes-cephfs-provisioner
+	url = https://github.com/alvistack/ansible-role-kubernetes-cephfs-provisioner.git
+	branch = develop

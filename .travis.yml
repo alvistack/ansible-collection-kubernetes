@@ -37,8 +37,8 @@ install:
 
 script:
   - |
-    sudo ./scripts/run-tests.sh
-    molecule lint -s $MOLECULE_SCENARIO_NAME
-    molecule syntax -s $MOLECULE_SCENARIO_NAME
-    molecule converge -s $MOLECULE_SCENARIO_NAME
-    molecule verify -s $MOLECULE_SCENARIO_NAME
+    source ./scripts/run-tests.sh
+    sudo -E molecule lint -s $MOLECULE_SCENARIO_NAME
+    sudo -E molecule syntax -s $MOLECULE_SCENARIO_NAME
+    sudo -E molecule converge -s $MOLECULE_SCENARIO_NAME
+    sudo -E molecule verify -s $MOLECULE_SCENARIO_NAME
