@@ -12,7 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible
+ansible>=2.8.0
 ansible-lint
-molecule
+flake8
+netaddr
+testinfra>=3.0.4
 yamllint
+git+https://github.com/ansible/molecule.git@master#egg=molecule

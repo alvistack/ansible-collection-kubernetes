@@ -1,0 +1,85 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+- hosts: kube-master:kube-node
+  remote_user: root
+  become: true
+  roles:
+    - role: docker
+    - role: cri-tools
+    - role: kubernetes-cni
+    - role: kubectl
+    - role: kubelet
+    - role: kubeadm
+
+- hosts: kube-master
+  remote_user: root
+  become: true
+  roles:
+    - role: etcd
+      etcd_cert_file: "/etc/kubernetes/pki/etcd/server.crt"
+      etcd_key_file: "/etc/kubernetes/pki/etcd/server.key"
+      etcd_trusted_ca_file: "/etc/kubernetes/pki/etcd/ca.crt"
+      etcd_peer_cert_file: "/etc/kubernetes/pki/etcd/peer.crt"
+      etcd_peer_key_file: "/etc/kubernetes/pki/etcd/peer.key"
+      etcd_peer_trusted_ca_file: "/etc/kubernetes/pki/etcd/ca.crt"
+    - role: kubernetes
+      kubernetes_cluster_name: "{{ hostvars[groups['kube-master'][0]]['ansible_machine_id'] | to_uuid }}"
+    - role: kubernetes-addon-manager
+    - role: kubernetes-weave
+
+  post_tasks:
+    - name: kubectl version
+      command: kubectl version
+      register: result
+      changed_when: result is not succeeded
+
+- hosts: kube-node
+  remote_user: root
+  become: true
+  tasks:
+    - name: kubeadm token create
+      shell: |
+        set -o pipefail
+        kubeadm token create --print-join-command
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['kube-master'][0] }}"
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      ignore_errors: true
+
+    - name: kubeadm init
+      shell: |
+        set -o pipefail
+        {{ result.stdout }} \
+          --ignore-preflight-errors=all
+      args:
+        executable: "/bin/bash"
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      ignore_errors: true
+
+- hosts: kube-master
+  remote_user: root
+  become: true
+  roles:
+    - role: kubernetes-dashboard
+    - role: kubernetes-metallb
+    - role: kubernetes-ingress-nginx
+    - role: kubernetes-cert-manager
