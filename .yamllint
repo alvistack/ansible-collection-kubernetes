@@ -1,8 +1,5 @@
 extends: default
 
-ignore: |
-  roles
-
 rules:
   braces:
     max-spaces-inside: 1
