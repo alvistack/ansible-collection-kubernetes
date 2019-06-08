@@ -74,7 +74,7 @@
       until: result is succeeded
       changed_when: result is not succeeded
       ignore_errors: true
-    
+
 - hosts: kube-master
   remote_user: root
   become: true
