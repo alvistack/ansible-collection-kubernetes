@@ -77,3 +77,15 @@
         {{ hostvars[host]['ansible_default_ipv4']['address'] }}:6789,
         {%- endfor -%}
       cephfs_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+
+  post_tasks:
+    - name: setup cephfs as default storageclass
+      shell: |
+        set -o pipefail
+        kubectl patch storageclass cephfs \
+          -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+      args:
+        executable: "/bin/bash"
+      when: ansible_hostname == groups['kube-master'][0]
+      register: result
+      changed_when: result is not succeeded
