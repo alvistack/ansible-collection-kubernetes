@@ -36,4 +36,9 @@ install:
     git submodule update
 
 script:
-  - travis_wait 120 sudo ./scripts/run-tests.sh molecule test -s $MOLECULE_SCENARIO_NAME
+  - |
+    sudo ./scripts/run-tests.sh
+    molecule lint -s $MOLECULE_SCENARIO_NAME
+    molecule syntax -s $MOLECULE_SCENARIO_NAME
+    molecule converge -s $MOLECULE_SCENARIO_NAME
+    molecule verify -s $MOLECULE_SCENARIO_NAME
