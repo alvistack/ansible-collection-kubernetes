@@ -40,6 +40,7 @@
       kubernetes_cluster_name: "{{ hostvars[groups['kube-master'][0]]['ansible_machine_id'] | to_uuid }}"
     - role: kubernetes-addon-manager
     - role: kubernetes-weave
+    - role: kubernetes-dashboard
 
   post_tasks:
     - name: kubectl version
@@ -74,12 +75,3 @@
       until: result is succeeded
       changed_when: result is not succeeded
       ignore_errors: true
-
-- hosts: kube-master
-  remote_user: root
-  become: true
-  roles:
-    - role: kubernetes-dashboard
-    - role: kubernetes-metallb
-    - role: kubernetes-ingress-nginx
-    - role: kubernetes-cert-manager
