@@ -20,7 +20,10 @@
   roles:
     - role: bootstrap
     - role: python
+    - role: git
     - role: locales
     - role: timezone
+    - role: duplicity
+    - role: rclone
     - role: ntp
     - role: sshd
