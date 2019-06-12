@@ -134,3 +134,7 @@
 	path = playbooks/roles/kubernetes-registry
 	url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
 	branch = develop
+[submodule "playbooks/roles/kubernetes-rbd-provisioner"]
+	path = playbooks/roles/kubernetes-rbd-provisioner
+	url = https://github.com/alvistack/ansible-role-kubernetes-rbd-provisioner.git
+	branch = develop
