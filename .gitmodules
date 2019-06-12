@@ -118,3 +118,23 @@
 	path = playbooks/roles/kubernetes-cephfs-provisioner
 	url = https://github.com/alvistack/ansible-role-kubernetes-cephfs-provisioner.git
 	branch = develop
+[submodule "playbooks/roles/duplicity"]
+	path = playbooks/roles/duplicity
+	url = https://github.com/alvistack/ansible-role-duplicity.git
+	branch = develop
+[submodule "playbooks/roles/rclone"]
+	path = playbooks/roles/rclone
+	url = https://github.com/alvistack/ansible-role-rclone.git
+	branch = develop
+[submodule "playbooks/roles/kubernetes-flannel"]
+	path = playbooks/roles/kubernetes-flannel
+	url = https://github.com/alvistack/ansible-role-kubernetes-flannel.git
+	branch = develop
+[submodule "playbooks/roles/kubernetes-registry"]
+	path = playbooks/roles/kubernetes-registry
+	url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
+	branch = develop
+[submodule "playbooks/roles/kubernetes-rbd-provisioner"]
+	path = playbooks/roles/kubernetes-rbd-provisioner
+	url = https://github.com/alvistack/ansible-role-kubernetes-rbd-provisioner.git
+	branch = develop
