@@ -18,7 +18,7 @@
   remote_user: root
   become: true
 
-- hosts: kube-master:kube-node
+- hosts: kube-node
   remote_user: root
   become: true
   roles:
@@ -32,29 +32,6 @@
         {%- for host in groups['ceph-mon'] -%}
         {{ hostvars[host]['ansible_default_ipv4']['address'] }},
         {%- endfor -%}
-
-  post_tasks:
-    - name: base64 encode keyring
-      shell: |
-        set -o pipefail
-        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
-      with_dict:
-        base64:
-          - "/etc/ceph/ceph.client.admin.keyring"
-      args:
-        executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
-      register: base64_encode_result
-      changed_when: base64_encode_result is not succeeded
-
-    - name: base64 decode certificates
-      shell: |
-        set -o pipefail
-        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
-      args:
-        executable: "/bin/bash"
-      register: base64_decode_result
-      changed_when: base64_decode_result is not succeeded
 
 - hosts: kube-master
   remote_user: root
