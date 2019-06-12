@@ -126,3 +126,11 @@
 	path = playbooks/roles/rclone
 	url = https://github.com/alvistack/ansible-role-rclone.git
 	branch = develop
+[submodule "playbooks/roles/kubernetes-flannel"]
+	path = playbooks/roles/kubernetes-flannel
+	url = https://github.com/alvistack/ansible-role-kubernetes-flannel.git
+	branch = develop
+[submodule "playbooks/roles/kubernetes-registry"]
+	path = playbooks/roles/kubernetes-registry
+	url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
+	branch = develop

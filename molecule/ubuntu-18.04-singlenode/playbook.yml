@@ -60,8 +60,8 @@
       shell: |
         set -o pipefail
         ceph osd pool create cephfs_metadata 32 32
-        ceph osd pool set cephfs_metadata size 3
-        ceph osd pool set cephfs_metadata min_size 2
+        ceph osd pool set cephfs_metadata size 1
+        ceph osd pool set cephfs_metadata min_size 1
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
@@ -72,8 +72,8 @@
       shell: |
         set -o pipefail
         ceph osd pool create cephfs_data 128 128
-        ceph osd pool set cephfs_data size 3
-        ceph osd pool set cephfs_data min_size 2
+        ceph osd pool set cephfs_data size 1
+        ceph osd pool set cephfs_data min_size 1
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]

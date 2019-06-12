@@ -14,11 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: setup-hosts.yml
-- import_playbook: setup-kernel.yml
-- import_playbook: setup-ceph.yml
-- import_playbook: setup-kubernetes.yml
-- import_playbook: setup-kubernetes-weave.yml
-- import_playbook: setup-kubernetes-ingress-nginx.yml
-- import_playbook: setup-kubernetes-cert-manager.yml
-- import_playbook: setup-kubernetes-cephfs-provisioner.yml
+- hosts: kube-master
+  remote_user: root
+  become: true
+  roles:
+    - role: kubernetes-weave

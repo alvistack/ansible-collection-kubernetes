@@ -39,7 +39,6 @@
     - role: kubernetes
       kubernetes_cluster_name: "{{ hostvars[groups['kube-master'][0]]['ansible_machine_id'] | to_uuid }}"
     - role: kubernetes-addon-manager
-    - role: kubernetes-weave
     - role: kubernetes-dashboard
 
   post_tasks:
