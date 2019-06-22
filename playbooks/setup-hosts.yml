@@ -23,7 +23,5 @@
     - role: git
     - role: locales
     - role: timezone
-    - role: duplicity
-    - role: rclone
     - role: ntp
     - role: sshd

@@ -21,5 +21,7 @@
     - role: bootstrap
     - role: python
     - role: ansible
+    - role: duplicity
+    - role: rclone
     - role: kubectl
     - role: ceph-common
