@@ -142,3 +142,7 @@
 	path = playbooks/roles/kubernetes-local-provisioner
 	url = https://github.com/alvistack/ansible-role-kubernetes-local-provisioner.git
 	branch = develop
+[submodule "playbooks/roles/kubernetes-csi-hostpath"]
+	path = playbooks/roles/kubernetes-csi-hostpath
+	url = https://github.com/alvistack/ansible-role-kubernetes-csi-hostpath
+	branch = develop
