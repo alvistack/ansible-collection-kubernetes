@@ -14,10 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all
-  remote_user: root
-  become: true
-
 - hosts: localhost
   remote_user: root
   become: true
@@ -30,12 +26,3 @@
     - role: docker
     - role: kubectl
     - role: ceph-common
-      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]]['ansible_machine_id'] | to_uuid }}"
-      ceph_mon_initial_members: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ host }},
-        {%- endfor -%}
-      ceph_mon_host: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }},
-        {%- endfor -%}
