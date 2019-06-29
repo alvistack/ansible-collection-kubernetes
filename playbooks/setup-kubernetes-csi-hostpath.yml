@@ -22,13 +22,13 @@
   remote_user: root
   become: true
   roles:
-    - role: kubernetes-local-provisioner
+    - role: kubernetes-csi-hostpath
 
   post_tasks:
-    - name: setup local as default storageclass
+    - name: setup csi-hostpath as default storageclass
       shell: |
         set -o pipefail
-        kubectl patch storageclass local \
+        kubectl patch storageclass csi-hostpath \
           -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
       args:
         executable: "/bin/bash"
