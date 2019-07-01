@@ -14,8 +14,11 @@
 
 ansible>=2.8.0
 ansible-lint
+docker>=2.0.0
 flake8
-molecule>=2.22rc1
+molecule
 netaddr
+openshift>=0.9.0
+python-vagrant
 testinfra>=3.0.4
 yamllint
