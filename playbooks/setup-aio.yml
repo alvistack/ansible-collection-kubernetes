@@ -15,9 +15,9 @@
 # limitations under the License.
 
 - import_playbook: setup-hosts.yml
-- import_playbook: setup-kernel.yml
-- import_playbook: setup-kubernetes.yml
-- import_playbook: setup-kubernetes-flannel.yml
-- import_playbook: setup-kubernetes-ingress-nginx.yml
-- import_playbook: setup-kubernetes-cert-manager.yml
-- import_playbook: setup-kubernetes-hostpath-provisioner.yml
+- import_playbook: kernel-install.yml
+- import_playbook: kubernetes-install.yml
+- import_playbook: kubernetes-flannel-install.yml
+- import_playbook: kubernetes-ingress-nginx-install.yml
+- import_playbook: kubernetes-cert-manager-install.yml
+- import_playbook: kubernetes-hostpath-provisioner-install.yml
