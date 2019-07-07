@@ -25,10 +25,10 @@ platforms:
     box: ubuntu/bionic64
     cpu: 2
     memory: 4096
-    provision: true
-    instance_raw_config_args:
-      - "vm.network 'public_network', use_dhcp_assigned_default_route: true, bridge: 'wlp2s0'"
-      - "vm.provision 'shell', run: 'always', inline: 'route del default gw 10.0.2.2'"
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"

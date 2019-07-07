@@ -23,15 +23,17 @@
   become: true
   roles:
     - role: ceph-common
-      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]]['ansible_machine_id'] | to_uuid }}"
+      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]].ansible_machine_id | to_uuid }}"
       ceph_mon_initial_members: >-
         {%- for host in groups['ceph-mon'] -%}
         {{ host }},
         {%- endfor -%}
       ceph_mon_host: >-
         {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }},
+        {{ hostvars[host].ansible_default_ipv4.address }},
         {%- endfor -%}
+      ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
+      ceph_cluster_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
 
 - hosts: kube-master
   remote_user: root
@@ -51,7 +53,7 @@
     - role: kubernetes-cephfs-provisioner
       cephfs_provisioner_monitors: >-
         {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }}:6789,
+        {{ hostvars[host].ansible_default_ipv4.address }}:6789,
         {%- endfor -%}
       cephfs_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"
 
