@@ -55,6 +55,9 @@ provisioner:
     ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}
   lint:
     name: ansible-lint
+  inventory:
+    links:
+      group_vars: group_vars
 verifier:
   name: testinfra
   lint:
