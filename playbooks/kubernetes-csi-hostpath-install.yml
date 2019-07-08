@@ -14,15 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: localhost
+- hosts: all
+  remote_user: root
+  become: true
+
+- hosts: kube-master
   remote_user: root
   become: true
   roles:
-    - role: bootstrap
-    - role: python
-    - role: ansible
-    - role: duplicity
-    - role: rclone
-    - role: docker
-    - role: kubectl
-    - role: ceph-common
+    - role: kubernetes-csi-hostpath
+
+  post_tasks:
+    - name: setup csi-hostpath as default storageclass
+      shell: |
+        set -o pipefail
+        kubectl patch storageclass csi-hostpath \
+          -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
+      args:
+        executable: "/bin/bash"
+      when: ansible_hostname == groups['kube-master'][0]
+      register: result
+      changed_when: result is not succeeded

@@ -1,18 +1,50 @@
-[submodule "playbooks/roles/bootstrap"]
-    path = playbooks/roles/bootstrap
-    url = https://github.com/alvistack/ansible-role-bootstrap.git
-    branch = develop
-[submodule "playbooks/roles/python"]
-    path = playbooks/roles/python
-    url = https://github.com/alvistack/ansible-role-python.git
-    branch = develop
 [submodule "playbooks/roles/ansible"]
     path = playbooks/roles/ansible
     url = https://github.com/alvistack/ansible-role-ansible.git
     branch = develop
+[submodule "playbooks/roles/bootstrap"]
+    path = playbooks/roles/bootstrap
+    url = https://github.com/alvistack/ansible-role-bootstrap.git
+    branch = develop
+[submodule "playbooks/roles/ceph-common"]
+    path = playbooks/roles/ceph-common
+    url = https://github.com/alvistack/ansible-role-ceph-common.git
+    branch = develop
+[submodule "playbooks/roles/ceph-mds"]
+    path = playbooks/roles/ceph-mds
+    url = https://github.com/alvistack/ansible-role-ceph-mds.git
+    branch = develop
+[submodule "playbooks/roles/ceph-mgr"]
+    path = playbooks/roles/ceph-mgr
+    url = https://github.com/alvistack/ansible-role-ceph-mgr.git
+    branch = develop
+[submodule "playbooks/roles/ceph-mon"]
+    path = playbooks/roles/ceph-mon
+    url = https://github.com/alvistack/ansible-role-ceph-mon.git
+    branch = develop
+[submodule "playbooks/roles/ceph-osd"]
+    path = playbooks/roles/ceph-osd
+    url = https://github.com/alvistack/ansible-role-ceph-osd.git
+    branch = develop
+[submodule "playbooks/roles/ceph-rgw"]
+    path = playbooks/roles/ceph-rgw
+    url = https://github.com/alvistack/ansible-role-ceph-rgw.git
+    branch = develop
+[submodule "playbooks/roles/cri-tools"]
+    path = playbooks/roles/cri-tools
+    url = https://github.com/alvistack/ansible-role-cri-tools.git
+    branch = develop
 [submodule "playbooks/roles/docker"]
     path = playbooks/roles/docker
     url = https://github.com/alvistack/ansible-role-docker.git
+    branch = develop
+[submodule "playbooks/roles/duplicity"]
+    path = playbooks/roles/duplicity
+    url = https://github.com/alvistack/ansible-role-duplicity.git
+    branch = develop
+[submodule "playbooks/roles/etcd"]
+    path = playbooks/roles/etcd
+    url = https://github.com/alvistack/ansible-role-etcd.git
     branch = develop
 [submodule "playbooks/roles/git"]
     path = playbooks/roles/git
@@ -22,6 +54,82 @@
     path = playbooks/roles/kernel
     url = https://github.com/alvistack/ansible-role-kernel.git
     branch = develop
+[submodule "playbooks/roles/kubeadm"]
+    path = playbooks/roles/kubeadm
+    url = https://github.com/alvistack/ansible-role-kubeadm.git
+    branch = develop
+[submodule "playbooks/roles/kubectl"]
+    path = playbooks/roles/kubectl
+    url = https://github.com/alvistack/ansible-role-kubectl.git
+    branch = develop
+[submodule "playbooks/roles/kubelet"]
+    path = playbooks/roles/kubelet
+    url = https://github.com/alvistack/ansible-role-kubelet.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes"]
+    path = playbooks/roles/kubernetes
+    url = https://github.com/alvistack/ansible-role-kubernetes.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-addon-manager"]
+    path = playbooks/roles/kubernetes-addon-manager
+    url = https://github.com/alvistack/ansible-role-kubernetes-addon-manager.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-cephfs-provisioner"]
+    path = playbooks/roles/kubernetes-cephfs-provisioner
+    url = https://github.com/alvistack/ansible-role-kubernetes-cephfs-provisioner.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-cert-manager"]
+    path = playbooks/roles/kubernetes-cert-manager
+    url = https://github.com/alvistack/ansible-role-kubernetes-cert-manager.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-cni"]
+    path = playbooks/roles/kubernetes-cni
+    url = https://github.com/alvistack/ansible-role-kubernetes-cni.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-csi-cephfs"]
+    path = playbooks/roles/kubernetes-csi-cephfs
+    url = https://github.com/alvistack/ansible-role-kubernetes-csi-cephfs.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-csi-hostpath"]
+    path = playbooks/roles/kubernetes-csi-hostpath
+    url = https://github.com/alvistack/ansible-role-kubernetes-csi-hostpath.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-csi-rbd"]
+    path = playbooks/roles/kubernetes-csi-rbd
+    url = https://github.com/alvistack/ansible-role-kubernetes-csi-rbd.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-dashboard"]
+    path = playbooks/roles/kubernetes-dashboard
+    url = https://github.com/alvistack/ansible-role-kubernetes-dashboard.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-flannel"]
+    path = playbooks/roles/kubernetes-flannel
+    url = https://github.com/alvistack/ansible-role-kubernetes-flannel.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-hostpath-provisioner"]
+    path = playbooks/roles/kubernetes-hostpath-provisioner
+    url = https://github.com/alvistack/ansible-role-kubernetes-hostpath-provisioner.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-ingress-nginx"]
+    path = playbooks/roles/kubernetes-ingress-nginx
+    url = https://github.com/alvistack/ansible-role-kubernetes-ingress-nginx.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-metallb"]
+    path = playbooks/roles/kubernetes-metallb
+    url = https://github.com/alvistack/ansible-role-kubernetes-metallb.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-rbd-provisioner"]
+    path = playbooks/roles/kubernetes-rbd-provisioner
+    url = https://github.com/alvistack/ansible-role-kubernetes-rbd-provisioner.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-registry"]
+    path = playbooks/roles/kubernetes-registry
+    url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
+    branch = develop
+[submodule "playbooks/roles/kubernetes-weave"]
+    path = playbooks/roles/kubernetes-weave
+    url = https://github.com/alvistack/ansible-role-kubernetes-weave.git
+    branch = develop
 [submodule "playbooks/roles/locales"]
     path = playbooks/roles/locales
     url = https://github.com/alvistack/ansible-role-locales.git
@@ -29,6 +137,14 @@
 [submodule "playbooks/roles/ntp"]
     path = playbooks/roles/ntp
     url = https://github.com/alvistack/ansible-role-ntp.git
+    branch = develop
+[submodule "playbooks/roles/python"]
+    path = playbooks/roles/python
+    url = https://github.com/alvistack/ansible-role-python.git
+    branch = develop
+[submodule "playbooks/roles/rclone"]
+    path = playbooks/roles/rclone
+    url = https://github.com/alvistack/ansible-role-rclone.git
     branch = develop
 [submodule "playbooks/roles/sshd"]
     path = playbooks/roles/sshd
@@ -38,107 +154,3 @@
     path = playbooks/roles/timezone
     url = https://github.com/alvistack/ansible-role-timezone.git
     branch = develop
-[submodule "playbooks/roles/ceph-common"]
-	path = playbooks/roles/ceph-common
-	url = https://github.com/alvistack/ansible-role-ceph-common.git
-	branch = develop
-[submodule "playbooks/roles/ceph-mon"]
-	path = playbooks/roles/ceph-mon
-	url = https://github.com/alvistack/ansible-role-ceph-mon.git
-	branch = develop
-[submodule "playbooks/roles/ceph-mgr"]
-	path = playbooks/roles/ceph-mgr
-	url = https://github.com/alvistack/ansible-role-ceph-mgr.git
-	branch = develop
-[submodule "playbooks/roles/ceph-osd"]
-	path = playbooks/roles/ceph-osd
-	url = https://github.com/alvistack/ansible-role-ceph-osd.git
-	branch = develop
-[submodule "playbooks/roles/ceph-mds"]
-	path = playbooks/roles/ceph-mds
-	url = https://github.com/alvistack/ansible-role-ceph-mds.git
-	branch = develop
-[submodule "playbooks/roles/ceph-rgw"]
-	path = playbooks/roles/ceph-rgw
-	url = https://github.com/alvistack/ansible-role-ceph-rgw.git
-	branch = develop
-[submodule "playbooks/roles/etcd"]
-    path = playbooks/roles/etcd
-    url = https://github.com/alvistack/ansible-role-etcd.git
-    branch = develop
-[submodule "playbooks/roles/cri-tools"]
-	path = playbooks/roles/cri-tools
-	url = https://github.com/alvistack/ansible-role-cri-tools.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-cni"]
-	path = playbooks/roles/kubernetes-cni
-	url = https://github.com/alvistack/ansible-role-kubernetes-cni.git
-	branch = develop
-[submodule "playbooks/roles/kubectl"]
-	path = playbooks/roles/kubectl
-	url = https://github.com/alvistack/ansible-role-kubectl.git
-	branch = develop
-[submodule "playbooks/roles/kubelet"]
-	path = playbooks/roles/kubelet
-	url = https://github.com/alvistack/ansible-role-kubelet.git
-	branch = develop
-[submodule "playbooks/roles/kubeadm"]
-	path = playbooks/roles/kubeadm
-	url = https://github.com/alvistack/ansible-role-kubeadm.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes"]
-	path = playbooks/roles/kubernetes
-	url = https://github.com/alvistack/ansible-role-kubernetes.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-addon-manager"]
-	path = playbooks/roles/kubernetes-addon-manager
-	url = https://github.com/alvistack/ansible-role-kubernetes-addon-manager.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-weave"]
-	path = playbooks/roles/kubernetes-weave
-	url = https://github.com/alvistack/ansible-role-kubernetes-weave.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-dashboard"]
-	path = playbooks/roles/kubernetes-dashboard
-	url = https://github.com/alvistack/ansible-role-kubernetes-dashboard.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-metallb"]
-	path = playbooks/roles/kubernetes-metallb
-	url = https://github.com/alvistack/ansible-role-kubernetes-metallb.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-ingress-nginx"]
-	path = playbooks/roles/kubernetes-ingress-nginx
-	url = https://github.com/alvistack/ansible-role-kubernetes-ingress-nginx.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-cert-manager"]
-	path = playbooks/roles/kubernetes-cert-manager
-	url = https://github.com/alvistack/ansible-role-kubernetes-cert-manager.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-cephfs-provisioner"]
-	path = playbooks/roles/kubernetes-cephfs-provisioner
-	url = https://github.com/alvistack/ansible-role-kubernetes-cephfs-provisioner.git
-	branch = develop
-[submodule "playbooks/roles/duplicity"]
-	path = playbooks/roles/duplicity
-	url = https://github.com/alvistack/ansible-role-duplicity.git
-	branch = develop
-[submodule "playbooks/roles/rclone"]
-	path = playbooks/roles/rclone
-	url = https://github.com/alvistack/ansible-role-rclone.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-flannel"]
-	path = playbooks/roles/kubernetes-flannel
-	url = https://github.com/alvistack/ansible-role-kubernetes-flannel.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-registry"]
-	path = playbooks/roles/kubernetes-registry
-	url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-rbd-provisioner"]
-	path = playbooks/roles/kubernetes-rbd-provisioner
-	url = https://github.com/alvistack/ansible-role-kubernetes-rbd-provisioner.git
-	branch = develop
-[submodule "playbooks/roles/kubernetes-local-provisioner"]
-	path = playbooks/roles/kubernetes-local-provisioner
-	url = https://github.com/alvistack/ansible-role-kubernetes-local-provisioner.git
-	branch = develop

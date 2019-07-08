@@ -23,15 +23,6 @@
   become: true
   roles:
     - role: ceph-common
-      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]]['ansible_machine_id'] | to_uuid }}"
-      ceph_mon_initial_members: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ host }},
-        {%- endfor -%}
-      ceph_mon_host: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }},
-        {%- endfor -%}
 
 - hosts: kube-master
   remote_user: root
@@ -48,18 +39,14 @@
       changed_when: ceph_client_admin_result is not succeeded
 
   roles:
-    - role: kubernetes-cephfs-provisioner
-      cephfs_provisioner_monitors: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }}:6789,
-        {%- endfor -%}
-      cephfs_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+    - role: kubernetes-csi-cephfs
+      csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
 
   post_tasks:
-    - name: setup cephfs as default storageclass
+    - name: setup csi-cephfs as default storageclass
       shell: |
         set -o pipefail
-        kubectl patch storageclass cephfs \
+        kubectl patch storageclass csi-cephfs \
           -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
       args:
         executable: "/bin/bash"

@@ -23,15 +23,6 @@
   become: true
   roles:
     - role: ceph-common
-      ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]]['ansible_machine_id'] | to_uuid }}"
-      ceph_mon_initial_members: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ host }},
-        {%- endfor -%}
-      ceph_mon_host: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }},
-        {%- endfor -%}
 
 - hosts: kube-master
   remote_user: root
@@ -48,18 +39,14 @@
       changed_when: ceph_client_admin_result is not succeeded
 
   roles:
-    - role: kubernetes-rbd-provisioner
-      rbd_provisioner_monitors: >-
-        {%- for host in groups['ceph-mon'] -%}
-        {{ hostvars[host]['ansible_default_ipv4']['address'] }}:6789,
-        {%- endfor -%}
-      rbd_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+    - role: kubernetes-csi-rbd
+      csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
 
   post_tasks:
-    - name: setup rbd as default storageclass
+    - name: setup csi-rbd as default storageclass
       shell: |
         set -o pipefail
-        kubectl patch storageclass rbd \
+        kubectl patch storageclass csi-rbd \
           -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
       args:
         executable: "/bin/bash"

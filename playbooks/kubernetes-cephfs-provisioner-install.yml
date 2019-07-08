@@ -18,17 +18,35 @@
   remote_user: root
   become: true
 
-- hosts: kube-master
+- hosts: kube-node
   remote_user: root
   become: true
   roles:
-    - role: kubernetes-local-provisioner
+    - role: ceph-common
 
-  post_tasks:
-    - name: setup local as default storageclass
+- hosts: kube-master
+  remote_user: root
+  become: true
+  pre_tasks:
+    - name: fetch ceph client.admin key
       shell: |
         set -o pipefail
-        kubectl patch storageclass local \
+        ceph auth get-key client.admin
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      register: ceph_client_admin_result
+      changed_when: ceph_client_admin_result is not succeeded
+
+  roles:
+    - role: kubernetes-cephfs-provisioner
+      cephfs_provisioner_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+
+  post_tasks:
+    - name: setup cephfs as default storageclass
+      shell: |
+        set -o pipefail
+        kubectl patch storageclass cephfs \
           -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
       args:
         executable: "/bin/bash"
