@@ -14,12 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: hosts-install.yml
-- import_playbook: kernel-install.yml
-- import_playbook: ceph-install.yml
-- import_playbook: kubernetes-install.yml
-- import_playbook: kubernetes-weave-install.yml
-- import_playbook: kubernetes-dashboard-install.yml
-- import_playbook: kubernetes-ingress-nginx-install.yml
-- import_playbook: kubernetes-cert-manager-install.yml
-- import_playbook: kubernetes-cephfs-provisioner-install.yml
+- hosts: kube-master
+  remote_user: root
+  become: true
+  roles:
+    - role: kubernetes-dashboard
