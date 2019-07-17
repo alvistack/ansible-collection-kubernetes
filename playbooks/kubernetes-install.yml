@@ -32,7 +32,6 @@
     - role: etcd
     - role: kubernetes
     - role: kubernetes-addon-manager
-    - role: kubernetes-dashboard
 
   post_tasks:
     - name: kubectl version
