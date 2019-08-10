@@ -10,7 +10,7 @@ Ansible playbooks for deploying AlviStack.
 
 This playbook require Ansible 2.8 or higher.
 
-This playbook was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 15.
+This playbook was designed for Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 15.1.
 
 ## License
 
