@@ -24,7 +24,7 @@ platforms:
     source:
       server: https://images.linuxcontainers.org
       protocol: simplestreams
-      alias: opensuse/15.1/amd64
+      alias: opensuse/15.0/amd64
     groups:
       - ceph-mon
       - kube-master
@@ -33,7 +33,7 @@ platforms:
     source:
       server: https://images.linuxcontainers.org
       protocol: simplestreams
-      alias: opensuse/15.1/amd64
+      alias: opensuse/15.0/amd64
     groups:
       - ceph-mgr
       - ceph-osd
