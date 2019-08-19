@@ -64,7 +64,7 @@
     - name: start services
       service:
         name: "ceph-mds@{{ ansible_hostname }}"
-        state: started
+        state: "started"
       changed_when: false
       ignore_errors: true
 
