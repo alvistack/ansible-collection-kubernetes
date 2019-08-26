@@ -39,7 +39,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: kube-node
+- hosts: kube-node:!kube-master
   remote_user: root
   become: true
   tasks:

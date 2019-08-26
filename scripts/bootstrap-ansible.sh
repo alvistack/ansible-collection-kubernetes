@@ -21,15 +21,22 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 # Prepare APT dependencies
 if [ -x "$(command -v apt-get)" ]; then
     apt-get update
-    apt-get -y install build-essential curl git libffi-dev libssl-dev python-dev python-minimal
+    apt-get -y install ca-certificates curl gcc git libffi-dev libssl-dev make python python-dev sudo
     apt-get -y purge python-pip
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
-    yum -y install epel-release
-    yum -y install curl gcc git libffi-devel openssl-devel python python python-devel python-urllib3 redhat-rpm-config
+    yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
+    yum -y install ca-certificates curl gcc git2u libffi-devel make openssl-devel python python-devel redhat-rpm-config sudo
     yum -y remove python-pip
+fi
+
+# Prepare Zypper dependencies
+if [ -x "$(command -v zypper)" ]; then
+    zypper -n --gpg-auto-import-keys refresh
+    zypper -n install -y ca-certificates ca-certificates-cacert ca-certificates-mozilla curl gcc git libffi-devel libopenssl-devel make python python-devel python-xml sudo
+    zypper -n rm -y python-pip
 fi
 
 # Install PIP
