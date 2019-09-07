@@ -15,14 +15,14 @@
 # limitations under the License.
 
 scenario:
-  name: ubuntu-18.04-singlenode
+  name: redhat-7-singlenode
 driver:
   name: vagrant
   provider:
     name: virtualbox
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: generic/ubuntu1804
+    box: generic/rhel7
     cpu: 2
     memory: 4096
     interfaces:

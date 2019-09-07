@@ -22,9 +22,9 @@ driver:
     name: virtualbox
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: ubuntu/bionic64
+    box: generic/ubuntu1804
     cpu: 2
-    memory: 2048
+    memory: 4096
     interfaces:
       - auto_config: true
         network_name: private_network
@@ -32,14 +32,15 @@ platforms:
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
-      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
+      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
+      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-2
-    box: ubuntu/bionic64
+    box: generic/ubuntu1804
     cpu: 2
-    memory: 2048
+    memory: 4096
     interfaces:
       - auto_config: true
         network_name: private_network
@@ -47,15 +48,16 @@ platforms:
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
-      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
+      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
+      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
       - ceph-osd
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-3
-    box: ubuntu/bionic64
+    box: generic/ubuntu1804
     cpu: 2
-    memory: 2048
+    memory: 4096
     interfaces:
       - auto_config: true
         network_name: private_network
@@ -63,15 +65,16 @@ platforms:
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
-      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
+      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
+      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
       - ceph-osd
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-4
-    box: ubuntu/bionic64
+    box: generic/ubuntu1804
     cpu: 2
-    memory: 2048
+    memory: 4096
     interfaces:
       - auto_config: true
         network_name: private_network
@@ -79,7 +82,8 @@ platforms:
     provider_raw_config_args:
       - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
       - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
-      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
+      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
+      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mgr
       - ceph-osd
