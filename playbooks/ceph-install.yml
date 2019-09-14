@@ -26,13 +26,13 @@
       register: result
       changed_when: result is not succeeded
 
-    - name: ceph-fuse --version
-      command: ceph-fuse --version
+    - name: rbd --version
+      command: rbd --version
       register: result
       changed_when: result is not succeeded
 
-    - name: rbd-fuse --version
-      command: rbd-fuse --version
+    - name: mount.ceph -h
+      command: mount.ceph -h
       register: result
       changed_when: result is not succeeded
 
