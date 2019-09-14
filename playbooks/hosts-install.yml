@@ -23,5 +23,5 @@
     - role: git
     - role: locales
     - role: timezone
-    - role: ntp
+    - role: chrony
     - role: sshd

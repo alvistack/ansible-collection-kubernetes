@@ -30,6 +30,10 @@
     path = playbooks/roles/ceph-rgw
     url = https://github.com/alvistack/ansible-role-ceph-rgw.git
     branch = develop
+[submodule "playbooks/roles/chrony"]
+    path = playbooks/roles/chrony
+    url = https://github.com/alvistack/ansible-role-chrony.git
+    branch = develop
 [submodule "playbooks/roles/cri-tools"]
     path = playbooks/roles/cri-tools
     url = https://github.com/alvistack/ansible-role-cri-tools.git
