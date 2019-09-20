@@ -44,12 +44,16 @@
 
   post_tasks:
     - name: setup csi-rbd as default storageclass
-      shell: |
-        set -o pipefail
-        kubectl patch storageclass csi-rbd \
-          -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
-      args:
-        executable: "/bin/bash"
+      k8s:
+        definition:
+          apiVersion: storage.k8s.io/v1
+          kind: StorageClass
+          metadata:
+            name: csi-rbd
+            metadata:
+              annotations:
+                storageclass.kubernetes.io/is-default-class: true
+        state: present
       when: ansible_hostname == groups['kube-master'][0]
       register: result
       changed_when: result is not succeeded
