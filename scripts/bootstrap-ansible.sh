@@ -21,26 +21,23 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 # Prepare APT dependencies
 if [ -x "$(command -v apt-get)" ]; then
     apt-get update
-    apt-get -y install ca-certificates curl gcc git libffi-dev libssl-dev make python python-dev sudo
-    apt-get -y purge python-pip
+    apt-get -y install ca-certificates curl gcc git libffi-dev libssl-dev make python3 python3-dev sudo
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
     yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
-    yum -y install ca-certificates curl gcc git2u libffi-devel make openssl-devel python python-devel redhat-rpm-config sudo
-    yum -y remove python-pip
+    yum -y install ca-certificates curl gcc git2u libffi-devel make openssl-devel python3 python3-devel redhat-rpm-config sudo
 fi
 
 # Prepare Zypper dependencies
 if [ -x "$(command -v zypper)" ]; then
     zypper -n --gpg-auto-import-keys refresh
-    zypper -n install -y ca-certificates ca-certificates-cacert ca-certificates-mozilla curl gcc git libffi-devel libopenssl-devel make python python-devel python-xml sudo
-    zypper -n rm -y python-pip
+    zypper -n install -y ca-certificates* curl gcc git libffi-devel libopenssl-devel make python3 python3-devel python3-xml sudo
 fi
 
 # Install PIP
-curl -skL https://bootstrap.pypa.io/get-pip.py | python
+curl -skL https://bootstrap.pypa.io/get-pip.py | python3
 
 # Install PIP dependencies
-pip install --upgrade -r requirements.txt
+pip3 install --upgrade --ignore-installed  --requirement requirements.txt

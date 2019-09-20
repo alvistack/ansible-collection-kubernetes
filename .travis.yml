@@ -24,10 +24,10 @@ before_install:
     sudo lxd init --preseed < .travis.lxd.yml
 
   - |
-    sudo apt-get -y purge python-openssl && sudo apt-get -y autoremove
-    sudo apt-get update && sudo apt-get -y install curl gcc libffi-dev libssl-dev make python python-dev
-    curl -skL https://bootstrap.pypa.io/get-pip.py | sudo -H python
-    sudo -H pip install --upgrade --requirement requirements.txt
+    sudo apt-get -y purge python3-openssl && sudo apt-get -y autoremove
+    sudo apt-get update && sudo apt-get -y install curl gcc libffi-dev libssl-dev make python3 python3-dev
+    curl -skL https://bootstrap.pypa.io/get-pip.py | sudo -H python3
+    sudo -H pip3 install --upgrade --ignore-installed  --requirement requirements.txt
 
 install:
   - |
