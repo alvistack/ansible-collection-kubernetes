@@ -26,6 +26,8 @@
 
   post_tasks:
     - name: setup csi-hostpath as default storageclass
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
       k8s:
         definition:
           apiVersion: storage.k8s.io/v1
