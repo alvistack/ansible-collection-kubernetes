@@ -114,6 +114,8 @@
   become: true
   post_tasks:
     - name: create pvc
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
       k8s:
         state: "present"
         definition:
@@ -130,6 +132,8 @@
                 storage: 100Mi
 
     - name: create pod
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
       k8s:
         state: "present"
         definition:
