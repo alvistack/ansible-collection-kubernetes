@@ -25,18 +25,11 @@ platforms:
       alias: ubuntu/xenial/amd64
     groups:
       - ceph-mon
-      - kube-master
-  - name: ${MOLECULE_INSTANCE_NAME}-4
-    url: unix:/var/snap/lxd/common/lxd/unix.socket
-    source:
-      server: https://images.linuxcontainers.org
-      protocol: simplestreams
-      alias: ubuntu/xenial/amd64
-    groups:
       - ceph-mgr
       - ceph-osd
       - ceph-mds
       - ceph-rgw
+      - kube-master
       - kube-node
 lint:
   name: yamllint
@@ -55,6 +48,8 @@ provisioner:
   inventory:
     links:
       group_vars: group_vars
+  playbooks:
+    prepare: prepare.yml
 verifier:
   name: testinfra
   lint:

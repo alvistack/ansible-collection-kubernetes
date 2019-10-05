@@ -34,6 +34,10 @@ platforms:
       - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
+      - ceph-mgr
+      - ceph-osd
+      - ceph-mds
+      - ceph-rgw
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-2
     box: generic/ubuntu1804
@@ -50,7 +54,10 @@ platforms:
       - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
+      - ceph-mgr
       - ceph-osd
+      - ceph-mds
+      - ceph-rgw
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-3
     box: generic/ubuntu1804
@@ -67,7 +74,10 @@ platforms:
       - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
       - ceph-mon
+      - ceph-mgr
       - ceph-osd
+      - ceph-mds
+      - ceph-rgw
       - kube-master
   - name: ${MOLECULE_INSTANCE_NAME}-4
     box: generic/ubuntu1804
@@ -83,10 +93,6 @@ platforms:
       - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
       - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
     groups:
-      - ceph-mgr
-      - ceph-osd
-      - ceph-mds
-      - ceph-rgw
       - kube-node
 lint:
   name: yamllint
@@ -105,6 +111,8 @@ provisioner:
   inventory:
     links:
       group_vars: group_vars
+  playbooks:
+    prepare: prepare.yml
 verifier:
   name: testinfra
   lint:
