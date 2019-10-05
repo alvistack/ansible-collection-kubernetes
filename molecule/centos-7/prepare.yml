@@ -5,6 +5,11 @@
   become: true
   gather_facts: false
   tasks:
+    - name: cp -rfT /etc/skel /root
+      raw: |
+        cp -rfT /etc/skel /root
+      ignore_errors: true
+
     - name: systemctl stop firewalld.service
       raw: |
         systemctl stop firewalld.service
