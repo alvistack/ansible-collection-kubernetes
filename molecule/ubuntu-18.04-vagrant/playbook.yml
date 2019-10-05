@@ -44,8 +44,8 @@
       shell: |
         set -o pipefail
         ceph osd pool create rbd 8 8
-        ceph osd pool set rbd size 1
-        ceph osd pool set rbd min_size 1
+        ceph osd pool set rbd size 3
+        ceph osd pool set rbd min_size 2
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
@@ -72,8 +72,8 @@
       shell: |
         set -o pipefail
         ceph osd pool create cephfs_metadata 32 32
-        ceph osd pool set cephfs_metadata size 1
-        ceph osd pool set cephfs_metadata min_size 1
+        ceph osd pool set cephfs_metadata size 3
+        ceph osd pool set cephfs_metadata min_size 2
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
@@ -84,8 +84,8 @@
       shell: |
         set -o pipefail
         ceph osd pool create cephfs_data 128 128
-        ceph osd pool set cephfs_data size 1
-        ceph osd pool set cephfs_data min_size 1
+        ceph osd pool set cephfs_data size 3
+        ceph osd pool set cephfs_data min_size 2
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
@@ -114,6 +114,8 @@
   become: true
   post_tasks:
     - name: create pvc
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
       k8s:
         state: "present"
         definition:
@@ -130,6 +132,8 @@
                 storage: 100Mi
 
     - name: create pod
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
       k8s:
         state: "present"
         definition:

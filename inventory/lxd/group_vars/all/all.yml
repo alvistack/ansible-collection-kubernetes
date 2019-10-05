@@ -67,7 +67,7 @@ kube_apiserver_csr_subject_alt_name: >-
   {%- endfor -%}
   IP:127.0.0.1
 kube_proxy_conntrack:
-  maxPerCore: 32768
+  maxPerCore: 0
   min: 131072
 
 # kubernetes-cephfs-provisioner

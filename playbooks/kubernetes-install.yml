@@ -46,7 +46,7 @@
     - name: kubeadm token create
       shell: |
         set -o pipefail
-        kubeadm token create --print-join-command
+        kubeadm token create
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube-master'][0] }}"
@@ -55,10 +55,30 @@
       changed_when: result is not succeeded
       ignore_errors: true
 
-    - name: kubeadm init
+    - name: kubeadm join
+      vars:
+        kubeadm_token: "{{ result.stdout }}"
       shell: |
         set -o pipefail
-        {{ result.stdout }} \
+        cat > /etc/kubernetes/kubeadm.conf <<EOF
+        apiVersion: kubeadm.k8s.io/v1beta2
+        kind: JoinConfiguration
+        discovery:
+          bootstrapToken:
+            apiServerEndpoint: {{ kube_apiserver_endpoint }}
+            token: {{ kubeadm_token }}
+            unsafeSkipCAVerification: true
+          tlsBootstrapToken: {{ kubeadm_token }}
+        nodeRegistration:
+          name: {{ ansible_hostname }}
+          criSocket: /var/run/dockershim.sock
+          taints: []
+          kubeletExtraArgs:
+            node-ip: {{ kubelet_node_ip }}
+            runtime-cgroups: /systemd/system.slice
+        EOF
+        kubeadm join \
+          --config=/etc/kubernetes/kubeadm.conf \
           --ignore-preflight-errors=all
       args:
         executable: "/bin/bash"

@@ -44,12 +44,18 @@
 
   post_tasks:
     - name: setup rbd as default storageclass
-      shell: |
-        set -o pipefail
-        kubectl patch storageclass rbd \
-          -p '{"metadata": {"annotations": {"storageclass.kubernetes.io/is-default-class": "true"}}}'
-      args:
-        executable: "/bin/bash"
+      vars:
+        ansible_python_interpreter: "/usr/bin/python3"
+      k8s:
+        definition:
+          apiVersion: storage.k8s.io/v1
+          kind: StorageClass
+          metadata:
+            name: rbd
+            annotations:
+              storageclass.kubernetes.io/is-default-class: "true"
+        state: present
       when: ansible_hostname == groups['kube-master'][0]
       register: result
-      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 15
