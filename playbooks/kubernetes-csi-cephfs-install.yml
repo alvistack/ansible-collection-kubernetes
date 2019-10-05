@@ -56,3 +56,6 @@
               storageclass.kubernetes.io/is-default-class: true
         state: present
       when: ansible_hostname == groups['kube-master'][0]
+      register: result
+      until: result is succeeded
+      retries: 15
