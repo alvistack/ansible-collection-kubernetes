@@ -34,8 +34,7 @@
           kind: StorageClass
           metadata:
             name: csi-hostpath
-            metadata:
-              annotations:
-                storageclass.kubernetes.io/is-default-class: true
+            annotations:
+              storageclass.kubernetes.io/is-default-class: true
         state: present
       when: ansible_hostname == groups['kube-master'][0]
