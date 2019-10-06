@@ -44,8 +44,10 @@
 
   post_tasks:
     - name: setup cephfs as default storageclass
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
-        ansible_python_interpreter: "/usr/bin/python3"
+        ansible_python_interpreter: "python3"
       k8s:
         definition:
           apiVersion: storage.k8s.io/v1

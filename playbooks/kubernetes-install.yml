@@ -35,6 +35,8 @@
 
   post_tasks:
     - name: kubectl version
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       command: kubectl version
       register: result
       changed_when: result is not succeeded
@@ -44,6 +46,8 @@
   become: true
   tasks:
     - name: kubeadm token create
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       shell: |
         set -o pipefail
         kubeadm token create
@@ -56,6 +60,8 @@
       ignore_errors: true
 
     - name: kubeadm join
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         kubeadm_token: "{{ result.stdout }}"
       shell: |
