@@ -14,9 +14,26 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: hosts-install.yml
-
 - hosts: all
+  remote_user: root
+  become: true
+  tasks:
+    - name: gather facts
+      setup:
+
+- hosts: ansible
+  remote_user: root
+  become: true
+  roles:
+    - role: bootstrap
+    - role: python
+    - role: git
+    - role: locales
+    - role: timezone
+    - role: chrony
+    - role: sshd
+
+- hosts: ansible
   remote_user: root
   become: true
   roles:
@@ -24,5 +41,62 @@
     - role: docker
     - role: duplicity
     - role: rclone
-    - role: kubectl
+
+- hosts: ansible
+  remote_user: root
+  become: true
+  roles:
     - role: ceph-common
+  
+  post_tasks:
+    - name: base64 encode /etc/ceph
+      shell: |
+        set -o pipefail
+        tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+      vars:
+        _params:
+          - "/etc/ceph/ceph.client.admin.keyring"
+          - "/etc/ceph/ceph.conf"
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      register: base64_encode_result
+      changed_when: base64_encode_result is not succeeded
+
+    - name: base64 decode /etc/ceph
+      shell: |
+        set -o pipefail
+        echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
+      args:
+        executable: "/bin/bash"
+      register: base64_decode_result
+      changed_when: base64_decode_result is not succeeded
+
+- hosts: ansible
+  remote_user: root
+  become: true
+  roles:
+    - role: kubectl
+
+  post_tasks:
+    - name: base64 encode /root/.kube/config
+      shell: |
+        set -o pipefail
+        tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+      vars:
+        _params:
+          - "/root/.kube/config"
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['kube-master'][0] }}"
+      register: base64_encode_result
+      changed_when: base64_encode_result is not succeeded
+
+    - name: base64 decode /root/.kube/config
+      shell: |
+        set -o pipefail
+        echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
+      args:
+        executable: "/bin/bash"
+      register: base64_decode_result
+      changed_when: base64_decode_result is not succeeded
