@@ -17,9 +17,6 @@
 - hosts: all
   remote_user: root
   become: true
-  tasks:
-    - name: gather facts
-      setup:
 
 - hosts: ansible
   remote_user: root
