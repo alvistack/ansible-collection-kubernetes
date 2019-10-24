@@ -1,3 +1,6 @@
+[ansible]
+localhost
+
 [ceph-mon]
 localhost
 

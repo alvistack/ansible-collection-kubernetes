@@ -22,4 +22,4 @@
 - import_playbook: kubernetes-dashboard-install.yml
 - import_playbook: kubernetes-ingress-nginx-install.yml
 - import_playbook: kubernetes-cert-manager-install.yml
-- import_playbook: kubernetes-cephfs-provisioner-install.yml
+- import_playbook: kubernetes-csi-cephfs-install.yml
