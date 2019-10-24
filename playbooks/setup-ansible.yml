@@ -14,15 +14,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ansible
+- import_playbook: hosts-install.yml
+
+- hosts: all
   remote_user: root
   become: true
   roles:
-    - role: bootstrap
-    - role: python
     - role: ansible
+    - role: docker
     - role: duplicity
     - role: rclone
-    - role: docker
     - role: kubectl
     - role: ceph-common
