@@ -1,0 +1,26 @@
+[all]
+localhost ansible_connectio=local
+
+[ansible]
+localhost
+
+[ceph-mon]
+localhost
+
+[ceph-mgr]
+localhost
+
+[ceph-osd]
+localhost
+
+[ceph-mds]
+localhost
+
+[ceph-rgw]
+localhost
+
+[kube-master]
+localhost
+
+[kube-node]
+localhost
