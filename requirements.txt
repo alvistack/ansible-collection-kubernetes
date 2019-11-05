@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible>=2.8.0
+ansible>=2.9.0
 ansible-lint
 docker>=2.0.0
 flake8

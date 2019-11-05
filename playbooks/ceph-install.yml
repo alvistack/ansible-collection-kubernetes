@@ -59,7 +59,7 @@
   remote_user: root
   become: true
   pre_tasks:
-    - name: base64 encode keyring
+    - name: base64 encode
       shell: |
         set -o pipefail
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
@@ -73,7 +73,7 @@
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
-    - name: base64 decode certificates
+    - name: base64 decode
       shell: |
         set -o pipefail
         echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
@@ -102,7 +102,7 @@
   remote_user: root
   become: true
   pre_tasks:
-    - name: base64 encode keyring
+    - name: base64 encode
       shell: |
         set -o pipefail
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
@@ -116,7 +116,7 @@
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
-    - name: base64 decode certificates
+    - name: base64 decode
       shell: |
         set -o pipefail
         echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
@@ -147,7 +147,7 @@
   remote_user: root
   become: true
   pre_tasks:
-    - name: base64 encode keyring
+    - name: base64 encode
       shell: |
         set -o pipefail
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
@@ -161,7 +161,7 @@
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
-    - name: base64 decode certificates
+    - name: base64 decode
       shell: |
         set -o pipefail
         echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
@@ -190,7 +190,7 @@
   remote_user: root
   become: true
   pre_tasks:
-    - name: base64 encode keyring
+    - name: base64 encode
       shell: |
         set -o pipefail
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
@@ -204,7 +204,7 @@
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
-    - name: base64 decode certificates
+    - name: base64 decode
       shell: |
         set -o pipefail
         echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
