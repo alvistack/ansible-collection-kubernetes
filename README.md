@@ -89,7 +89,6 @@ Once update `inventory/myinventory/hosts` as per your production environment, no
 
     # Run playbooks
     ansible-playbook -i inventory/myinventory/hosts playbooks/setup-everything.yml
-    ansible-playbook -i inventory/myinventory/hosts playbooks/setup-ansible.yml
     
     # Confirm the version and status of Ceph
     ceph --version
