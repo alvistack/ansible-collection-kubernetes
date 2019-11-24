@@ -21,20 +21,18 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 # Prepare APT dependencies
 if [ -x "$(command -v apt-get)" ]; then
     apt-get update
-    apt-get -y install ca-certificates curl gcc git libffi-dev libssl-dev make python3 python3-dev sudo
+    apt-get -y install ca-certificates curl gcc libffi-dev libssl-dev make python3 python3-dev sudo
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
-    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
-    yum -y install https://centos7.iuscommunity.org/ius-release.rpm
-    yum -y install ca-certificates curl gcc git2u libffi-devel make openssl-devel python3 python3-devel redhat-rpm-config sudo
+    yum -y install ca-certificates curl gcc libffi-devel make openssl-devel python3 python3-devel redhat-rpm-config sudo
 fi
 
 # Prepare Zypper dependencies
 if [ -x "$(command -v zypper)" ]; then
     zypper -n --gpg-auto-import-keys refresh
-    zypper -n install -y ca-certificates* curl gcc git libffi-devel libopenssl-devel make python3 python3-devel python3-xml sudo
+    zypper -n install -y ca-certificates* curl gcc libffi-devel libopenssl-devel make python3 python3-devel python3-xml sudo
 fi
 
 # Install PIP
