@@ -22,11 +22,8 @@
     - role: cri-tools
     - role: kubernetes-cni
     - role: kubectl
-      kubectl_version: "{{ kubernetes_version }}"
     - role: kubelet
-      kubelet_version: "{{ kubernetes_version }}"
     - role: kubeadm
-      kubeadm_version: "{{ kubernetes_version }}"
 
 - hosts: kube-master
   remote_user: root
@@ -101,7 +98,6 @@
   become: true
   roles:
     - role: kubectl
-      kubectl_version: "{{ kubernetes_version }}"
 
   post_tasks:
     - name: base64 encode
