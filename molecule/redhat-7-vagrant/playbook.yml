@@ -46,6 +46,7 @@
         ceph osd pool create rbd 8 8
         ceph osd pool set rbd size 1
         ceph osd pool set rbd min_size 1
+        ceph osd pool application enable rbd rbd
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
