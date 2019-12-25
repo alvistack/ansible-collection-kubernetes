@@ -48,9 +48,6 @@ etcd_peer_csr_subject_alt_name: >-
   IP:127.0.0.1
 
 # kubernetes
-kubectl_version: "{{ kubernetes_version }}"
-kubelet_version: "{{ kubernetes_version }}"
-kubeadm_version: "{{ kubernetes_version }}"
 kubernetes_cluster_name: "{{ hostvars[groups['kube-master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd_external_endpoints: >-
   {%- for host in ansible_play_hosts -%}
