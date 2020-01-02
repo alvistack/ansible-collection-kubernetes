@@ -39,6 +39,7 @@ platforms:
       - ceph-mds
       - ceph-rgw
       - kube-master
+      - kube-node
   - name: ${MOLECULE_INSTANCE_NAME}-2
     box: generic/rhel7
     cpu: 2
@@ -59,6 +60,7 @@ platforms:
       - ceph-mds
       - ceph-rgw
       - kube-master
+      - kube-node
   - name: ${MOLECULE_INSTANCE_NAME}-3
     box: generic/rhel7
     cpu: 2
@@ -79,20 +81,6 @@ platforms:
       - ceph-mds
       - ceph-rgw
       - kube-master
-  - name: ${MOLECULE_INSTANCE_NAME}-4
-    box: generic/rhel7
-    cpu: 2
-    memory: 4096
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: dhcp
-    provider_raw_config_args:
-      - "customize [ 'modifyvm', :id, '--uartmode1', 'disconnected' ]"
-      - "customize [ 'createhd', '--filename', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\", '--size', 10 * 1024 ]"
-      - "customize [ 'storagectl', :id, '--name', 'SCSI Controller', '--add', 'scsi' ]"
-      - "customize [ 'storageattach', :id, '--storagectl', 'SCSI Controller', '--port', 3, '--device', 0, '--type', 'hdd', '--medium', \"/tmp/#{vagrant_config_hash['instance']['name']}.vmdk\" ]"
-    groups:
       - kube-node
 lint:
   name: yamllint
