@@ -1,8 +1,17 @@
 # AlviStack-Ansible
 
-## 4.1.0 - TBC
+## 4.2.0 - TBC
 
 ### Major Changes
+
+## 4.1.0 - 2020-01-15
+
+### Major Changes
+
+  - Avoid EPEL Repo and IUS Repo for CentOS/RHEL 7
+  - Handle controller setup with `ansible-install.yml`
+  - Copy keys for controller by `ceph-install.yml` and `kubernetes-install.yml`
+  - Replace default `cephfs-provisioner` with `csi-cephfs`
 
 ## 4.0.0 - 2019-11-05
 

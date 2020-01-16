@@ -32,7 +32,7 @@ fi
 # Prepare Zypper dependencies
 if [ -x "$(command -v zypper)" ]; then
     zypper -n --gpg-auto-import-keys refresh
-    zypper -n install -y ca-certificates* curl gcc libffi-devel libopenssl-devel make python3 python3-devel python3-xml sudo
+    zypper -n install -y ca-certificates curl gcc libffi-devel libopenssl-devel make python3 python3-devel sudo
 fi
 
 # Install PIP
