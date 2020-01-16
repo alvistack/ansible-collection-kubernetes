@@ -28,18 +28,18 @@
           --autosubscribe
       ignore_errors: true
 
-    - name: redhat | yum install ca-certificates curl python3 sudo
+    - name: redhat | yum install -y ca-certificates curl python3 sudo
       raw: |
         yum install -y ca-certificates curl python3 sudo
       ignore_errors: true
 
-    - name: suse | zypper install ca-certificates* curl python3 sudo
+    - name: suse | zypper -n install -y ca-certificates curl python3 sudo
       raw: |
         zypper -n --gpg-auto-import-keys refresh
-        zypper -n install -y ca-certificates* curl python3 sudo
+        zypper -n install -y ca-certificates curl python3 sudo
       ignore_errors: true
 
-    - name: debian | apt-get install ca-certificates curl python3 sudo
+    - name: debian | apt-get install -y ca-certificates curl python3 sudo
       raw: |
         apt-get update
         apt-get install -y ca-certificates curl python3 sudo
