@@ -14,6 +14,8 @@
 
 ansible>=2.9.0
 ansible-lint
+ansible-runner
+ansible-runner-http
 argcomplete
 docker>=2.0.0
 flake8
