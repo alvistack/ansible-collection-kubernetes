@@ -142,9 +142,17 @@
     path = playbooks/roles/ntp
     url = https://github.com/alvistack/ansible-role-ntp.git
     branch = develop
+[submodule "playbooks/roles/operator-sdk"]
+    path = playbooks/roles/operator-sdk
+    url = https://github.com/alvistack/ansible-role-operator-sdk.git
+    branch = develop
 [submodule "playbooks/roles/python"]
     path = playbooks/roles/python
     url = https://github.com/alvistack/ansible-role-python.git
+    branch = develop
+[submodule "playbooks/roles/restic"]
+    path = playbooks/roles/restic
+    url = https://github.com/alvistack/ansible-role-restic.git
     branch = develop
 [submodule "playbooks/roles/rclone"]
     path = playbooks/roles/rclone
