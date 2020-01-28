@@ -18,7 +18,9 @@
   remote_user: root
   become: true
   roles:
-    - role: ansible
     - role: docker
-    - role: duplicity
+    - role: kubectl
+    - role: ansible
+    - role: operator-sdk
     - role: rclone
+    - role: restic

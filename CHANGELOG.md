@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Add `operator-sdk`
+  - Replace `duplicity` with `restic`
+
 ## 4.1.0 - 2020-01-15
 
 ### Major Changes
