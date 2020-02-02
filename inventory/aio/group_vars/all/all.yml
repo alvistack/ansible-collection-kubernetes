@@ -1,5 +1,8 @@
 ---
 
+# kernel
+kernel_release: "mainline"
+
 # ceph-common
 ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]].ansible_machine_id | to_uuid }}"
 ceph_mon_initial_members: >-
