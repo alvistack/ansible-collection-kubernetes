@@ -6,6 +6,7 @@
 
   - Add `operator-sdk`
   - Replace `duplicity` with `restic`
+  - Default with `mainline` kernel
 
 ## 4.1.0 - 2020-01-15
 
