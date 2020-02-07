@@ -30,7 +30,7 @@ profiles:
     devices:
       aadisable:
         path: /sys/module/nf_conntrack/parameters/hashsize
-        source: /sys/module/nf_conntrack/parameters/hashsize
+        source: /dev/null
         type: disk
       aadisable1:
         path: /sys/module/apparmor/parameters/enabled
