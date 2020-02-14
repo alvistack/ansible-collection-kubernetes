@@ -15,14 +15,65 @@
 # limitations under the License.
 
 driver:
-  name: lxd
+  name: vagrant
+  provider:
+    name: libvirt
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    url: unix:/var/snap/lxd/common/lxd/unix.socket
-    source:
-      server: https://images.linuxcontainers.org
-      protocol: simplestreams
-      alias: ubuntu/bionic/amd64
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - ceph-mon
+      - ceph-mgr
+      - ceph-osd
+      - ceph-mds
+      - ceph-rgw
+      - kube-master
+      - kube-node
+  - name: ${MOLECULE_INSTANCE_NAME}-2
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - ceph-mon
+      - ceph-mgr
+      - ceph-osd
+      - ceph-mds
+      - ceph-rgw
+      - kube-master
+      - kube-node
+  - name: ${MOLECULE_INSTANCE_NAME}-3
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
     groups:
       - ceph-mon
       - ceph-mgr
@@ -43,6 +94,12 @@ provisioner:
   name: ansible
   env:
     ANSIBLE_ROLES_PATH: ${ANSIBLE_ROLES_PATH}
+  config_options:
+    defaults:
+      forks: 20
+    ssh_connection:
+      pipelining: true
+      ssh_args: -o ControlMaster=auto -o ControlPersist=600s
   lint:
     name: ansible-lint
   inventory:
@@ -51,6 +108,6 @@ provisioner:
   playbooks:
     prepare: prepare.yml
 verifier:
-  name: testinfra
+  name: ansible
   lint:
-    name: flake8
+    name: ansible-lint
