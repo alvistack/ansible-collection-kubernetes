@@ -14,18 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ../../playbooks/setup-everything.yml
-
 - hosts: ceph-osd
   remote_user: root
   become: true
-  post_tasks:
+  tasks:
     - name: ceph-volume lvm create
       shell: |
         set -o pipefail
         ceph-volume lvm create \
           --bluestore \
-          --data /dev/sdb
+          --data /dev/vdb
       args:
         executable: "/bin/bash"
       changed_when: false
@@ -61,14 +59,7 @@
 - hosts: ceph-mds
   remote_user: root
   become: true
-  post_tasks:
-    - name: start services
-      service:
-        name: "ceph-mds@{{ ansible_hostname }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
+  tasks:
     - name: ceph osd pool create cephfs_metadata
       shell: |
         set -o pipefail
@@ -113,7 +104,7 @@
 - hosts: kube-master
   remote_user: root
   become: true
-  post_tasks:
+  tasks:
     - name: create pvc
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

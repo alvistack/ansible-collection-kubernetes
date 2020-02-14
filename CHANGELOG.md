@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Migrate molecule driver to Libvirt
+  - Migrate molecule verifier to Ansible
+  - Support Ubuntu 19.10
   - Add `operator-sdk`
   - Replace `duplicity` with `restic`
   - Default with `mainline` kernel
