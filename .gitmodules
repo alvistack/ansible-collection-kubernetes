@@ -66,6 +66,10 @@
 	path = roles/kubelet
 	url = https://github.com/alvistack/ansible-role-kubelet.git
 	branch = develop
+[submodule "roles/kubernetes"]
+    path = roles/kubernetes
+    url = https://github.com/alvistack/ansible-role-kubernetes.git
+    branch = develop
 [submodule "roles/kubernetes-addon-manager"]
 	path = roles/kubernetes-addon-manager
 	url = https://github.com/alvistack/ansible-role-kubernetes-addon-manager.git
