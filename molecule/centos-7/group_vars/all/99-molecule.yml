@@ -16,6 +16,10 @@ ceph_mon_host: >-
 ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 
+# ceph_osd
+ceph_volume:
+  - { objectstore: "bluestore", data: "/dev/vdb" }
+
 # etcd
 etcd_cert_file: "/etc/kubernetes/pki/etcd/server.crt"
 etcd_key_file: "/etc/kubernetes/pki/etcd/server.key"

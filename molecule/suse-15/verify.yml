@@ -14,30 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ceph-osd
-  remote_user: root
-  become: true
-  tasks:
-    - name: ceph-volume lvm create
-      shell: |
-        set -o pipefail
-        ceph-volume lvm create \
-          --bluestore \
-          --data /dev/sdb
-      args:
-        executable: "/bin/bash"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph-volume lvm activate
-      shell: |
-        set -o pipefail
-        ceph-volume lvm activate --all
-      args:
-        executable: "/bin/bash"
-      changed_when: false
-      ignore_errors: true
-
 - import_playbook: ../../playbooks/ceph-verify.yml
 - import_playbook: ../../playbooks/kubernetes-verify.yml
 - import_playbook: ../../playbooks/kubernetes-csi-cephfs-verify.yml

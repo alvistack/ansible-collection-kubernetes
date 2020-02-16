@@ -11,13 +11,14 @@ ceph_mon_initial_members: >-
   {%- endfor -%}
 ceph_mon_host: >-
   {%- for host in groups['ceph_mon'] -%}
-  {{ hostvars[host].ansible_default_ipv4.address }},
+  {{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
-ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
-ceph_cluster_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
+ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
+ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 
 # ceph_osd
-ceph_volume: []
+ceph_volume:
+  - { objectstore: "bluestore", data: "/dev/vdb" }
 
 # etcd
 etcd_cert_file: "/etc/kubernetes/pki/etcd/server.crt"
@@ -26,21 +27,21 @@ etcd_trusted_ca_file: "/etc/kubernetes/pki/etcd/ca.crt"
 etcd_peer_cert_file: "/etc/kubernetes/pki/etcd/peer.crt"
 etcd_peer_key_file: "/etc/kubernetes/pki/etcd/peer.key"
 etcd_peer_trusted_ca_file: "/etc/kubernetes/pki/etcd/ca.crt"
-etcd_listen_peer_urls: "https://{{ ansible_default_ipv4.address }}:2380,https://127.0.0.1:2380"
-etcd_listen_client_urls: "https://{{ ansible_default_ipv4.address }}:2379,https://127.0.0.1:2379"
-etcd_initial_advertise_peer_urls: "https://{{ ansible_default_ipv4.address }}:2380"
+etcd_listen_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380,https://127.0.0.1:2380"
+etcd_listen_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379,https://127.0.0.1:2379"
+etcd_initial_advertise_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380"
 etcd_initial_cluster: >-
   {%- for host in ansible_play_hosts -%}
-  {{ host }}=https://{{ hostvars[host].ansible_default_ipv4.address }}:2380,
+  {{ host }}=https://{{ hostvars[host].ansible_eth1.ipv4.address }}:2380,
   {%- endfor -%}
-etcd_advertise_client_urls: "https://{{ ansible_default_ipv4.address }}:2379"
+etcd_advertise_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379"
 etcd_csr_subject_alt_name: >-
   {%- for host in ansible_play_hosts -%}
   DNS:{{ host }},
   {%- endfor -%}
   DNS:localhost,
   {%- for host in ansible_play_hosts -%}
-  IP:{{ hostvars[host].ansible_default_ipv4.address }},
+  IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1
 etcd_peer_csr_subject_alt_name: >-
@@ -49,7 +50,7 @@ etcd_peer_csr_subject_alt_name: >-
   {%- endfor -%}
   DNS:localhost,
   {%- for host in ansible_play_hosts -%}
-  IP:{{ hostvars[host].ansible_default_ipv4.address }},
+  IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1
 
@@ -57,19 +58,19 @@ etcd_peer_csr_subject_alt_name: >-
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd_external_endpoints: >-
   {%- for host in ansible_play_hosts -%}
-  https://{{ hostvars[host].ansible_default_ipv4.address }}:2379,
+  https://{{ hostvars[host].ansible_eth1.ipv4.address }}:2379,
   {%- endfor -%}
-kubelet_node_ip: "{{ ansible_default_ipv4.address }}"
-kube_apiserver_advertise_address: "{{ ansible_default_ipv4.address }}"
+kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
+kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
 kube_apiserver_bind_port: "6443"
-kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}:{{ kube_apiserver_bind_port }}"
+kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"
 kube_apiserver_csr_subject_alt_name: >-
   {%- for host in ansible_play_hosts -%}
   DNS:{{ host }},
   {%- endfor -%}
   DNS:localhost,
   {%- for host in ansible_play_hosts -%}
-  IP:{{ hostvars[host].ansible_default_ipv4.address }},
+  IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1
 kube_proxy_conntrack:
@@ -79,11 +80,11 @@ kube_proxy_conntrack:
 # kubernetes_csi_cephfs
 csi_cephfs_monitors: >-
   {%- for host in groups['ceph_mon'] -%}
-  {{ hostvars[host].ansible_default_ipv4.address }}:6789,
+  {{ hostvars[host].ansible_eth1.ipv4.address }}:6789,
   {%- endfor -%}
 
 # kubernetes_csi_rbd
 csi_rbd_monitors: >-
   {%- for host in groups['ceph_mon'] -%}
-  {{ hostvars[host].ansible_default_ipv4.address }}:6789,
+  {{ hostvars[host].ansible_eth1.ipv4.address }}:6789,
   {%- endfor -%}
