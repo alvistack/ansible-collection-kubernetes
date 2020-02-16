@@ -15,7 +15,7 @@
 # limitations under the License.
 
 namespace: alvistack
-name: kubernetes
+name: kubernetes-collection
 description: Ansible Collection for Kubernetes
 
 version: 4.2.0
