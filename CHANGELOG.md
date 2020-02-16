@@ -1,4 +1,4 @@
-# AlviStack-Ansible
+# Ansible Collection for Kubernetes
 
 ## 4.3.0 - TBC
 

@@ -1,12 +1,12 @@
-# AlviStack-Ansible
+# Ansible Collection for Kubernetes
 
-[![Travis](https://img.shields.io/travis/alvistack/alvistack-ansible.svg)](https://travis-ci.org/alvistack/alvistack-ansible)
-[![GitHub release](https://img.shields.io/github/release/alvistack/alvistack-ansible.svg)](https://github.com/alvistack/alvistack-ansible/releases)
-[![GitHub license](https://img.shields.io/github/license/alvistack/alvistack-ansible.svg)](https://github.com/alvistack/alvistack-ansible/blob/master/LICENSE)
+[![Travis](https://img.shields.io/travis/alvistack/ansible-collection-kubernetes.svg)](https://travis-ci.org/alvistack/ansible-collection-kubernetes)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/releases)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
 
-Ansible playbooks for deploying AlviStack.
+Ansible collection for deploying Kubernetes.
 
-AlviStack-Ansible provides Ansible playbooks and roles for the deployment and configuration of an [Kubernetes](https://github.com/kubernetes/kubernetes) environment.
+This Ansible collection provides Ansible playbooks and roles for the deployment and configuration of an [Kubernetes](https://github.com/kubernetes/kubernetes) environment.
 
 ## Requirements
 
@@ -21,8 +21,8 @@ This playbook was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7 or open
 Start by cloning the Alvistack-Ansible repository, checkout the corresponding branch, and init with `git submodule`, then bootstrap Python3 + Ansible with provided helper script:
 
     # GIT clone the development branch
-    git clone --branch develop https://github.com/alvistack/alvistack-ansible
-    cd alvistack-ansible
+    git clone --branch develop https://github.com/alvistack/ansible-collection-kubernetes
+    cd ansible-collection-kubernetes
     
     # Setup Roles with GIT submodule
     git submodule init
@@ -130,13 +130,10 @@ Moreover, we don't setup the Ceph OSD and Ceph MDS for you, which you should set
 
 ### Molecule
 
-You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [LXD](https://lxd.readthedocs.io/en/latest/) or [Vagrant](https://www.vagrantup.com/) installed, e.g.
+You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Ubuntu 18.04 with LXD
+    # Run Molecule on Ubuntu 18.04 with Vagrant and Libvirt
     molecule converge -s ubuntu-18.04
-    
-    # Run Molecule on Ubuntu 18.04 with Vagrant
-    molecule converge -s ubuntu-18.04-vagrant
 
 Please refer to [.travis.yml](.travis.yml) for more information on running Molecule and LXD.
 

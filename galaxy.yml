@@ -14,12 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: hosts-install.yml
-- import_playbook: kernel-install.yml
-- import_playbook: ansible-install.yml
-- import_playbook: kubernetes-install.yml
-- import_playbook: kubernetes-flannel-install.yml
-- import_playbook: kubernetes-dashboard-install.yml
-- import_playbook: kubernetes-ingress-nginx-install.yml
-- import_playbook: kubernetes-cert-manager-install.yml
-- import_playbook: kubernetes-csi-hostpath-install.yml
+namespace: alvistack
+name: kubernetes
+description: Ansible Collection for Kubernetes
+
+version: 4.2.0
+readme: README.md
+license: Apache License 2.0
+
+repository: https://github.com/alvistack/ansible-collection-kubernetes
+documentation: https://github.com/alvistack/ansible-collection-kubernetes
+homepage: https://github.com/alvistack/ansible-collection-kubernetes
+issues: https://github.com/alvistack/ansible-collection-kubernetes/issues
+
+dependencies: {}
+tags:
+  - system
+authors:
+  - Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+

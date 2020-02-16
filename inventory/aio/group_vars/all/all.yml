@@ -73,18 +73,6 @@ kube_proxy_conntrack:
   maxPerCore: 32768
   min: 131072
 
-# kubernetes-cephfs-provisioner
-cephfs_provisioner_monitors: >-
-  {%- for host in groups['ceph-mon'] -%}
-  {{ hostvars[host].ansible_default_ipv4.address }}:6789,
-  {%- endfor -%}
-
-# kubernetes-rbd-provisioner
-rbd_provisioner_monitors: >-
-  {%- for host in groups['ceph-mon'] -%}
-  {{ hostvars[host].ansible_default_ipv4.address }}:6789,
-  {%- endfor -%}
-
 # kubernetes-csi-cephfs
 csi_cephfs_monitors: >-
   {%- for host in groups['ceph-mon'] -%}

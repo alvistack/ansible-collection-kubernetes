@@ -22,49 +22,7 @@ platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
     box: generic/opensuse15
     cpu: 2
-    memory: 2048
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: dhcp
-    provider_raw_config_args:
-      - 'nic_model_type = "virtio"'
-      - 'disk_bus = "sata"'
-      - 'volume_cache = "none"'
-      - 'storage :file, bus: "sata", cache: "none"'
-    groups:
-      - ceph-mon
-      - ceph-mgr
-      - ceph-osd
-      - ceph-mds
-      - ceph-rgw
-      - kube-master
-      - kube-node
-  - name: ${MOLECULE_INSTANCE_NAME}-2
-    box: generic/opensuse15
-    cpu: 2
-    memory: 2048
-    interfaces:
-      - auto_config: true
-        network_name: private_network
-        type: dhcp
-    provider_raw_config_args:
-      - 'nic_model_type = "virtio"'
-      - 'disk_bus = "sata"'
-      - 'volume_cache = "none"'
-      - 'storage :file, bus: "sata", cache: "none"'
-    groups:
-      - ceph-mon
-      - ceph-mgr
-      - ceph-osd
-      - ceph-mds
-      - ceph-rgw
-      - kube-master
-      - kube-node
-  - name: ${MOLECULE_INSTANCE_NAME}-3
-    box: generic/opensuse15
-    cpu: 2
-    memory: 2048
+    memory: 4096
     interfaces:
       - auto_config: true
         network_name: private_network
