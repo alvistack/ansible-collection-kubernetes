@@ -18,13 +18,13 @@
   remote_user: root
   become: true
 
-- hosts: kube-node
+- hosts: kube_node
   remote_user: root
   become: true
   roles:
-    - role: ceph-common
+    - role: ceph_common
 
-- hosts: kube-master
+- hosts: kube_master
   remote_user: root
   become: true
   pre_tasks:
@@ -34,12 +34,12 @@
         ceph auth get-key client.admin
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
 
   roles:
-    - role: kubernetes-csi-rbd
+    - role: kubernetes_csi_rbd
       csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
 
   post_tasks:
@@ -57,7 +57,7 @@
             annotations:
               storageclass.kubernetes.io/is-default-class: "true"
         state: present
-      when: ansible_hostname == groups['kube-master'][0]
+      when: ansible_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
       retries: 15

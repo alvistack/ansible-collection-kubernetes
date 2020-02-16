@@ -4,23 +4,23 @@ localhost ansible_connectio=local
 [ansible]
 localhost
 
-[ceph-mon]
+[ceph_mon]
 localhost
 
-[ceph-mgr]
+[ceph_mgr]
 localhost
 
-[ceph-osd]
+[ceph_osd]
 localhost
 
-[ceph-mds]
+[ceph_mds]
 localhost
 
-[ceph-rgw]
+[ceph_rgw]
 localhost
 
-[kube-master]
+[kube_master]
 localhost
 
-[kube-node]
+[kube_node]
 localhost

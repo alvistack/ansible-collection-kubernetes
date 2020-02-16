@@ -14,24 +14,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube-master:kube-node
+- hosts: kube_master:kube_node
   remote_user: root
   become: true
   roles:
     - role: docker
-    - role: cri-tools
-    - role: kubernetes-cni
+    - role: cri_tools
+    - role: kubernetes_cni
     - role: kubectl
     - role: kubelet
     - role: kubeadm
 
-- hosts: kube-master
+- hosts: kube_master
   remote_user: root
   become: true
   roles:
     - role: etcd
     - role: kubernetes
-    - role: kubernetes-addon-manager
+    - role: kubernetes_addon_manager
 
   post_tasks:
     - name: kubectl version
@@ -41,7 +41,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: kube-node:!kube-master
+- hosts: kube_node:!kube_master
   remote_user: root
   become: true
   tasks:
@@ -53,7 +53,7 @@
         kubeadm token create
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['kube-master'][0] }}"
+      delegate_to: "{{ groups['kube_master'][0] }}"
       register: result
       until: result is succeeded
       changed_when: result is not succeeded
@@ -109,7 +109,7 @@
           - "/root/.kube/config"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['kube-master'][0] }}"
+      delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 

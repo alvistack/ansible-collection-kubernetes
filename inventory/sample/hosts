@@ -13,37 +13,37 @@ kube16  ansible_host=172.24.2.16
 [ansible]
 ansible
 
-[ceph-mon]
+[ceph_mon]
 ceph11
 ceph12
 ceph13
 
-[ceph-mgr]
+[ceph_mgr]
 ceph11
 ceph12
 ceph13
 
-[ceph-osd]
+[ceph_osd]
 ceph11
 ceph12
 ceph13
 
-[ceph-mds]
+[ceph_mds]
 ceph11
 ceph12
 ceph13
 
-[ceph-rgw]
+[ceph_rgw]
 ceph11
 ceph12
 ceph13
 
-[kube-master]
+[kube_master]
 kube11
 kube12
 kube13
 
-[kube-node]
+[kube_node]
 kube14
 kube15
 kube16

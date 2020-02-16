@@ -6,37 +6,37 @@
 	path = roles/bootstrap
 	url = https://github.com/alvistack/ansible-role-bootstrap.git
 	branch = develop
-[submodule "roles/ceph-common"]
-	path = roles/ceph-common
-	url = https://github.com/alvistack/ansible-role-ceph-common.git
+[submodule "roles/ceph_common"]
+	path = roles/ceph_common
+	url = https://github.com/alvistack/ansible-role-ceph_common.git
 	branch = develop
-[submodule "roles/ceph-mds"]
-	path = roles/ceph-mds
-	url = https://github.com/alvistack/ansible-role-ceph-mds.git
+[submodule "roles/ceph_mds"]
+	path = roles/ceph_mds
+	url = https://github.com/alvistack/ansible-role-ceph_mds.git
 	branch = develop
-[submodule "roles/ceph-mgr"]
-	path = roles/ceph-mgr
-	url = https://github.com/alvistack/ansible-role-ceph-mgr.git
+[submodule "roles/ceph_mgr"]
+	path = roles/ceph_mgr
+	url = https://github.com/alvistack/ansible-role-ceph_mgr.git
 	branch = develop
-[submodule "roles/ceph-mon"]
-	path = roles/ceph-mon
-	url = https://github.com/alvistack/ansible-role-ceph-mon.git
+[submodule "roles/ceph_mon"]
+	path = roles/ceph_mon
+	url = https://github.com/alvistack/ansible-role-ceph_mon.git
 	branch = develop
-[submodule "roles/ceph-osd"]
-	path = roles/ceph-osd
-	url = https://github.com/alvistack/ansible-role-ceph-osd.git
+[submodule "roles/ceph_osd"]
+	path = roles/ceph_osd
+	url = https://github.com/alvistack/ansible-role-ceph_osd.git
 	branch = develop
-[submodule "roles/ceph-rgw"]
-	path = roles/ceph-rgw
-	url = https://github.com/alvistack/ansible-role-ceph-rgw.git
+[submodule "roles/ceph_rgw"]
+	path = roles/ceph_rgw
+	url = https://github.com/alvistack/ansible-role-ceph_rgw.git
 	branch = develop
 [submodule "roles/chrony"]
 	path = roles/chrony
 	url = https://github.com/alvistack/ansible-role-chrony.git
 	branch = develop
-[submodule "roles/cri-tools"]
-	path = roles/cri-tools
-	url = https://github.com/alvistack/ansible-role-cri-tools.git
+[submodule "roles/cri_tools"]
+	path = roles/cri_tools
+	url = https://github.com/alvistack/ansible-role-cri_tools.git
 	branch = develop
 [submodule "roles/docker"]
 	path = roles/docker
@@ -67,64 +67,64 @@
 	url = https://github.com/alvistack/ansible-role-kubelet.git
 	branch = develop
 [submodule "roles/kubernetes"]
-    path = roles/kubernetes
-    url = https://github.com/alvistack/ansible-role-kubernetes.git
-    branch = develop
-[submodule "roles/kubernetes-addon-manager"]
-	path = roles/kubernetes-addon-manager
-	url = https://github.com/alvistack/ansible-role-kubernetes-addon-manager.git
+	path = roles/kubernetes
+	url = https://github.com/alvistack/ansible-role-kubernetes.git
 	branch = develop
-[submodule "roles/kubernetes-cert-manager"]
-	path = roles/kubernetes-cert-manager
-	url = https://github.com/alvistack/ansible-role-kubernetes-cert-manager.git
+[submodule "roles/kubernetes_addon_manager"]
+	path = roles/kubernetes_addon_manager
+	url = https://github.com/alvistack/ansible-role-kubernetes_addon_manager.git
 	branch = develop
-[submodule "roles/kubernetes-cni"]
-	path = roles/kubernetes-cni
-	url = https://github.com/alvistack/ansible-role-kubernetes-cni.git
+[submodule "roles/kubernetes_cert_manager"]
+	path = roles/kubernetes_cert_manager
+	url = https://github.com/alvistack/ansible-role-kubernetes_cert_manager.git
 	branch = develop
-[submodule "roles/kubernetes-csi-cephfs"]
-	path = roles/kubernetes-csi-cephfs
-	url = https://github.com/alvistack/ansible-role-kubernetes-csi-cephfs.git
+[submodule "roles/kubernetes_cni"]
+	path = roles/kubernetes_cni
+	url = https://github.com/alvistack/ansible-role-kubernetes_cni.git
 	branch = develop
-[submodule "roles/kubernetes-csi-hostpath"]
-	path = roles/kubernetes-csi-hostpath
-	url = https://github.com/alvistack/ansible-role-kubernetes-csi-hostpath.git
+[submodule "roles/kubernetes_csi_cephfs"]
+	path = roles/kubernetes_csi_cephfs
+	url = https://github.com/alvistack/ansible-role-kubernetes_csi_cephfs.git
 	branch = develop
-[submodule "roles/kubernetes-csi-rbd"]
-	path = roles/kubernetes-csi-rbd
-	url = https://github.com/alvistack/ansible-role-kubernetes-csi-rbd.git
+[submodule "roles/kubernetes_csi_hostpath"]
+	path = roles/kubernetes_csi_hostpath
+	url = https://github.com/alvistack/ansible-role-kubernetes_csi_hostpath.git
 	branch = develop
-[submodule "roles/kubernetes-dashboard"]
-	path = roles/kubernetes-dashboard
-	url = https://github.com/alvistack/ansible-role-kubernetes-dashboard.git
+[submodule "roles/kubernetes_csi_rbd"]
+	path = roles/kubernetes_csi_rbd
+	url = https://github.com/alvistack/ansible-role-kubernetes_csi_rbd.git
 	branch = develop
-[submodule "roles/kubernetes-flannel"]
-	path = roles/kubernetes-flannel
-	url = https://github.com/alvistack/ansible-role-kubernetes-flannel.git
+[submodule "roles/kubernetes_dashboard"]
+	path = roles/kubernetes_dashboard
+	url = https://github.com/alvistack/ansible-role-kubernetes_dashboard.git
 	branch = develop
-[submodule "roles/kubernetes-ingress-nginx"]
-	path = roles/kubernetes-ingress-nginx
-	url = https://github.com/alvistack/ansible-role-kubernetes-ingress-nginx.git
+[submodule "roles/kubernetes_flannel"]
+	path = roles/kubernetes_flannel
+	url = https://github.com/alvistack/ansible-role-kubernetes_flannel.git
 	branch = develop
-[submodule "roles/kubernetes-metallb"]
-	path = roles/kubernetes-metallb
-	url = https://github.com/alvistack/ansible-role-kubernetes-metallb.git
+[submodule "roles/kubernetes_ingress_nginx"]
+	path = roles/kubernetes_ingress_nginx
+	url = https://github.com/alvistack/ansible-role-kubernetes_ingress_nginx.git
 	branch = develop
-[submodule "roles/kubernetes-registry"]
-	path = roles/kubernetes-registry
-	url = https://github.com/alvistack/ansible-role-kubernetes-registry.git
+[submodule "roles/kubernetes_metallb"]
+	path = roles/kubernetes_metallb
+	url = https://github.com/alvistack/ansible-role-kubernetes_metallb.git
 	branch = develop
-[submodule "roles/kubernetes-weave"]
-	path = roles/kubernetes-weave
-	url = https://github.com/alvistack/ansible-role-kubernetes-weave.git
+[submodule "roles/kubernetes_registry"]
+	path = roles/kubernetes_registry
+	url = https://github.com/alvistack/ansible-role-kubernetes_registry.git
+	branch = develop
+[submodule "roles/kubernetes_weave"]
+	path = roles/kubernetes_weave
+	url = https://github.com/alvistack/ansible-role-kubernetes_weave.git
 	branch = develop
 [submodule "roles/locales"]
 	path = roles/locales
 	url = https://github.com/alvistack/ansible-role-locales.git
 	branch = develop
-[submodule "roles/operator-sdk"]
-	path = roles/operator-sdk
-	url = https://github.com/alvistack/ansible-role-operator-sdk.git
+[submodule "roles/operator_sdk"]
+	path = roles/operator_sdk
+	url = https://github.com/alvistack/ansible-role-operator_sdk.git
 	branch = develop
 [submodule "roles/python"]
 	path = roles/python

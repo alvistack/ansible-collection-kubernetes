@@ -21,6 +21,6 @@
     - role: docker
     - role: kubectl
     - role: ansible
-    - role: operator-sdk
+    - role: operator_sdk
     - role: rclone
     - role: restic

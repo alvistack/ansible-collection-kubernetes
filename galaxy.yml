@@ -15,21 +15,20 @@
 # limitations under the License.
 
 namespace: alvistack
-name: kubernetes-collection
+name: kubernetes_collection
 description: Ansible Collection for Kubernetes
 
 version: 4.2.0
 readme: README.md
-license: Apache License 2.0
+license: Apache-2.0
 
-repository: https://github.com/alvistack/ansible-collection-kubernetes
-documentation: https://github.com/alvistack/ansible-collection-kubernetes
-homepage: https://github.com/alvistack/ansible-collection-kubernetes
-issues: https://github.com/alvistack/ansible-collection-kubernetes/issues
+repository: https://github.com/alvistack/ansible-collection-kubernetes_collection
+documentation: https://github.com/alvistack/ansible-collection-kubernetes_collection
+homepage: https://github.com/alvistack/ansible-collection-kubernetes_collection
+issues: https://github.com/alvistack/ansible-collection-kubernetes_collection/issues
 
 dependencies: {}
 tags:
   - system
 authors:
   - Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
-

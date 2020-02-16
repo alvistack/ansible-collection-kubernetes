@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ceph-mon:ceph-mgr:ceph-osd:ceph-mds:ceph-rgw
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
   remote_user: root
   become: true
   roles:
-    - role: ceph-common
+    - role: ceph_common
 
   post_tasks:
     - name: ceph --version
@@ -36,11 +36,11 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mon
+- hosts: ceph_mon
   remote_user: root
   become: true
   roles:
-    - role: ceph-mon
+    - role: ceph_mon
 
   post_tasks:
     - name: start services
@@ -55,7 +55,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mgr
+- hosts: ceph_mgr
   remote_user: root
   become: true
   pre_tasks:
@@ -69,7 +69,7 @@
           - "/var/lib/ceph/bootstrap-mgr/ceph.keyring"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
@@ -83,7 +83,7 @@
       changed_when: base64_decode_result is not succeeded
 
   roles:
-    - role: ceph-mgr
+    - role: ceph_mgr
 
   post_tasks:
     - name: start services
@@ -98,7 +98,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-osd
+- hosts: ceph_osd
   remote_user: root
   become: true
   pre_tasks:
@@ -112,7 +112,7 @@
           - "/var/lib/ceph/bootstrap-osd/ceph.keyring"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
@@ -126,7 +126,7 @@
       changed_when: base64_decode_result is not succeeded
 
   roles:
-    - role: ceph-osd
+    - role: ceph_osd
 
   post_tasks:
     - name: ceph-volume lvm activate
@@ -143,7 +143,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mds
+- hosts: ceph_mds
   remote_user: root
   become: true
   pre_tasks:
@@ -157,7 +157,7 @@
           - "/var/lib/ceph/bootstrap-mds/ceph.keyring"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
@@ -171,7 +171,7 @@
       changed_when: base64_decode_result is not succeeded
 
   roles:
-    - role: ceph-mds
+    - role: ceph_mds
 
   post_tasks:
     - name: start services
@@ -186,7 +186,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-rgw
+- hosts: ceph_rgw
   remote_user: root
   become: true
   pre_tasks:
@@ -200,7 +200,7 @@
           - "/var/lib/ceph/bootstrap-rgw/ceph.keyring"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 
@@ -214,7 +214,7 @@
       changed_when: base64_decode_result is not succeeded
 
   roles:
-    - role: ceph-rgw
+    - role: ceph_rgw
 
   post_tasks:
     - name: start services
@@ -233,7 +233,7 @@
   remote_user: root
   become: true
   roles:
-    - role: ceph-common
+    - role: ceph_common
 
   post_tasks:
     - name: base64 encode
@@ -245,7 +245,7 @@
           - "/etc/ceph/ceph.client.admin.keyring"
       args:
         executable: "/bin/bash"
-      delegate_to: "{{ groups['ceph-mon'][0] }}"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
 

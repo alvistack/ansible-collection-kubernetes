@@ -14,8 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube-master
+- hosts: kube_master
   remote_user: root
   become: true
   roles:
-    - role: kubernetes-metallb
+    - role: kubernetes_metallb

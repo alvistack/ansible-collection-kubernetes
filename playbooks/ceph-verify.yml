@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ceph-mon:ceph-mgr:ceph-osd:ceph-mds:ceph-rgw
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
   remote_user: root
   become: true
   tasks:
@@ -33,7 +33,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mon
+- hosts: ceph_mon
   remote_user: root
   become: true
   tasks:
@@ -42,7 +42,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mgr
+- hosts: ceph_mgr
   remote_user: root
   become: true
   tasks:
@@ -51,7 +51,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-osd
+- hosts: ceph_osd
   remote_user: root
   become: true
   tasks:
@@ -73,7 +73,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-mds
+- hosts: ceph_mds
   remote_user: root
   become: true
   tasks:
@@ -118,7 +118,7 @@
       register: result
       changed_when: result is not succeeded
 
-- hosts: ceph-rgw
+- hosts: ceph_rgw
   remote_user: root
   become: true
   tasks:

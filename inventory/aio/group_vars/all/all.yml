@@ -3,14 +3,14 @@
 # kernel
 kernel_release: "mainline"
 
-# ceph-common
-ceph_fsid: "{{ hostvars[groups['ceph-mon'][0]].ansible_machine_id | to_uuid }}"
+# ceph_common
+ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
 ceph_mon_initial_members: >-
-  {%- for host in groups['ceph-mon'] -%}
+  {%- for host in groups['ceph_mon'] -%}
   {{ host }},
   {%- endfor -%}
 ceph_mon_host: >-
-  {%- for host in groups['ceph-mon'] -%}
+  {%- for host in groups['ceph_mon'] -%}
   {{ hostvars[host].ansible_default_ipv4.address }},
   {%- endfor -%}
 ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
@@ -51,7 +51,7 @@ etcd_peer_csr_subject_alt_name: >-
   IP:127.0.0.1
 
 # kubernetes
-kubernetes_cluster_name: "{{ hostvars[groups['kube-master'][0]].ansible_machine_id | to_uuid }}"
+kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd_external_endpoints: >-
   {%- for host in ansible_play_hosts -%}
   https://{{ hostvars[host].ansible_default_ipv4.address }}:2379,
@@ -59,7 +59,7 @@ kubernetes_etcd_external_endpoints: >-
 kubelet_node_ip: "{{ ansible_default_ipv4.address }}"
 kube_apiserver_advertise_address: "{{ ansible_default_ipv4.address }}"
 kube_apiserver_bind_port: "6443"
-kube_apiserver_endpoint: "{{ hostvars[groups['kube-master'][0]].ansible_default_ipv4.address }}:{{ kube_apiserver_bind_port }}"
+kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}:{{ kube_apiserver_bind_port }}"
 kube_apiserver_csr_subject_alt_name: >-
   {%- for host in ansible_play_hosts -%}
   DNS:{{ host }},
@@ -73,14 +73,14 @@ kube_proxy_conntrack:
   maxPerCore: 32768
   min: 131072
 
-# kubernetes-csi-cephfs
+# kubernetes_csi_cephfs
 csi_cephfs_monitors: >-
-  {%- for host in groups['ceph-mon'] -%}
+  {%- for host in groups['ceph_mon'] -%}
   {{ hostvars[host].ansible_default_ipv4.address }}:6789,
   {%- endfor -%}
 
-# kubernetes-csi-rbd
+# kubernetes_csi_rbd
 csi_rbd_monitors: >-
-  {%- for host in groups['ceph-mon'] -%}
+  {%- for host in groups['ceph_mon'] -%}
   {{ hostvars[host].ansible_default_ipv4.address }}:6789,
   {%- endfor -%}
