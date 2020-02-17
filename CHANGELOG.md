@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Revamp with `kube_master` and `kube_node`
+
 ## 4.2.0 - 2020-02-15
 
 ### Major Changes

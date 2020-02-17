@@ -30,21 +30,13 @@
   become: true
   roles:
     - role: etcd
-    - role: kubernetes
+    - role: kube_master
     - role: kubernetes_addon_manager
-
-  post_tasks:
-    - name: kubectl version
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      command: kubectl version
-      register: result
-      changed_when: result is not succeeded
 
 - hosts: kube_node:!kube_master
   remote_user: root
   become: true
-  tasks:
+  pre_tasks:
     - name: kubeadm token create
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -54,44 +46,14 @@
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
-      register: result
-      until: result is succeeded
-      changed_when: result is not succeeded
+      register: kube_admin_token_result
+      until: kube_admin_token_result is succeeded
+      changed_when: kube_admin_token_result is not succeeded
       ignore_errors: true
 
-    - name: kubeadm join
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      vars:
-        kubeadm_token: "{{ result.stdout }}"
-      shell: |
-        set -o pipefail
-        cat > /etc/kubernetes/kubeadm.conf <<EOF
-        apiVersion: kubeadm.k8s.io/v1beta2
-        kind: JoinConfiguration
-        discovery:
-          bootstrapToken:
-            apiServerEndpoint: {{ kube_apiserver_endpoint }}
-            token: {{ kubeadm_token }}
-            unsafeSkipCAVerification: true
-          tlsBootstrapToken: {{ kubeadm_token }}
-        nodeRegistration:
-          name: {{ ansible_hostname }}
-          criSocket: /var/run/dockershim.sock
-          taints: []
-          kubeletExtraArgs:
-            node-ip: {{ kubelet_node_ip }}
-            runtime-cgroups: /systemd/system.slice
-        EOF
-        kubeadm join \
-          --config=/etc/kubernetes/kubeadm.conf \
-          --ignore-preflight-errors=all
-      args:
-        executable: "/bin/bash"
-      register: result
-      until: result is succeeded
-      changed_when: result is not succeeded
-      ignore_errors: true
+  roles:
+    - role: kube_node
+      kubeadm_token: "{{ kube_admin_token_result.stdout }}"
 
 - hosts: ansible
   remote_user: root

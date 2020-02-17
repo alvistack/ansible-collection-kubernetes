@@ -20,40 +20,11 @@
   roles:
     - role: ceph_common
 
-  post_tasks:
-    - name: ceph --version
-      command: ceph --version
-      register: result
-      changed_when: result is not succeeded
-
-    - name: rbd --version
-      command: rbd --version
-      register: result
-      changed_when: result is not succeeded
-
-    - name: mount.ceph -h
-      command: mount.ceph -h
-      register: result
-      changed_when: result is not succeeded
-
 - hosts: ceph_mon
   remote_user: root
   become: true
   roles:
     - role: ceph_mon
-
-  post_tasks:
-    - name: start services
-      service:
-        name: "ceph-mon@{{ ansible_hostname }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph --status
-      command: ceph --status
-      register: result
-      changed_when: result is not succeeded
 
 - hosts: ceph_mgr
   remote_user: root
@@ -85,19 +56,6 @@
   roles:
     - role: ceph_mgr
 
-  post_tasks:
-    - name: start services
-      service:
-        name: "ceph-mgr@{{ ansible_hostname }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph --status
-      command: ceph --status
-      register: result
-      changed_when: result is not succeeded
-
 - hosts: ceph_osd
   remote_user: root
   become: true
@@ -127,21 +85,6 @@
 
   roles:
     - role: ceph_osd
-
-  post_tasks:
-    - name: ceph-volume lvm activate
-      shell: |
-        set -o pipefail
-        ceph-volume lvm activate --all
-      args:
-        executable: "/bin/bash"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph --status
-      command: ceph --status
-      register: result
-      changed_when: result is not succeeded
 
 - hosts: ceph_mds
   remote_user: root
@@ -173,19 +116,6 @@
   roles:
     - role: ceph_mds
 
-  post_tasks:
-    - name: start services
-      service:
-        name: "ceph-mds@{{ ansible_hostname }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph --status
-      command: ceph --status
-      register: result
-      changed_when: result is not succeeded
-
 - hosts: ceph_rgw
   remote_user: root
   become: true
@@ -215,19 +145,6 @@
 
   roles:
     - role: ceph_rgw
-
-  post_tasks:
-    - name: start services
-      service:
-        name: "ceph-radosgw@rgw.{{ ansible_hostname }}"
-        state: "started"
-      changed_when: false
-      ignore_errors: true
-
-    - name: ceph --status
-      command: ceph --status
-      register: result
-      changed_when: result is not succeeded
 
 - hosts: ansible
   remote_user: root
