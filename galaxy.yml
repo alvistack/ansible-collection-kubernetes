@@ -18,14 +18,14 @@ namespace: alvistack
 name: kubernetes
 description: Ansible Collection for Kubernetes
 
-version: 4.2.0
+version: 4.2.1
 readme: README.md
 license: Apache-2.0
 
-repository: https://github.com/alvistack/ansible-collection-kubernetes_collection
-documentation: https://github.com/alvistack/ansible-collection-kubernetes_collection
-homepage: https://github.com/alvistack/ansible-collection-kubernetes_collection
-issues: https://github.com/alvistack/ansible-collection-kubernetes_collection/issues
+repository: https://github.com/alvistack/ansible-collection-kubernetes
+documentation: https://github.com/alvistack/ansible-collection-kubernetes
+homepage: https://github.com/alvistack/ansible-collection-kubernetes
+issues: https://github.com/alvistack/ansible-collection-kubernetes/issues
 
 dependencies: {}
 tags:
