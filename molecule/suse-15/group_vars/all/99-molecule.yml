@@ -16,6 +16,10 @@ ceph_mon_host: >-
 ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 
+# ceph_osd
+ceph_volume:
+  - { objectstore: "bluestore", data: "/dev/sdb" }
+
 # etcd
 etcd_cert_file: "/etc/kubernetes/pki/etcd/server.crt"
 etcd_key_file: "/etc/kubernetes/pki/etcd/server.key"
@@ -27,25 +31,25 @@ etcd_listen_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380,https://127
 etcd_listen_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379,https://127.0.0.1:2379"
 etcd_initial_advertise_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380"
 etcd_initial_cluster: >-
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   {{ host }}=https://{{ hostvars[host].ansible_eth1.ipv4.address }}:2380,
   {%- endfor -%}
 etcd_advertise_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379"
 etcd_csr_subject_alt_name: >-
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   DNS:{{ host }},
   {%- endfor -%}
   DNS:localhost,
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1
 etcd_peer_csr_subject_alt_name: >-
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   DNS:{{ host }},
   {%- endfor -%}
   DNS:localhost,
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1
@@ -53,7 +57,7 @@ etcd_peer_csr_subject_alt_name: >-
 # kubernetes
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd_external_endpoints: >-
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   https://{{ hostvars[host].ansible_eth1.ipv4.address }}:2379,
   {%- endfor -%}
 kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
@@ -61,11 +65,11 @@ kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
 kube_apiserver_bind_port: "6443"
 kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"
 kube_apiserver_csr_subject_alt_name: >-
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   DNS:{{ host }},
   {%- endfor -%}
   DNS:localhost,
-  {%- for host in ansible_play_hosts -%}
+  {%- for host in groups['kube_master'] -%}
   IP:{{ hostvars[host].ansible_eth1.ipv4.address }},
   {%- endfor -%}
   IP:127.0.0.1

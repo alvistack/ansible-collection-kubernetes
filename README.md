@@ -1,9 +1,9 @@
 # Ansible Collection for Kubernetes
 
-[![Travis](https://img.shields.io/travis/alvistack/ansible-collection-kubernetes_collection.svg)](https://travis-ci.org/alvistack/ansible-collection-kubernetes_collection)
-[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-collection-kubernetes_collection.svg)](https://github.com/alvistack/ansible-collection-kubernetes_collection/releases)
-[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes_collection.svg)](https://github.com/alvistack/ansible-collection-kubernetes_collection/blob/master/LICENSE)
-[![Ansible Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes_collection-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes_collection)
+[![Travis](https://img.shields.io/travis/alvistack/ansible-collection-kubernetes.svg)](https://travis-ci.org/alvistack/ansible-collection-kubernetes)
+[![GitHub release](https://img.shields.io/github/release/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/releases)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
+[![Ansible Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes)
 
 Ansible collection for deploying Kubernetes.
 
@@ -22,8 +22,8 @@ This playbook was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7 or open
 Start by cloning the Alvistack-Ansible repository, checkout the corresponding branch, and init with `git submodule`, then bootstrap Python3 + Ansible with provided helper script:
 
     # GIT clone the development branch
-    git clone --branch develop https://github.com/alvistack/ansible-collection-kubernetes_collection
-    cd ansible-collection-kubernetes_collection
+    git clone --branch develop https://github.com/alvistack/ansible-collection-kubernetes
+    cd ansible-collection-kubernetes
     
     # Setup Roles with GIT submodule
     git submodule init
