@@ -60,7 +60,7 @@ kubernetes_etcd_external_endpoints: >-
   https://{{ hostvars[host].ansible_default_ipv4.address }}:2379,
   {%- endfor -%}
 kubelet_node_ip: "{{ ansible_default_ipv4.address }}"
-kube_apiserver_advertise_address: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}"
+kube_apiserver_advertise_address: "{{ ansible_default_ipv4.address }}"
 kube_apiserver_bind_port: "6443"
 kube_apiserver_csr_subject_alt_name: >-
   {%- for host in groups['kube_master'] -%}

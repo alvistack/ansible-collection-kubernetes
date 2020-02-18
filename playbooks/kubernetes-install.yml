@@ -53,6 +53,7 @@
 
   roles:
     - role: kube_node
+      kube_apiserver_advertise_address: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}"
       kubeadm_token: "{{ kube_admin_token_result.stdout }}"
 
 - hosts: ansible
