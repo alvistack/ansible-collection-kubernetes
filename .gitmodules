@@ -34,9 +34,9 @@
 	path = roles/chrony
 	url = https://github.com/alvistack/ansible-role-chrony.git
 	branch = develop
-[submodule "roles/cri_tools"]
-	path = roles/cri_tools
-	url = https://github.com/alvistack/ansible-role-cri_tools.git
+[submodule "roles/crictl"]
+	path = roles/crictl
+	url = https://github.com/alvistack/ansible-role-crictl.git
 	branch = develop
 [submodule "roles/docker"]
 	path = roles/docker
