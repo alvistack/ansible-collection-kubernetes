@@ -18,7 +18,7 @@ ansible-runner
 ansible-runner-http
 argcomplete
 docker
-molecule
+molecule~=2.22.0
 netaddr
 openshift
 python-vagrant
