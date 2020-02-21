@@ -40,8 +40,10 @@ platforms:
       - ceph_rgw
       - kube_master
       - kube_node
-lint:
-  name: yamllint
+lint: |
+  yamllint .
+  ansible-lint
+  flake8
 dependency:
   name: galaxy
   options:
@@ -58,14 +60,5 @@ provisioner:
     ssh_connection:
       pipelining: true
       ssh_args: -o ControlMaster=auto -o ControlPersist=600s
-  lint:
-    name: ansible-lint
-  inventory:
-    links:
-      group_vars: group_vars
-  playbooks:
-    prepare: prepare.yml
 verifier:
   name: ansible
-  lint:
-    name: ansible-lint

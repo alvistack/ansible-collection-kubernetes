@@ -18,7 +18,9 @@ ansible-runner
 ansible-runner-http
 argcomplete
 docker
-molecule~=2.22.0
+flake8
+molecule>=3.0.0
+git+https://github.com/ansible-community/molecule-vagrant.git@master#egg=molecule-vagrant
 netaddr
 openshift
 python-vagrant
