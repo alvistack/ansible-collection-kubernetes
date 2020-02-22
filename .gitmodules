@@ -34,9 +34,13 @@
 	path = roles/chrony
 	url = https://github.com/alvistack/ansible-role-chrony.git
 	branch = develop
-[submodule "roles/crictl"]
-	path = roles/crictl
-	url = https://github.com/alvistack/ansible-role-crictl.git
+[submodule "roles/cni_plugins"]
+	path = roles/cni_plugins
+	url = https://github.com/alvistack/ansible-role-cni_plugins.git
+	branch = develop
+[submodule "roles/cri_tools"]
+	path = roles/cri_tools
+	url = https://github.com/alvistack/ansible-role-cri_tools.git
 	branch = develop
 [submodule "roles/docker"]
 	path = roles/docker
@@ -81,10 +85,6 @@
 [submodule "roles/kubernetes_cert_manager"]
 	path = roles/kubernetes_cert_manager
 	url = https://github.com/alvistack/ansible-role-kubernetes_cert_manager.git
-	branch = develop
-[submodule "roles/kubernetes_cni"]
-	path = roles/kubernetes_cni
-	url = https://github.com/alvistack/ansible-role-kubernetes_cni.git
 	branch = develop
 [submodule "roles/kubernetes_csi_cephfs"]
 	path = roles/kubernetes_csi_cephfs

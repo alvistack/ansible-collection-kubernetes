@@ -19,8 +19,8 @@
   become: true
   roles:
     - role: docker
-    - role: crictl
-    - role: kubernetes_cni
+    - role: cri_tools
+    - role: cni_plugins
     - role: kubectl
     - role: kubelet
     - role: kubeadm
