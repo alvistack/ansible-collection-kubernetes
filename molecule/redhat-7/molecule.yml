@@ -41,7 +41,10 @@ platforms:
       - kube_master
       - kube_node
 lint: |
-  yamllint . && ansible-lint && flake8
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 dependency:
   name: galaxy
   options:
