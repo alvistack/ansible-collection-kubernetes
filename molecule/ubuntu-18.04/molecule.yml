@@ -33,13 +33,98 @@ platforms:
       - 'volume_cache = "none"'
       - 'storage :file, bus: "virtio", cache: "none"'
     groups:
+      - ansible
+      - kube_master
+      - kube_node
+  - name: ${MOLECULE_INSTANCE_NAME}-2
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - kube_master
+      - kube_node
+  - name: ${MOLECULE_INSTANCE_NAME}-3
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - kube_master
+      - kube_node
+  - name: ${MOLECULE_INSTANCE_NAME}-4
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
       - ceph_mon
       - ceph_mgr
       - ceph_osd
       - ceph_mds
       - ceph_rgw
-      - kube_master
-      - kube_node
+  - name: ${MOLECULE_INSTANCE_NAME}-5
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - ceph_mon
+      - ceph_mgr
+      - ceph_osd
+      - ceph_mds
+      - ceph_rgw
+  - name: ${MOLECULE_INSTANCE_NAME}-6
+    box: generic/ubuntu1804
+    cpu: 2
+    memory: 2048
+    interfaces:
+      - auto_config: true
+        network_name: private_network
+        type: dhcp
+    provider_raw_config_args:
+      - 'nic_model_type = "virtio"'
+      - 'disk_bus = "virtio"'
+      - 'volume_cache = "none"'
+      - 'storage :file, bus: "virtio", cache: "none"'
+    groups:
+      - ceph_mon
+      - ceph_mgr
+      - ceph_osd
+      - ceph_mds
+      - ceph_rgw
 lint: |
   set -e
   yamllint .
