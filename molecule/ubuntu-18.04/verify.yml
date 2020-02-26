@@ -16,4 +16,4 @@
 
 - import_playbook: ../../playbooks/ceph-verify.yml
 - import_playbook: ../../playbooks/kubernetes-verify.yml
-- import_playbook: ../../playbooks/kubernetes-csi-cephfs-verify.yml
+- import_playbook: ../../playbooks/kubernetes_csi_cephfs-verify.yml

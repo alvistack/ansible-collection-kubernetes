@@ -18,12 +18,10 @@
   remote_user: root
   become: true
   roles:
-    - role: docker
-    - role: cri_tools
-    - role: kubernetes_cni
     - role: kubectl
     - role: kubelet
     - role: kubeadm
+    - role: operator_sdk
 
 - hosts: kube_master
   remote_user: root
@@ -53,7 +51,6 @@
 
   roles:
     - role: kube_node
-      kube_apiserver_advertise_address: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}"
       kubeadm_token: "{{ kube_admin_token_result.stdout }}"
 
 - hosts: ansible
@@ -61,6 +58,7 @@
   become: true
   roles:
     - role: kubectl
+    - role: operator_sdk
 
   post_tasks:
     - name: base64 encode
