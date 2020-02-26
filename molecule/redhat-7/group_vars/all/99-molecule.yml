@@ -75,8 +75,8 @@ kubernetes_etcd_external_endpoints: >-
   https://{{ hostvars[host].ansible_eth1.ipv4.address }}:2379,
   {%- endfor -%}
 kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
-kubelet_container_runtime: "docker"
-kubelet_container_runtime_endpoint: "/var/run/dockershim.sock"
+kubelet_container_runtime: "remote"
+kubelet_container_runtime_endpoint: "/var/run/crio/crio.sock"
 kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
 kube_apiserver_bind_port: "6443"
 kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"

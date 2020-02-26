@@ -18,12 +18,10 @@
   remote_user: root
   become: true
   roles:
-    - role: docker
-    - role: cri_tools
-    - role: cni_plugins
     - role: kubectl
     - role: kubelet
     - role: kubeadm
+    - role: operator_sdk
 
 - hosts: kube_master
   remote_user: root
@@ -60,6 +58,7 @@
   become: true
   roles:
     - role: kubectl
+    - role: operator_sdk
 
   post_tasks:
     - name: base64 encode

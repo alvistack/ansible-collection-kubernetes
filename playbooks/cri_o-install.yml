@@ -14,10 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ansible
+- hosts: ansible:kube_master:kube_node
   remote_user: root
   become: true
   roles:
-    - role: ansible
-    - role: rclone
-    - role: restic
+    - role: golang
+    - role: runc
+    - role: conmon
+    - role: skopeo
+    - role: buildah
+    - role: cni_plugins
+    - role: podman
+    - role: cri_tools
+    - role: cri_o
