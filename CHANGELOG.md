@@ -4,6 +4,10 @@
 
 ### Major Changes
 
+  - Upgrade minimal Molecule support to 3.0.2
+  - Migrate role name to lowercase or underline
+  - Migrate group name to lowercase or underline
+  - Migrate molecule `group_vars` to file
   - Revamp with `kube_master` and `kube_node`
   - Default with `cri_o`
 

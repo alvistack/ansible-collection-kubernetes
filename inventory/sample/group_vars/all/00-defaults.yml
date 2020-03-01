@@ -67,6 +67,9 @@ etcd_peer_csr_subject_alt_name: >-
   {%- endfor -%}
   IP:127.0.0.1
 
+# crictl
+crictl_runtime_endpoint: "unix:///var/run/crio/crio.sock"
+
 # kubernetes
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd_external_endpoints: >-
@@ -75,7 +78,7 @@ kubernetes_etcd_external_endpoints: >-
   {%- endfor -%}
 kubelet_node_ip: "{{ ansible_default_ipv4.address }}"
 kubelet_container_runtime: "remote"
-kubelet_container_runtime_endpoint: "/var/run/crio/crio.sock"
+kubelet_container_runtime_endpoint: "unix:///var/run/crio/crio.sock"
 kube_apiserver_advertise_address: "{{ ansible_default_ipv4.address }}"
 kube_apiserver_bind_port: "6443"
 kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_default_ipv4.address }}:{{ kube_apiserver_bind_port }}"

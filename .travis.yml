@@ -50,13 +50,12 @@ script:
       && sudo -E molecule lint -s $MOLECULE_SCENARIO_NAME \
       && sudo -E molecule syntax -s $MOLECULE_SCENARIO_NAME \
       && sudo -E molecule converge -s $MOLECULE_SCENARIO_NAME \
-      && travis_wait 120 sudo -E molecule idempotence -s $MOLECULE_SCENARIO_NAME \
       && sudo -E molecule verify -s $MOLECULE_SCENARIO_NAME
 
 after_success:
   - |
-    if [[ -n "$TRAVIS_TAG" ]]; then
+    if [[ -n "$TRAVIS_TAG" ]] && [[ "MOLECULE_SCENARIO_NAME" =~ [^ubuntu-18\.04$] ]]; then
       sed -i "s/version:.*/version: $TRAVIS_TAG/g" galaxy.yml
-      ansible-galaxy collection build
-      ansible-galaxy collection publish --api-key $ANSIBLE_GALAXY_API_KEY --no-wait *.tar.gz
+      sudo -E ansible-galaxy collection build
+      sudo -E ansible-galaxy collection publish --api-key $ANSIBLE_GALAXY_API_KEY --no-wait *.tar.gz
     fi
