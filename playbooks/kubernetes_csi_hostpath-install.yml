@@ -21,10 +21,10 @@
 - hosts: kube_master
   remote_user: root
   become: true
-  roles:
-    - role: kubernetes_csi_hostpath
+  tasks:
+    - include_role:
+        name: kubernetes_csi_hostpath
 
-  post_tasks:
     - name: setup csi-hostpath as default storageclass
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

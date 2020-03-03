@@ -17,7 +17,12 @@
 - hosts: ansible
   remote_user: root
   become: true
-  roles:
-    - role: ansible
-    - role: rclone
-    - role: restic
+  tasks:
+    - include_role:
+        name: ansible
+
+    - include_role:
+        name: rclone
+
+    - include_role:
+        name: restic

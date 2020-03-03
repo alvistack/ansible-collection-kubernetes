@@ -17,5 +17,6 @@
 - hosts: kube_master
   remote_user: root
   become: true
-  roles:
-    - role: kubernetes_cert_manager
+  tasks:
+    - include_role:
+        name: kubernetes_cert_manager

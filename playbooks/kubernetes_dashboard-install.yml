@@ -17,5 +17,6 @@
 - hosts: kube_master
   remote_user: root
   become: true
-  roles:
-    - role: kubernetes_dashboard
+  tasks:
+    - include_role:
+        name: kubernetes_dashboard

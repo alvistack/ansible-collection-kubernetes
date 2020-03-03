@@ -17,13 +17,30 @@
 - hosts: ansible:kube_master:kube_node
   remote_user: root
   become: true
-  roles:
-    - role: golang
-    - role: runc
-    - role: conmon
-    - role: skopeo
-    - role: buildah
-    - role: cni_plugins
-    - role: podman
-    - role: cri_tools
-    - role: cri_o
+  tasks:
+    - include_role:
+        name: golang
+
+    - include_role:
+        name: runc
+
+    - include_role:
+        name: conmon
+
+    - include_role:
+        name: skopeo
+
+    - include_role:
+        name: buildah
+
+    - include_role:
+        name: cni_plugins
+
+    - include_role:
+        name: podman
+
+    - include_role:
+        name: cri_tools
+
+    - include_role:
+        name: cri_o
