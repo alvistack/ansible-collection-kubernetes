@@ -14,21 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-namespace: alvistack
-name: kubernetes
-description: Ansible Collection for Kubernetes
-
-version: VERSION
-readme: README.md
-license: Apache-2.0
-
-repository: https://github.com/alvistack/ansible-collection-kubernetes
-documentation: https://github.com/alvistack/ansible-collection-kubernetes
-homepage: https://github.com/alvistack/ansible-collection-kubernetes
-issues: https://github.com/alvistack/ansible-collection-kubernetes/issues
-
-dependencies: {}
-tags:
-  - system
-authors:
-  - Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+- import_playbook: ../../playbooks/ceph-verify.yml
+- import_playbook: ../../playbooks/kubernetes-verify.yml
+- import_playbook: ../../playbooks/kubernetes_csi_cephfs-verify.yml
