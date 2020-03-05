@@ -21,13 +21,14 @@
 - hosts: kube_node
   remote_user: root
   become: true
-  roles:
-    - role: ceph_common
+  tasks:
+    - include_role:
+        name: ceph_common
 
 - hosts: kube_master
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: fetch ceph client.admin key
       shell: |
         set -o pipefail
@@ -38,11 +39,11 @@
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
 
-  roles:
-    - role: kubernetes_csi_cephfs
-      csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+    - include_role:
+        name: kubernetes_csi_cephfs
+      vars:
+        csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
 
-  post_tasks:
     - name: setup csi-cephfs as default storageclass
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"

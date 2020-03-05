@@ -17,19 +17,21 @@
 - hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
   remote_user: root
   become: true
-  roles:
-    - role: ceph_common
+  tasks:
+    - include_role:
+        name: ceph_common
 
 - hosts: ceph_mon
   remote_user: root
   become: true
-  roles:
-    - role: ceph_mon
+  tasks:
+    - include_role:
+        name: ceph_mon
 
 - hosts: ceph_mgr
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: base64 encode
       shell: |
         set -o pipefail
@@ -53,13 +55,13 @@
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
 
-  roles:
-    - role: ceph_mgr
+    - include_role:
+        name: ceph_mgr
 
 - hosts: ceph_osd
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: base64 encode
       shell: |
         set -o pipefail
@@ -83,13 +85,13 @@
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
 
-  roles:
-    - role: ceph_osd
+    - include_role:
+        name: ceph_osd
 
 - hosts: ceph_mds
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: base64 encode
       shell: |
         set -o pipefail
@@ -113,13 +115,13 @@
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
 
-  roles:
-    - role: ceph_mds
+    - include_role:
+        name: ceph_mds
 
 - hosts: ceph_rgw
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: base64 encode
       shell: |
         set -o pipefail
@@ -143,16 +145,16 @@
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
 
-  roles:
-    - role: ceph_rgw
+    - include_role:
+        name: ceph_rgw
 
 - hosts: ansible
   remote_user: root
   become: true
-  roles:
-    - role: ceph_common
+  tasks:
+    - include_role:
+        name: ceph_common
 
-  post_tasks:
     - name: base64 encode
       shell: |
         set -o pipefail

@@ -17,5 +17,6 @@
 - hosts: kube_master
   remote_user: root
   become: true
-  roles:
-    - role: kubernetes_weave
+  tasks:
+    - include_role:
+        name: kubernetes_weave

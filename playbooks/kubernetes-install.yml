@@ -17,24 +17,36 @@
 - hosts: kube_master:kube_node
   remote_user: root
   become: true
-  roles:
-    - role: kubectl
-    - role: kubelet
-    - role: kubeadm
-    - role: operator_sdk
+  tasks:
+    - include_role:
+        name: kubectl
+
+    - include_role:
+        name: kubelet
+
+    - include_role:
+        name: kubeadm
+
+    - include_role:
+        name: operator_sdk
 
 - hosts: kube_master
   remote_user: root
   become: true
-  roles:
-    - role: etcd
-    - role: kube_master
-    - role: kubernetes_addon_manager
+  tasks:
+    - include_role:
+        name: etcd
+
+    - include_role:
+        name: kube_master
+
+    - include_role:
+        name: kubernetes_addon_manager
 
 - hosts: kube_node:!kube_master
   remote_user: root
   become: true
-  pre_tasks:
+  tasks:
     - name: kubeadm token create
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -49,18 +61,21 @@
       changed_when: kube_admin_token_result is not succeeded
       ignore_errors: true
 
-  roles:
-    - role: kube_node
-      kubeadm_token: "{{ kube_admin_token_result.stdout }}"
+    - include_role:
+        name: kube_node
+      vars:
+        kubeadm_token: "{{ kube_admin_token_result.stdout }}"
 
 - hosts: ansible
   remote_user: root
   become: true
-  roles:
-    - role: kubectl
-    - role: operator_sdk
+  tasks:
+    - include_role:
+        name: kubectl
 
-  post_tasks:
+    - include_role:
+        name: operator_sdk
+
     - name: base64 encode
       shell: |
         set -o pipefail

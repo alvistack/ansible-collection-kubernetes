@@ -17,7 +17,12 @@
 - hosts: ansible:kube_master:kube_node
   remote_user: root
   become: true
-  roles:
-    - role: cni_plugins
-    - role: cri_tools
-    - role: docker
+  tasks:
+    - include_role:
+        name: cni_plugins
+
+    - include_role:
+        name: cri_tools
+
+    - include_role:
+        name: docker
