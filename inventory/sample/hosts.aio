@@ -19,6 +19,9 @@ localhost
 [ceph_rgw]
 localhost
 
+[etcd]
+localhost
+
 [kube_master]
 localhost
 

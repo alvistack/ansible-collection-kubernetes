@@ -35,9 +35,6 @@
   become: true
   tasks:
     - include_role:
-        name: etcd
-
-    - include_role:
         name: kube_master
 
     - include_role:

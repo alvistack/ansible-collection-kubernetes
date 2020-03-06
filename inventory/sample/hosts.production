@@ -38,6 +38,11 @@ ceph11
 ceph12
 ceph13
 
+[etcd]
+kube11
+kube12
+kube13
+
 [kube_master]
 kube11
 kube12

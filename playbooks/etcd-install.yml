@@ -14,15 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: hosts-install.yml
-- import_playbook: kernel-install.yml
-- import_playbook: ansible-install.yml
-- import_playbook: ceph-install.yml
-- import_playbook: cri_o-install.yml
-- import_playbook: etcd-install.yml
-- import_playbook: kubernetes-install.yml
-- import_playbook: kubernetes_weave-install.yml
-- import_playbook: kubernetes_dashboard-install.yml
-- import_playbook: kubernetes_ingress_nginx-install.yml
-- import_playbook: kubernetes_cert_manager-install.yml
-- import_playbook: kubernetes_csi_cephfs-install.yml
+- hosts: etcd
+  remote_user: root
+  become: true
+  tasks:
+    - include_role:
+        name: etcd
