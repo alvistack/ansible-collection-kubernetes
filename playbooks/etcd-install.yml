@@ -33,23 +33,23 @@
         - { dest: "/etc/kubernetes/pki/etcd" }
       when: ansible_hostname == ansible_play_hosts[0]
 
-    - name: generate apiserver-etcd-client private key
+    - name: "generate {{ kubernetes_etcd.external.keyFile }}"
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       openssl_privatekey:
-        path: "/etc/kubernetes/pki/apiserver-etcd-client.key"
+        path: "{{ kubernetes_etcd.external.keyFile }}"
       when: ansible_hostname == ansible_play_hosts[0]
 
-    - name: generate apiserver-etcd-client csr
+    - name: "generate {{ kubernetes_etcd.external.keyFile | splitext | first }}.csr"
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       openssl_csr:
-        path: "/etc/kubernetes/pki/apiserver-etcd-client.csr"
-        privatekey_path: "/etc/kubernetes/pki/apiserver-etcd-client.key"
+        path: "{{ kubernetes_etcd.external.keyFile | splitext | first }}.csr"
+        privatekey_path: "{{ kubernetes_etcd.external.keyFile }}"
         common_name: "{{ kube_apiserver_csr_common_name }}"
         subject:
           CN: "{{ kube_apiserver_csr_common_name }}"
@@ -64,21 +64,21 @@
         basic_constraints: "CA:FALSE"
       when: ansible_hostname == ansible_play_hosts[0]
 
-    - name: generate apiserver-etcd-client ownca certificate
+    - name: "generate {{ kubernetes_etcd.external.certFile }}"
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       openssl_certificate:
-        path: "/etc/kubernetes/pki/apiserver-etcd-client.crt"
-        csr_path: "/etc/kubernetes/pki/apiserver-etcd-client.csr"
-        privatekey_path: "/etc/kubernetes/pki/apiserver-etcd-client.key"
+        path: "{{ kubernetes_etcd.external.certFile }}"
+        csr_path: "{{ kubernetes_etcd.external.keyFile | splitext | first }}.csr"
+        privatekey_path: "{{ kubernetes_etcd.external.keyFile }}"
         ownca_path: "{{ etcd_trusted_ca_file }}"
         ownca_privatekey_path: "{{ etcd_trusted_ca_file | splitext | first }}.key"
         provider: "ownca"
       when: ansible_hostname == ansible_play_hosts[0]
 
-    - name: copy /etc/kubernetes/pki/etcd/ca.crt
+    - name: "copy {{ kubernetes_etcd.external.caFile }}"
       copy:
         dest: "{{ item.dest }}"
         src: "{{ item.src }}"
@@ -88,7 +88,7 @@
         remote_src: true
         force: false
       loop:
-        - { dest: "/etc/kubernetes/pki/etcd/ca.crt", src: "{{ etcd_trusted_ca_file }}" }
+        - { dest: "{{ kubernetes_etcd.external.caFile }}", src: "{{ etcd_trusted_ca_file }}" }
       when: ansible_hostname == ansible_play_hosts[0]
 
     - name: prepare files
@@ -99,7 +99,7 @@
         mode: "{{ item.mode | default('0644') }}"
         state: "{{ item.state | default('file') }}"
       loop:
-        - { dest: "/etc/kubernetes/pki/apiserver-etcd-client.crt" }
-        - { dest: "/etc/kubernetes/pki/apiserver-etcd-client.key", mode: "0600" }
-        - { dest: "/etc/kubernetes/pki/etcd/ca.crt" }
+        - { dest: "{{ kubernetes_etcd.external.caFile }}" }
+        - { dest: "{{ kubernetes_etcd.external.certFile }}" }
+        - { dest: "{{ kubernetes_etcd.external.keyFile }}", mode: "0600" }
       when: ansible_hostname == ansible_play_hosts[0]
