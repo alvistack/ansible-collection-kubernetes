@@ -11,6 +11,7 @@
   - Consolidate molecule tests into `default` (noop)
   - Revamp with `kube_master` and `kube_node`
   - Default with `cri_o`
+  - Default with `ExternalEtcd`
 
 ## 4.2.0 - 2020-02-15
 
