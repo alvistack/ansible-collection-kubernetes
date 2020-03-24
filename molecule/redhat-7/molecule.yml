@@ -42,7 +42,7 @@ platforms:
       - kube_master
       - kube_node
 lint: |
-  set -e
+  set -ex
   yamllint .
   ansible-lint
   flake8

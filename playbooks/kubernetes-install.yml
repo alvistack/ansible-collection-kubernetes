@@ -40,9 +40,9 @@
         tar zcfP - {{ _params | join(' ') }} | base64 -w 0
       vars:
         _params:
-          - "/etc/kubernetes/pki/apiserver-etcd-client.crt"
-          - "/etc/kubernetes/pki/apiserver-etcd-client.key"
-          - "/etc/kubernetes/pki/etcd/ca.crt"
+          - "{{ kubernetes_etcd.external.caFile }}"
+          - "{{ kubernetes_etcd.external.certFile }}"
+          - "{{ kubernetes_etcd.external.keyFile }}"
       args:
         executable: "/bin/bash"
       when: ansible_hostname == ansible_play_hosts[0]
