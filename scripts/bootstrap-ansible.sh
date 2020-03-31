@@ -26,7 +26,7 @@ fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
-    yum makecache fast
+    yum makecache
     yum install -y ca-certificates curl gcc iproute python3 python3-devel sudo
 fi
 
