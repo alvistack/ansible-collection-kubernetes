@@ -22,10 +22,10 @@
         name: kubectl
 
     - include_role:
-        name: kubelet
+        name: kubeadm
 
     - include_role:
-        name: kubeadm
+        name: kubelet
 
     - include_role:
         name: operator_sdk
