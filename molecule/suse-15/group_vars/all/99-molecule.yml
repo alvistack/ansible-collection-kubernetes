@@ -14,9 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# kernel
-kernel_release: "mainline"
-
 # ceph_common
 ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
 ceph_mon_initial_members: >-
@@ -74,9 +71,6 @@ etcd_peer_csr_subject_alt_name: >-
   {%- endfor -%}
   {{ _params }}
 
-# crictl
-crictl_runtime_endpoint: "unix:///var/run/crio/crio.sock"
-
 # kubernetes
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd:
@@ -91,8 +85,6 @@ kubernetes_etcd:
     certFile: "/etc/kubernetes/pki/apiserver-etcd-client.crt"
     keyFile: "/etc/kubernetes/pki/apiserver-etcd-client.key"
 kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
-kubelet_container_runtime: "remote"
-kubelet_container_runtime_endpoint: "unix:///var/run/crio/crio.sock"
 kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
 kube_apiserver_bind_port: "6443"
 kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"
