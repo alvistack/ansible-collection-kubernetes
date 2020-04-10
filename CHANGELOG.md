@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Support CentOS/RHEL 8
+  - Support Ubuntu 20.04
+  - Remove Ubuntu 16.04 support
   - Upgrade minimal Molecule support to 3.0.2
   - Migrate role name to lowercase or underline
   - Migrate group name to lowercase or underline
@@ -12,7 +15,6 @@
   - Revamp with `kube_master` and `kube_node`
   - Default with `cri_o`
   - Default with `ExternalEtcd`
-  - Support CentOS/RHEL 8
 
 ## 4.2.0 - 2020-02-15
 
