@@ -1,1 +1,1 @@
-../../../../defaults/main.yml
+../../../../inventory/sample/group_vars/all/00-defaults.yml
