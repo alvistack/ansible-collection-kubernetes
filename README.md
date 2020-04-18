@@ -110,17 +110,18 @@ Moreover, we don't setup the Ceph OSD and Ceph MDS for you, which you should set
     ceph-volume lvm activate --all
     
     # Create OSD pool for RBD
-    ceph osd pool create rbd 8 8
+    ceph osd pool create rbd
     ceph osd pool set rbd size 3
     ceph osd pool set rbd min_size 2
+    ceph osd pool application enable rbd rbd
     
     # Create OSD pool for CephFS Metadata
-    ceph osd pool create cephfs_metadata 32 32
+    ceph osd pool create cephfs_metadata
     ceph osd pool set cephfs_metadata size 3
     ceph osd pool set cephfs_metadata min_size 2
     
     # Create OSD pool for CephFS data
-    ceph osd pool create cephfs_data 128 128
+    ceph osd pool create cephfs_data
     ceph osd pool set cephfs_data size 3
     ceph osd pool set cephfs_data min_size 2
     
