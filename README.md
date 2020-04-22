@@ -13,7 +13,7 @@ This Ansible collection provides Ansible playbooks and roles for the deployment 
 
 This playbook require Ansible 2.9 or higher.
 
-This playbook was designed for Ubuntu 16.04/18.04/19.10 or RHEL/CentOS 7/8 or openSUSE Leap 15.1.
+This playbook was designed for Ubuntu 18.04/19.10/20.04 or RHEL/CentOS 7/8 or openSUSE Leap 15.1.
 
 ## Quick Start
 
@@ -52,7 +52,7 @@ This deployment will setup the follow components:
   - [Dashboard](https://github.com/kubernetes/dashboard)
   - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
   - [cert-manager](https://github.com/jetstack/cert-manager)
-  - [Local Path Provisioner](https://github.com/rancher/local-path-provisioner)
+  - [CSI Hostpath](https://github.com/kubernetes-csi/csi-driver-host-path)
 
 Simply run the playbooks with sample AIO inventory:
 
@@ -79,7 +79,7 @@ This deployment will setup the follow components:
   - [Dashboard](https://github.com/kubernetes/dashboard)
   - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
   - [cert-manager](https://github.com/jetstack/cert-manager)
-  - [CephFS Volume Provisioner](https://github.com/kubernetes-incubator/external-storage/tree/master/ceph/cephfs)
+  - [CSI Ceph](https://github.com/ceph/ceph-csi)
 
 Start by copying the sample inventory for customization:
 
