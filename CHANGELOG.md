@@ -1,6 +1,10 @@
 # Ansible Collection for Kubernetes
 
-## 4.3.0 - TBC
+## 4.4.0 - TBC
+
+### Major Changes
+
+## 4.3.0 - 2020-04-22
 
 ### Major Changes
 
@@ -12,9 +16,12 @@
   - Migrate group name to lowercase or underline
   - Migrate molecule `group_vars` to file
   - Consolidate molecule tests into `default` (noop)
+  - Revamp as Ansible Collection
   - Revamp with `kube_master` and `kube_node`
   - Default with `cri_o`
   - Default with `ExternalEtcd`
+  - Default with Ceph Octoups
+  - Default with kubernetes v1.18
 
 ## 4.2.0 - 2020-02-15
 

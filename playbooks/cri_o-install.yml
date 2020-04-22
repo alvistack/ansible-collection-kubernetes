@@ -47,6 +47,9 @@
   become: true
   tasks:
     - include_role:
+        name: golang
+
+    - include_role:
         name: cni_plugins
 
     - include_role:
