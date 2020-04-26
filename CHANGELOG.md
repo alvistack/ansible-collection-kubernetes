@@ -4,8 +4,8 @@
 
 ### Major Changes
 
-  - `molecule -s default` with delegated to localhost
   - Replace use of `ansible_hostname` with `inventory_hostname`
+  - `molecule -s default` with delegated to localhost
 
 ## 4.3.0 - 2020-04-22
 
