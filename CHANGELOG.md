@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+  - Support CephFS creation
+  - Support OSD pool creation
+  - Discovery device for OSD from `ansible_devices`
+  - Template complex variable with Jinja `namespace()`
+  - Replace use of `ansible_hostname` with `inventory_hostname`
   - `molecule -s default` with delegated to localhost
 
 ## 4.3.0 - 2020-04-22

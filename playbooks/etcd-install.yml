@@ -31,7 +31,7 @@
       loop:
         - { dest: "/etc/kubernetes/pki" }
         - { dest: "/etc/kubernetes/pki/etcd" }
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]
 
     - name: "generate {{ kubernetes_etcd.external.keyFile }}"
       environment:
@@ -40,7 +40,7 @@
         ansible_python_interpreter: "python3"
       openssl_privatekey:
         path: "{{ kubernetes_etcd.external.keyFile }}"
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]
 
     - name: "generate {{ kubernetes_etcd.external.keyFile | splitext | first }}.csr"
       environment:
@@ -62,7 +62,7 @@
           - clientAuth
           - serverAuth
         basic_constraints: "CA:FALSE"
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]
 
     - name: "generate {{ kubernetes_etcd.external.certFile }}"
       environment:
@@ -76,7 +76,7 @@
         ownca_path: "{{ etcd_trusted_ca_file }}"
         ownca_privatekey_path: "{{ etcd_trusted_ca_file | splitext | first }}.key"
         provider: "ownca"
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]
 
     - name: "copy {{ kubernetes_etcd.external.caFile }}"
       copy:
@@ -89,7 +89,7 @@
         force: false
       loop:
         - { dest: "{{ kubernetes_etcd.external.caFile }}", src: "{{ etcd_trusted_ca_file }}" }
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]
 
     - name: prepare files
       file:
@@ -102,4 +102,4 @@
         - { dest: "{{ kubernetes_etcd.external.caFile }}" }
         - { dest: "{{ kubernetes_etcd.external.certFile }}" }
         - { dest: "{{ kubernetes_etcd.external.keyFile }}", mode: "0600" }
-      when: ansible_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == ansible_play_hosts[0]

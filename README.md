@@ -46,50 +46,10 @@ All-in-one (AIO) build is a great way to perform an Kubernetes build for:
   - An overview of how all the Kubernetes services fit together
   - A simple lab deployment
 
-This deployment will setup the follow components:
+Simply execule our default Molecule test case and it will deploy all default components into your localhost:
 
-  - [Flannel](https://github.com/coreos/flannel)
-  - [Dashboard](https://github.com/kubernetes/dashboard)
-  - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
-  - [cert-manager](https://github.com/jetstack/cert-manager)
-  - [CSI Hostpath](https://github.com/kubernetes-csi/csi-driver-host-path)
-
-Simply run the playbooks with sample AIO inventory:
-
-    # Run playbooks
-    ansible-playbook -i inventory/aio/hosts playbooks/setup-aio.yml
-    
-    # Confirm the version and status of Kubernetes
-    kubectl version
-    kubectl get node
-    kubectl get pod --all-namespaces
-
-### Production
-
-For production environment we should backed with [Ceph File System](https://docs.ceph.com/docs/master/cephfs/) for [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/).
-
-Moreover, using [Weave Net](https://github.com/weaveworks/weave) as network plugin so we could support [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
-
-Finally, in order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended.
-
-This deployment will setup the follow components:
-
-  - [Ceph](https://ceph.io/)
-  - [Weave Net](https://github.com/weaveworks/weave)
-  - [Dashboard](https://github.com/kubernetes/dashboard)
-  - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
-  - [cert-manager](https://github.com/jetstack/cert-manager)
-  - [CSI Ceph](https://github.com/ceph/ceph-csi)
-
-Start by copying the sample inventory for customization:
-
-    # Copy sample inventory
-    cp -rfp inventory/sample inventory/myinventory
-
-Once update `inventory/myinventory/hosts` as per your production environment, now run the playbooks:
-
-    # Run playbooks
-    ansible-playbook -i inventory/myinventory/hosts playbooks/setup-everything.yml
+    # Run Molecule test case
+    molecule test -s default
     
     # Confirm the version and status of Ceph
     ceph --version
@@ -98,37 +58,57 @@ Once update `inventory/myinventory/hosts` as per your production environment, no
     
     # Confirm the version and status of Kubernetes
     kubectl version
-    kubectl get node
+    kubectl get node --output wide
     kubectl get pod --all-namespaces
 
-Moreover, we don't setup the Ceph OSD and Ceph MDS for you, which you should set it up once manually according to your production environment, e.g.:
+### Production
 
-    # Initialize individual OSDs
-    ceph-volume lvm create --bluestore --data /dev/sdb
-    ceph-volume lvm create --bluestore --data /dev/sdc
-    ceph-volume lvm create --bluestore --data /dev/sdd
-    ceph-volume lvm activate --all
+For production environment we should backed with [Ceph File System](https://docs.ceph.com/docs/master/cephfs/) for [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) with `ReadWriteMany` support. Corresponding dynamic provisioning could be handled by using [CSI CephFS](https://github.com/ceph/ceph-csi).
+
+Traditionally we could use [Docker](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) or [containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd) as [Kubernetes container runtime (CRI)](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/). Now a day, this collection is default with the modern [CRI-O](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o) implementation.
+
+Moreover, we are using [Weave Net](https://github.com/weaveworks/weave) as [Kubernetes network plugin (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) so we could support [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+
+Finally, in order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended (i.e. 3 + 3 = 6 nodes if CephFS and Kubernetes are running individually; well, or you could also stack up them together so at least 3 nodes).
+
+This deployment will setup the follow components:
+
+  - [Ceph](https://ceph.io/)
+  - [Kubernetes](https://kubernetes.io/)
+      - CRI: [CRI-O](https://cri-o.io/)
+      - CNI: [Weave Net](https://github.com/weaveworks/weave)
+      - CSI: [CSI Ceph](https://github.com/ceph/ceph-csi)
+      - Addons:
+          - [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
+          - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
+          - [Cert Manager](https://github.com/jetstack/cert-manager)
+
+Start by copying the default inventory for customization:
+
+    # Copy default inventory
+    cp -rfp inventory/default inventory/myinventory
+
+You should update the following files as per your production environment:
+
+    - `inventory/myinventory/hosts`
+      - Update with your inventory hostnames and IPs
+    - `inventory/myinventory/group_vars/all/00-defaults.yml`
+      - Update `*_release` and `*_version` if you hope to pin the deployment into any legacy supported version
+
+Once update now run the playbooks:
+
+    # Run playbooks
+    ansible-playbook -i inventory/myinventory/hosts playbooks/converge.yml
     
-    # Create OSD pool for RBD
-    ceph osd pool create rbd
-    ceph osd pool set rbd size 3
-    ceph osd pool set rbd min_size 2
-    ceph osd pool application enable rbd rbd
+    # Confirm the version and status of Ceph
+    ceph --version
+    ceph --status
+    ceph health detail
     
-    # Create OSD pool for CephFS Metadata
-    ceph osd pool create cephfs_metadata
-    ceph osd pool set cephfs_metadata size 3
-    ceph osd pool set cephfs_metadata min_size 2
-    
-    # Create OSD pool for CephFS data
-    ceph osd pool create cephfs_data
-    ceph osd pool set cephfs_data size 3
-    ceph osd pool set cephfs_data min_size 2
-    
-    # Create CephFS
-    ceph fs new cephfs cephfs_metadata cephfs_data
-    ceph fs set cephfs standby_count_wanted 0
-    ceph fs set cephfs max_mds 1
+    # Confirm the version and status of Kubernetes
+    kubectl version
+    kubectl get node --output wide
+    kubectl get pod --all-namespaces
 
 ### Molecule
 
@@ -137,7 +117,7 @@ You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) te
     # Run Molecule on Ubuntu 18.04 with Vagrant and Libvirt
     molecule converge -s ubuntu-18.04
 
-Please refer to [.travis.yml](.travis.yml) for more information on running Molecule and LXD.
+Please refer to [.travis.yml](.travis.yml) for more information on running Molecule.
 
 ## License
 
