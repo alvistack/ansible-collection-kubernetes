@@ -13,7 +13,12 @@ This Ansible collection provides Ansible playbooks and roles for the deployment 
 
 This playbook require Ansible 2.9 or higher.
 
-This playbook was designed for Ubuntu 18.04/19.10/20.04 or RHEL/CentOS 7/8 or openSUSE Leap 15.1.
+This playbook was designed for:
+
+  - Ubuntu 18.04/19.10/20.04
+  - Debian 10
+  - RHEL/CentOS 7/8
+  - openSUSE Leap 15.1
 
 ## Quick Start
 

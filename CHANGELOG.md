@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Debian 10
   - Support CephFS creation
   - Support OSD pool creation
   - Discovery device for OSD from `ansible_devices`
