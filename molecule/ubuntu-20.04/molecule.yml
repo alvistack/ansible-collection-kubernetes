@@ -33,6 +33,7 @@ platforms:
       - 'volume_cache = "none"'
       - 'storage :file, bus: "virtio", cache: "none"'
     groups:
+      - ansible
       - ceph_mon
       - ceph_mgr
       - ceph_osd
