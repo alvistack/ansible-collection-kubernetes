@@ -16,9 +16,10 @@ This playbook require Ansible 2.9 or higher.
 This playbook was designed for:
 
   - Ubuntu 18.04/19.10/20.04
-  - Debian 10
   - RHEL/CentOS 7/8
   - openSUSE Leap 15.1
+  - Debian 10
+  - Fedora 30
 
 ## Quick Start
 
