@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Fedora 32
   - Support Debian 10
   - Support CephFS creation
   - Support OSD pool creation

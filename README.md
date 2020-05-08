@@ -16,9 +16,27 @@ This playbook require Ansible 2.9 or higher.
 This playbook was designed for:
 
   - Ubuntu 18.04/19.10/20.04
-  - Debian 10
   - RHEL/CentOS 7/8
   - openSUSE Leap 15.1
+  - Debian 10
+  - Fedora 32
+
+### Debian 10
+
+CRI-O v1.18.0 is currently failed on Debian 10 default kernel, due to missing `CONFIG_CGROUP_HUGETLB` support for cgroup (see <https://github.com/cri-o/cri-o/issues/3717>), with solution:
+
+  - Upgrade CRI-O into branch `release-1.18` (see <https://github.com/cri-o/cri-o/commit/ea79742604aec07fad891bd53f4acaaec4355399>), or
+  - Upgrade kernel with Ubuntu Mainline Kernel PPA and reboot (see <https://kernel.ubuntu.com/~kernel-ppa/mainline/v5.6.11/>)
+
+### Fedora 32
+
+Our default Ceph 15.2 is not supported by Fedora 32 (only Ceph 14.2), with solution:
+
+  - Switch our variable as `ceph_release: "14.2"` for deployment (see [inventory/default/group\_vars/all/00-defaults.yml](inventory/default/group_vars/all/00-defaults.yml))
+
+Fedora 31+ is now using cgroup v2 by default which not supported by kubelet (see <https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/20191118-cgroups-v2.md>), with solution:
+
+  - Setup `systemd.unified_cgroup_hierarchy=1` to the kernel arguments and reboot (see <https://github.com/rancher/k3s/issues/900#issuecomment-551337575>)
 
 ## Quick Start
 
