@@ -1,3 +1,5 @@
+---
+
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible>=2.9.5
-ansible-lint
-ansible-runner
-ansible-runner-http
-argcomplete
-docker
-flake8
-jmespath
-molecule>=3.0.2
-molecule-vagrant
-netaddr
-openshift
-python-vagrant
-yamllint
+collections:
+  - name: community.kubernetes
+    src: https://galaxy.ansible.com
+    version: ">=0.11.0,<1.0.0"
+
+  - name: operator_sdk.util
+    src: https://galaxy.ansible.com
+    version: ">=0.0.0,<1.0.0"
+
