@@ -41,14 +41,14 @@ dependency:
   name: galaxy
   options:
     role-file: ansible-galaxy-requirements.yml
-    roles-path: ~/.ansible/roles
+    roles-path: ${HOME}/.ansible/roles
     requirements-file: ansible-galaxy-requirements.yml
-    collections-path: ~/.ansible/collections
+    collections-path: ${HOME}/.ansible/collections
     ignore-errors: true
 provisioner:
   name: ansible
   env:
-    ANSIBLE_ROLES_PATH: ~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+    ANSIBLE_ROLES_PATH: ${HOME}/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
   config_options:
     defaults:
       forks: 20
