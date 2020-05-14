@@ -22,7 +22,7 @@
       reboot:
         reboot_timeout: 600
         post_reboot_delay: 60
-        test_command: "systemctl status ceph.target"
+        test_command: "ceph health | grep HEALTH_OK && exit 0"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
@@ -37,7 +37,7 @@
       reboot:
         reboot_timeout: 600
         post_reboot_delay: 60
-        test_command: "systemctl status kubelet.service"
+        test_command: "kubectl get node | grep NotReady || exit 0"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true

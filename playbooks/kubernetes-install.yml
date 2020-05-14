@@ -70,6 +70,28 @@
   remote_user: root
   become: true
   tasks:
+    - name: base64 encode
+      shell: |
+        set -o pipefail
+        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
+      with_dict:
+        base64:
+          - "/root/.kube/config"
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['kube_master'][0] }}"
+      register: base64_encode_result
+      changed_when: base64_encode_result is not succeeded
+
+    - name: base64 decode
+      shell: |
+        set -o pipefail
+        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
+      args:
+        executable: "/bin/bash"
+      register: base64_decode_result
+      changed_when: base64_decode_result is not succeeded
+
     - name: kubeadm token create
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
