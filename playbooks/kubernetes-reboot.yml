@@ -21,7 +21,7 @@
     - name: reboot
       reboot:
         reboot_timeout: 600
-        test_command: "kubectl get node | grep NotReady || sleep 60"
+        test_command: "[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]] && sleep 60"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
