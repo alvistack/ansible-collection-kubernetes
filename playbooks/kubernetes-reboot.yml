@@ -21,7 +21,6 @@
     - name: reboot
       reboot:
         reboot_timeout: 600
-        post_reboot_delay: 60
         test_command: "kubectl get node | grep NotReady || sleep 60"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
