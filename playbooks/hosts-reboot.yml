@@ -20,6 +20,7 @@
   tasks:
     - name: reboot
       reboot:
+        post_reboot_delay: 300
         reboot_timeout: 600
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
