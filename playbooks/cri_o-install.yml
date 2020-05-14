@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ansible
+- hosts: ansible:kube_master:kube_node
   remote_user: root
   become: true
   tasks:
@@ -47,22 +47,7 @@
   become: true
   tasks:
     - include_role:
-        name: golang
-
-    - include_role:
-        name: cni_plugins
-
-    - include_role:
         name: cri_tools
-
-    - include_role:
-        name: containers_common
-
-    - include_role:
-        name: runc
-
-    - include_role:
-        name: conmon
 
     - include_role:
         name: cri_o
