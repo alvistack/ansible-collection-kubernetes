@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all:!ansible
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
   remote_user: root
   become: true
   tasks:
@@ -22,6 +22,22 @@
       reboot:
         reboot_timeout: 600
         post_reboot_delay: 60
+        test_command: "systemctl status ceph.target"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true
+
+- hosts: kube_master:kube_node
+  remote_user: root
+  become: true
+  tasks:
+    - name: reboot
+      reboot:
+        reboot_timeout: 600
+        post_reboot_delay: 60
+        test_command: "systemctl status kubelet.service"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
