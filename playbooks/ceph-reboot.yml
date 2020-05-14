@@ -14,5 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ceph-reboot.yml
-- import_playbook: kubernetes-reboot.yml
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
+  remote_user: root
+  become: true
+  tasks:
+    - name: reboot
+      reboot:
+        reboot_timeout: 600
+        test_command: "ceph health | grep HEALTH_OK && sleep 60"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true

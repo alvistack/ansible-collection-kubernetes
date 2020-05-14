@@ -14,5 +14,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ceph-reboot.yml
-- import_playbook: kubernetes-reboot.yml
+- hosts: kube_master:kube_node
+  remote_user: root
+  become: true
+  tasks:
+    - name: reboot
+      reboot:
+        reboot_timeout: 600
+        post_reboot_delay: 60
+        test_command: "kubectl get node | grep NotReady || sleep 60"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true
