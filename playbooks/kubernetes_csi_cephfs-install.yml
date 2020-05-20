@@ -24,6 +24,7 @@
   tasks:
     - include_role:
         name: ceph_common
+      tags: ceph_common
 
 - hosts: kube_master
   remote_user: root
@@ -38,11 +39,13 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
+      tags: kubernetes_csi_cephfs
 
     - include_role:
         name: kubernetes_csi_cephfs
       vars:
         csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+      tags: kubernetes_csi_cephfs
 
     - name: setup csi-cephfs as default storageclass
       environment:
@@ -62,3 +65,4 @@
       register: result
       until: result is succeeded
       retries: 15
+      tags: kubernetes_csi_cephfs

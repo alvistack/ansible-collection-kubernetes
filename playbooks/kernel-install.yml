@@ -20,3 +20,4 @@
   tasks:
     - include_role:
         name: kernel
+      tags: kernel

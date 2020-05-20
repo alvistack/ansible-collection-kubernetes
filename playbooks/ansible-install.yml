@@ -20,9 +20,12 @@
   tasks:
     - include_role:
         name: ansible
+      tags: ansible
 
     - include_role:
         name: rclone
+      tags: rclone
 
     - include_role:
         name: restic
+      tags: restic

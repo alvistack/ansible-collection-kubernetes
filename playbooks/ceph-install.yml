@@ -20,6 +20,7 @@
   tasks:
     - include_role:
         name: ceph_common
+      tags: ceph_common
 
 - hosts: ceph_mon
   remote_user: root
@@ -27,6 +28,7 @@
   tasks:
     - include_role:
         name: ceph_mon
+      tags: ceph_mon
 
 - hosts: ceph_mgr
   remote_user: root
@@ -45,6 +47,7 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: ceph_mgr
 
     - name: base64 decode
       shell: |
@@ -54,9 +57,11 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: ceph_mgr
 
     - include_role:
         name: ceph_mgr
+      tags: ceph_mgr
 
 - hosts: ceph_osd
   remote_user: root
@@ -75,6 +80,7 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: ceph_osd
 
     - name: base64 decode
       shell: |
@@ -84,9 +90,11 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: ceph_osd
 
     - include_role:
         name: ceph_osd
+      tags: ceph_osd
 
 - hosts: ceph_mds
   remote_user: root
@@ -105,6 +113,7 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: ceph_mds
 
     - name: base64 decode
       shell: |
@@ -114,9 +123,11 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: ceph_mds
 
     - include_role:
         name: ceph_mds
+      tags: ceph_mds
 
 - hosts: ceph_rgw
   remote_user: root
@@ -135,6 +146,7 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: ceph_rgw
 
     - name: base64 decode
       shell: |
@@ -144,9 +156,11 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: ceph_rgw
 
     - include_role:
         name: ceph_rgw
+      tags: ceph_rgw
 
 - hosts: ansible
   remote_user: root
@@ -154,6 +168,7 @@
   tasks:
     - include_role:
         name: ceph_common
+      tags: ceph_common
 
     - name: base64 encode
       shell: |
@@ -167,6 +182,7 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: ceph_common
 
     - name: base64 decode
       shell: |
@@ -176,3 +192,4 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: ceph_common

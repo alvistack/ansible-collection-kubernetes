@@ -20,21 +20,28 @@
   tasks:
     - include_role:
         name: bootstrap
+      tags: bootstrap
 
     - include_role:
         name: python
+      tags: python
 
     - include_role:
         name: git
+      tags: git
 
     - include_role:
         name: locales
+      tags: locales
 
     - include_role:
         name: timezone
+      tags: timezone
 
     - include_role:
         name: chrony
+      tags: chrony
 
     - include_role:
         name: sshd
+      tags: sshd

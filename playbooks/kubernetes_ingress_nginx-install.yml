@@ -20,3 +20,4 @@
   tasks:
     - include_role:
         name: kubernetes_ingress_nginx
+      tags: kubernetes_ingress_nginx
