@@ -28,7 +28,7 @@
         name: containers_common
 
     - include_role:
-        name: crun
+        name: runc
 
     - include_role:
         name: conmon
