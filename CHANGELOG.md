@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Compile binary with Nix
   - Default with `crun`
   - Support Fedora 32
   - Support Debian 10
