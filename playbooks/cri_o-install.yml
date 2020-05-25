@@ -19,10 +19,6 @@
   become: true
   tasks:
     - include_role:
-        name: nix
-      tags: nix
-
-    - include_role:
         name: golang
       tags: golang
 

@@ -146,10 +146,6 @@
 	path = roles/locales
 	url = https://github.com/alvistack/ansible-role-locales.git
 	branch = develop
-[submodule "roles/nix"]
-	path = roles/nix
-	url = https://github.com/alvistack/ansible-role-nix.git
-	branch = develop
 [submodule "roles/operator_sdk"]
 	path = roles/operator_sdk
 	url = https://github.com/alvistack/ansible-role-operator_sdk.git
