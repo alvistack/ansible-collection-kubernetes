@@ -14,7 +14,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ansible:kube_master:kube_node
+- hosts: kube_master:kube_node
+  remote_user: root
+  become: true
+  tasks:
+    - include_role:
+        name: cni_plugins
+      tags: cni_plugins
+
+    - include_role:
+        name: containers_common
+      tags: containers_common
+
+    - include_role:
+        name: crun
+      tags: crun
+
+    - include_role:
+        name: conmon
+      tags: conmon
+
+    - include_role:
+        name: cri_tools
+      tags: cri_tools
+
+    - include_role:
+        name: cri_o
+      tags: cri_o
+
+- hosts: ansible
   remote_user: root
   become: true
   tasks:
@@ -49,15 +77,3 @@
     - include_role:
         name: podman
       tags: podman
-
-- hosts: kube_master:kube_node
-  remote_user: root
-  become: true
-  tasks:
-    - include_role:
-        name: cri_tools
-      tags: cri_tools
-
-    - include_role:
-        name: cri_o
-      tags: cri_o
