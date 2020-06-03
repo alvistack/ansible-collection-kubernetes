@@ -84,6 +84,7 @@
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
       with_dict:
         base64:
+          - "/etc/kubernetes/admin.conf"
           - "/root/.kube/config"
       args:
         executable: "/bin/bash"
@@ -141,6 +142,7 @@
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
       with_dict:
         base64:
+          - "/etc/kubernetes/admin.conf"
           - "/root/.kube/config"
       args:
         executable: "/bin/bash"
