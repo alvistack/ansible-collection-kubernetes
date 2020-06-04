@@ -20,3 +20,4 @@
   tasks:
     - include_role:
         name: kubernetes_metallb
+      tags: kubernetes_metallb

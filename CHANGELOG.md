@@ -1,9 +1,15 @@
 # Ansible Collection for Kubernetes
 
-## 4.4.0 - TBC
+## 4.5.0 - TBC
 
 ### Major Changes
 
+## 4.4.0 - 2020-06-04
+
+### Major Changes
+
+  - Install with static binary archive
+  - Default with `crun`
   - Support Fedora 32
   - Support Debian 10
   - Support CephFS creation

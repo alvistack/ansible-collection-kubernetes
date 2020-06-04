@@ -14,10 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
   remote_user: root
   become: true
   tasks:
-    - include_role:
-        name: kubernetes_flannel
-      tags: kubernetes_flannel
+    - name: reboot
+      reboot:
+        reboot_timeout: 600
+        test_command: "bash -c '[[ $(ceph health | grep -c HEALTH_OK) == 1 ]] && sleep 60'"
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true

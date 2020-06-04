@@ -47,9 +47,9 @@
 	url = https://github.com/alvistack/ansible-role-conmon.git
 	branch = develop
 [submodule "roles/containers_common"]
-    path = roles/containers_common
-    url = https://github.com/alvistack/ansible-role-containers_common.git
-    branch = develop
+	path = roles/containers_common
+	url = https://github.com/alvistack/ansible-role-containers_common.git
+	branch = develop
 [submodule "roles/cri_o"]
 	path = roles/cri_o
 	url = https://github.com/alvistack/ansible-role-cri_o.git
@@ -57,6 +57,10 @@
 [submodule "roles/cri_tools"]
 	path = roles/cri_tools
 	url = https://github.com/alvistack/ansible-role-cri_tools.git
+	branch = develop
+[submodule "roles/crun"]
+	path = roles/crun
+	url = https://github.com/alvistack/ansible-role-crun.git
 	branch = develop
 [submodule "roles/etcd"]
 	path = roles/etcd
@@ -66,13 +70,17 @@
 	path = roles/git
 	url = https://github.com/alvistack/ansible-role-git.git
 	branch = develop
-[submodule "roles/golang"]
-	path = roles/golang
-	url = https://github.com/alvistack/ansible-role-golang.git
-	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
 	url = https://github.com/alvistack/ansible-role-kernel.git
+	branch = develop
+[submodule "roles/kube_master"]
+	path = roles/kube_master
+	url = https://github.com/alvistack/ansible-role-kube_master.git
+	branch = develop
+[submodule "roles/kube_node"]
+	path = roles/kube_node
+	url = https://github.com/alvistack/ansible-role-kube_node.git
 	branch = develop
 [submodule "roles/kubeadm"]
 	path = roles/kubeadm
@@ -85,14 +93,6 @@
 [submodule "roles/kubelet"]
 	path = roles/kubelet
 	url = https://github.com/alvistack/ansible-role-kubelet.git
-	branch = develop
-[submodule "roles/kube_master"]
-	path = roles/kube_master
-	url = https://github.com/alvistack/ansible-role-kube_master.git
-	branch = develop
-[submodule "roles/kube_node"]
-	path = roles/kube_node
-	url = https://github.com/alvistack/ansible-role-kube_node.git
 	branch = develop
 [submodule "roles/kubernetes_addon_manager"]
 	path = roles/kubernetes_addon_manager

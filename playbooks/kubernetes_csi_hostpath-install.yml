@@ -24,6 +24,7 @@
   tasks:
     - include_role:
         name: kubernetes_csi_hostpath
+      tags: kubernetes_csi_hostpath
 
     - name: setup csi-hostpath as default storageclass
       environment:
@@ -43,3 +44,4 @@
       register: result
       until: result is succeeded
       retries: 15
+      tags: kubernetes_csi_hostpath

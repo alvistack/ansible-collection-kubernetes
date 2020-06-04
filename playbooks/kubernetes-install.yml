@@ -20,15 +20,19 @@
   tasks:
     - include_role:
         name: kubectl
+      tags: kubectl
 
     - include_role:
         name: kubeadm
+      tags: kubeadm
 
     - include_role:
         name: kubelet
+      tags: kubelet
 
     - include_role:
         name: operator_sdk
+      tags: operator_sdk
 
 - hosts: kube_master
   remote_user: root
@@ -49,6 +53,7 @@
       delegate_to: "{{ groups['etcd'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: kube_master
 
     - name: base64 decode
       shell: |
@@ -59,17 +64,44 @@
       when: inventory_hostname == ansible_play_hosts[0]
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: kube_master
 
     - include_role:
         name: kube_master
+      tags: kube_master
 
     - include_role:
         name: kubernetes_addon_manager
+      tags: kubernetes_addon_manager
 
 - hosts: kube_node:!kube_master
   remote_user: root
   become: true
   tasks:
+    - name: base64 encode
+      shell: |
+        set -o pipefail
+        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
+      with_dict:
+        base64:
+          - "/etc/kubernetes/admin.conf"
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['kube_master'][0] }}"
+      register: base64_encode_result
+      changed_when: base64_encode_result is not succeeded
+      tags: kube_node
+
+    - name: base64 decode
+      shell: |
+        set -o pipefail
+        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
+      args:
+        executable: "/bin/bash"
+      register: base64_decode_result
+      changed_when: base64_decode_result is not succeeded
+      tags: kube_node
+
     - name: kubeadm token create
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
@@ -83,21 +115,25 @@
       until: kube_admin_token_result is succeeded
       changed_when: kube_admin_token_result is not succeeded
       ignore_errors: true
+      tags: kube_node
 
     - include_role:
         name: kube_node
       vars:
         kubeadm_token: "{{ kube_admin_token_result.stdout }}"
+      tags: kube_node
 
 - hosts: ansible
   remote_user: root
   become: true
   tasks:
     - include_role:
-        name: kubectl
+        name: operator_sdk
+      tags: operator_sdk
 
     - include_role:
-        name: operator_sdk
+        name: kubectl
+      tags: kubectl
 
     - name: base64 encode
       shell: |
@@ -105,12 +141,13 @@
         tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
       with_dict:
         base64:
-          - "/root/.kube/config"
+          - "/etc/kubernetes/admin.conf"
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
+      tags: kubectl
 
     - name: base64 decode
       shell: |
@@ -120,3 +157,4 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
+      tags: kubectl
