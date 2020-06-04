@@ -85,7 +85,6 @@
       with_dict:
         base64:
           - "/etc/kubernetes/admin.conf"
-          - "/root/.kube/config"
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
@@ -143,7 +142,6 @@
       with_dict:
         base64:
           - "/etc/kubernetes/admin.conf"
-          - "/root/.kube/config"
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
