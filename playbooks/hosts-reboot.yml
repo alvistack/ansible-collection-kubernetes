@@ -16,3 +16,4 @@
 
 - import_playbook: ceph-reboot.yml
 - import_playbook: kubernetes-reboot.yml
+- import_playbook: ansible-reboot.yml

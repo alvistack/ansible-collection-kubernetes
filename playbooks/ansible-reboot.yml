@@ -14,14 +14,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master:kube_node:!ansible
+- hosts: ansible
   remote_user: root
   become: true
   tasks:
     - name: reboot
       reboot:
         reboot_timeout: 600
-        test_command: "bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]] && sleep 60'"
+        test_command: "bash -c 'whoami && sleep 60'"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
