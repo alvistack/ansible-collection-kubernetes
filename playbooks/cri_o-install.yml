@@ -27,7 +27,15 @@
       tags: containers_common
 
     - include_role:
+        name: runc
+      when:
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" == "redhat-7"
+      tags: runc
+
+    - include_role:
         name: crun
+      when:
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" != "redhat-7"
       tags: crun
 
     - include_role:
@@ -55,7 +63,15 @@
       tags: containers_common
 
     - include_role:
+        name: runc
+      when:
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" == "redhat-7"
+      tags: runc
+
+    - include_role:
         name: crun
+      when:
+        - "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" != "redhat-7"
       tags: crun
 
     - include_role:
