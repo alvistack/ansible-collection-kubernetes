@@ -27,16 +27,8 @@
       tags: containers_common
 
     - include_role:
-        name: runc
-      when:
-        - (ansible_os_family | lower == "redhat" and ansible_distribution_major_version | lower == "7")
-      tags: runc
-
-    - include_role:
-        name: crun
-      when:
-        - not (ansible_os_family | lower == "redhat" and ansible_distribution_major_version | lower == "7")
-      tags: crun
+        name: "{{ cri_o_crio_runtime_default_runtime }}"
+      tags: "{{ cri_o_crio_runtime_default_runtime }}"
 
     - include_role:
         name: conmon
@@ -63,16 +55,8 @@
       tags: containers_common
 
     - include_role:
-        name: runc
-      when:
-        - (ansible_os_family | lower == "redhat" and ansible_distribution_major_version | lower == "7")
-      tags: runc
-
-    - include_role:
-        name: crun
-      when:
-        - not (ansible_os_family | lower == "redhat" and ansible_distribution_major_version | lower == "7")
-      tags: crun
+        name: "{{ containers_common_engine_runtime }}"
+      tags: "{{ containers_common_engine_runtime }}"
 
     - include_role:
         name: conmon

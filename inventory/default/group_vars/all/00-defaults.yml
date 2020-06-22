@@ -23,6 +23,24 @@ crictl_version: "v1.18.0"
 cri_o_version: "v1.18.2"
 kubernetes_version: "v1.18.4"
 
+# runc/crun
+containers_common_engine_runtime: >-
+  {%- set _params = '' -%}
+  {%- if "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" == "redhat-7" -%}
+  {%-   _params = 'runc' -%}
+  {%- else -%}
+  {%-   _params = 'crun' -%}
+  {%- endif -%}
+  {{ _params }}
+cri_o_crio_runtime_default_runtime: >-
+  {%- set _params = '' -%}
+  {%- if "{{ ansible_os_family | lower }}-{{ ansible_distribution_major_version | lower }}" == "redhat-7" -%}
+  {%-   _params = 'runc' -%}
+  {%- else -%}
+  {%-   _params = 'crun' -%}
+  {%- endif -%}
+  {{ _params }}
+
 # ceph_common
 ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
 ceph_mon_initial_members: >-
