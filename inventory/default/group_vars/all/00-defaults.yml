@@ -21,7 +21,7 @@ kernel_release: "mainline"
 # version
 crictl_version: "v1.18.0"
 cri_o_version: "v1.18.2"
-kubernetes_version: "v1.18.4"
+kubernetes_version: "v1.18.5"
 
 # ceph_common
 ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
