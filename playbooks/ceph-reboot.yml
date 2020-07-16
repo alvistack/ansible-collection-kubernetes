@@ -14,13 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
+- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw:!ansible
   remote_user: root
   become: true
   tasks:
     - name: reboot
       reboot:
-        reboot_timeout: 600
+        reboot_timeout: 1800
         test_command: "bash -c '[[ $(ceph health | grep -c HEALTH_OK) == 1 ]] && sleep 60'"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"

@@ -1,4 +1,4 @@
----
+#!/bin/bash
 
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
@@ -14,16 +14,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master:kube_node:!ceph_mon:!ceph_mgr:!ceph_osd:!ceph_mds:!ceph_rgw:!ansible
-  remote_user: root
-  become: true
-  tasks:
-    - name: reboot
-      reboot:
-        reboot_timeout: 1800
-        test_command: "bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]] && sleep 60'"
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
-      changed_when: false
-      ignore_errors: true
+set -o xtrace
+
+kubectl get pv -o name | while read line
+do
+    namespace="$(kubectl get $line -o jsonpath='{.spec.claimRef.namespace}')"
+    name="$(kubectl get $line -o jsonpath='{.spec.claimRef.name}')"
+    path="volumes/csi/csi-vol-$(kubectl get $line -o jsonpath='{.spec.csi.volumeHandle}' | sed 's/^0001-0004-ceph-0000000000000001-//g')"
+
+    if [[ -f $path/.meta ]]
+    then
+        path="$(cat $path/.meta | egrep -e '^path = ' | sed 's/^path = \///g')"
+    fi
+
+    mkdir -p symlinks/$namespace
+    cd symlinks/$namespace
+    rm $name
+    ln -fs ../../$path $name
+    cd ../../
+done
