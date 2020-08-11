@@ -31,6 +31,10 @@
       tags: git
 
     - include_role:
+        name: vim
+      tags: vim
+
+    - include_role:
         name: locales
       tags: locales
 
