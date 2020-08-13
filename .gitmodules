@@ -74,14 +74,6 @@
 	path = roles/kernel
 	url = https://github.com/alvistack/ansible-role-kernel.git
 	branch = develop
-[submodule "roles/kube_master"]
-	path = roles/kube_master
-	url = https://github.com/alvistack/ansible-role-kube_master.git
-	branch = develop
-[submodule "roles/kube_node"]
-	path = roles/kube_node
-	url = https://github.com/alvistack/ansible-role-kube_node.git
-	branch = develop
 [submodule "roles/kubeadm"]
 	path = roles/kubeadm
 	url = https://github.com/alvistack/ansible-role-kubeadm.git
@@ -93,6 +85,14 @@
 [submodule "roles/kubelet"]
 	path = roles/kubelet
 	url = https://github.com/alvistack/ansible-role-kubelet.git
+	branch = develop
+[submodule "roles/kube_master"]
+	path = roles/kube_master
+	url = https://github.com/alvistack/ansible-role-kube_master.git
+	branch = develop
+[submodule "roles/kube_node"]
+	path = roles/kube_node
+	url = https://github.com/alvistack/ansible-role-kube_node.git
 	branch = develop
 [submodule "roles/kubernetes_addon_manager"]
 	path = roles/kubernetes_addon_manager
@@ -173,4 +173,8 @@
 [submodule "roles/timezone"]
 	path = roles/timezone
 	url = https://github.com/alvistack/ansible-role-timezone.git
+	branch = develop
+[submodule "roles/vim"]
+	path = roles/vim
+	url = https://github.com/alvistack/ansible-role-vim.git
 	branch = develop
