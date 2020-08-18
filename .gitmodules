@@ -162,6 +162,10 @@
 	path = roles/restic
 	url = https://github.com/alvistack/ansible-role-restic.git
 	branch = develop
+[submodule "roles/runc"]
+	path = roles/runc
+	url = https://github.com/alvistack/ansible-role-runc.git
+	branch = develop
 [submodule "roles/skopeo"]
 	path = roles/skopeo
 	url = https://github.com/alvistack/ansible-role-skopeo.git
