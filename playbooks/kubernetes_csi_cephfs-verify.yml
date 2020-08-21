@@ -23,7 +23,7 @@
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
-      k8s:
+      community.kubernetes.k8s:
         state: "present"
         definition:
           apiVersion: v1
@@ -43,7 +43,7 @@
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
-      k8s:
+      community.kubernetes.k8s:
         state: "present"
         definition:
           apiVersion: v1

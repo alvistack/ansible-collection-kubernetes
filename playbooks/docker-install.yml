@@ -1,3 +1,5 @@
+---
+
 # (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -12,17 +14,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-ansible~=2.10.0a9
-ansible-lint~=4.3.1
-ansible-runner
-ansible-runner-http
-argcomplete
-docker
-flake8
-jmespath
-molecule~=3.0.2
-molecule-vagrant
-netaddr
-openshift
-python-vagrant
-yamllint
+- hosts: kube_master:kube_node
+  remote_user: root
+  become: true
+  tasks:
+    - include_role:
+        name: cni_plugins
+      tags: cni_plugins
+
+    - include_role:
+        name: cri_tools
+      tags: cri_tools
+
+    - include_role:
+        name: docker
+      tags: docker
+
+- hosts: ansible
+  remote_user: root
+  become: true
+  tasks:
+    - include_role:
+        name: cni_plugins
+      tags: cni_plugins
+
+    - include_role:
+        name: docker
+      tags: docker

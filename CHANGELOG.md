@@ -4,7 +4,8 @@
 
 ### Major Changes
 
-  - Install `mainline` for Ubuntu Mainline Kernel
+  - Upgrade Travis CI test as Ubuntu Focal based
+  - Upgrade minimal Ansible support to 2.10.0
   - Support openSUSE Leap 15.2
   - Remove Ubuntu 19.10 support
 
