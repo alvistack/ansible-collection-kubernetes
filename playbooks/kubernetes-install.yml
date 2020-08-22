@@ -61,38 +61,7 @@
         mode: "{{ item.mode | default('0644') }}"
       loop:
         - { dest: "/lib/systemd/system/kubelet.service.d/50-crio.service.conf" }
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
         - { dest: "/lib/systemd/system/kubelet.service.d/50-etcd.service.conf" }
-      when: inventory_hostname in groups['etcd']
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/50-ceph.target.conf" }
-      when: inventory_hostname in groups['ceph_mon'] or
-            inventory_hostname in groups['ceph_mgr'] or
-            inventory_hostname in groups['ceph_osd'] or
-            inventory_hostname in groups['ceph_mds'] or
-            inventory_hostname in groups['ceph_rgw']
       notify:
         - kubelet | systemctl daemon-reload
         - kubelet | systemctl restart kubelet
