@@ -18,7 +18,7 @@
   remote_user: root
   become: true
   handlers:
-      - name: cri_o | systemctl daemon-reload
+    - name: cri_o | systemctl daemon-reload
       systemd:
         daemon_reload: true
       changed_when: false
