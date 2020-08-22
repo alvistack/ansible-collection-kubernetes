@@ -123,6 +123,58 @@
         kubeadm_token: "{{ kube_admin_token_result.stdout }}"
       tags: kube_node
 
+- hosts: kube_master:kube_node
+  remote_user: root
+  become: true
+  tasks:
+    - name: prepare directories
+      file:
+        dest: "{{ item.dest }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0755') }}"
+        state: "{{ item.state | default('directory') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d" }
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/crio.conf" }
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/etcd.conf" }
+      when: inventory_hostname in groups['etcd']
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/ceph-osd.conf" }
+      when: inventory_hostname in groups['ceph_osd']
+
+    - name: systemctl daemon-reload
+      systemd:
+        daemon_reload: true
+      changed_when: false
+      ignore_errors: true
+
 - hosts: ansible
   remote_user: root
   become: true
