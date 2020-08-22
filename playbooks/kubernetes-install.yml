@@ -126,6 +126,24 @@
 - hosts: kube_master:kube_node
   remote_user: root
   become: true
+  handlers:
+    - name: kubelet | systemctl daemon-reload
+      systemd:
+        daemon_reload: true
+      changed_when: false
+      ignore_errors: true
+
+    - name: kubelet | systemctl restart kubelet
+      service:
+        name: "kubelet"
+        state: "restarted"
+        enabled: true
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true
+
   tasks:
     - name: prepare directories
       file:
@@ -146,6 +164,9 @@
         mode: "{{ item.mode | default('0644') }}"
       loop:
         - { dest: "/lib/systemd/system/kubelet.service.d/crio.conf" }
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
 
     - name: copy templates
       template:
@@ -157,6 +178,9 @@
       loop:
         - { dest: "/lib/systemd/system/kubelet.service.d/etcd.conf" }
       when: inventory_hostname in groups['etcd']
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
 
     - name: copy templates
       template:
@@ -172,12 +196,12 @@
             inventory_hostname in groups['ceph_osd'] or
             inventory_hostname in groups['ceph_mds'] or
             inventory_hostname in groups['ceph_rgw']
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
 
-    - name: systemctl daemon-reload
-      systemd:
-        daemon_reload: true
-      changed_when: false
-      ignore_errors: true
+    - name: flush handlers
+      meta: flush_handlers
 
 - hosts: ansible
   remote_user: root
