@@ -166,8 +166,12 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/ceph-osd.conf" }
-      when: inventory_hostname in groups['ceph_osd']
+        - { dest: "/lib/systemd/system/kubelet.service.d/ceph.conf" }
+      when: inventory_hostname in groups['ceph_mon'] or
+            inventory_hostname in groups['ceph_mgr'] or
+            inventory_hostname in groups['ceph_osd'] or
+            inventory_hostname in groups['ceph_mds'] or
+            inventory_hostname in groups['ceph_rgw']
 
     - name: systemctl daemon-reload
       systemd:
