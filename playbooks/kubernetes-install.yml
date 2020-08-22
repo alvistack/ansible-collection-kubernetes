@@ -60,7 +60,7 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/crio.conf" }
+        - { dest: "/lib/systemd/system/kubelet.service.d/50-crio.service.conf" }
       notify:
         - kubelet | systemctl daemon-reload
         - kubelet | systemctl restart kubelet
@@ -73,7 +73,7 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/etcd.conf" }
+        - { dest: "/lib/systemd/system/kubelet.service.d/50-etcd.service.conf" }
       when: inventory_hostname in groups['etcd']
       notify:
         - kubelet | systemctl daemon-reload
@@ -87,7 +87,7 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/ceph.conf" }
+        - { dest: "/lib/systemd/system/kubelet.service.d/50-ceph.target.conf" }
       when: inventory_hostname in groups['ceph_mon'] or
             inventory_hostname in groups['ceph_mgr'] or
             inventory_hostname in groups['ceph_osd'] or

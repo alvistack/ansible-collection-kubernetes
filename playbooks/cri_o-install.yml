@@ -72,7 +72,7 @@
         group: "{{ item.group | default('root') }}"
         mode: "{{ item.mode | default('0644') }}"
       loop:
-        - { dest: "/lib/systemd/system/crio.service.d/ceph.conf" }
+        - { dest: "/lib/systemd/system/crio.service.d/50-ceph.target.conf" }
       when: inventory_hostname in groups['ceph_mon'] or
             inventory_hostname in groups['ceph_mgr'] or
             inventory_hostname in groups['ceph_osd'] or
