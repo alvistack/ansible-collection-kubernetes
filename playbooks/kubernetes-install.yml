@@ -17,7 +17,29 @@
 - hosts: kube_master:kube_node
   remote_user: root
   become: true
+  handlers:
+    - name: kubelet | systemctl daemon-reload
+      systemd:
+        daemon_reload: true
+      changed_when: false
+      ignore_errors: true
+
+    - name: kubelet | systemctl restart kubelet
+      service:
+        name: "kubelet"
+        state: "restarted"
+        enabled: true
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+      changed_when: false
+      ignore_errors: true
+
   tasks:
+    - include_role:
+        name: operator_sdk
+      tags: operator_sdk
+
     - include_role:
         name: kubectl
       tags: kubectl
@@ -30,9 +52,53 @@
         name: kubelet
       tags: kubelet
 
-    - include_role:
-        name: operator_sdk
-      tags: operator_sdk
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/crio.conf" }
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/etcd.conf" }
+      when: inventory_hostname in groups['etcd']
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
+
+    - name: copy templates
+      template:
+        dest: "{{ item.dest }}"
+        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
+        owner: "{{ item.owner | default('root') }}"
+        group: "{{ item.group | default('root') }}"
+        mode: "{{ item.mode | default('0644') }}"
+      loop:
+        - { dest: "/lib/systemd/system/kubelet.service.d/ceph.conf" }
+      when: inventory_hostname in groups['ceph_mon'] or
+            inventory_hostname in groups['ceph_mgr'] or
+            inventory_hostname in groups['ceph_osd'] or
+            inventory_hostname in groups['ceph_mds'] or
+            inventory_hostname in groups['ceph_rgw']
+      notify:
+        - kubelet | systemctl daemon-reload
+        - kubelet | systemctl restart kubelet
+
+    - name: flush handlers
+      meta: flush_handlers
 
 - hosts: kube_master
   remote_user: root
@@ -122,86 +188,6 @@
       vars:
         kubeadm_token: "{{ kube_admin_token_result.stdout }}"
       tags: kube_node
-
-- hosts: kube_master:kube_node
-  remote_user: root
-  become: true
-  handlers:
-    - name: kubelet | systemctl daemon-reload
-      systemd:
-        daemon_reload: true
-      changed_when: false
-      ignore_errors: true
-
-    - name: kubelet | systemctl restart kubelet
-      service:
-        name: "kubelet"
-        state: "restarted"
-        enabled: true
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
-      changed_when: false
-      ignore_errors: true
-
-  tasks:
-    - name: prepare directories
-      file:
-        dest: "{{ item.dest }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0755') }}"
-        state: "{{ item.state | default('directory') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d" }
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/crio.conf" }
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/etcd.conf" }
-      when: inventory_hostname in groups['etcd']
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/ceph.conf" }
-      when: inventory_hostname in groups['ceph_mon'] or
-            inventory_hostname in groups['ceph_mgr'] or
-            inventory_hostname in groups['ceph_osd'] or
-            inventory_hostname in groups['ceph_mds'] or
-            inventory_hostname in groups['ceph_rgw']
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: flush handlers
-      meta: flush_handlers
 
 - hosts: ansible
   remote_user: root
