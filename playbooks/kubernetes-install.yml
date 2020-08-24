@@ -24,6 +24,14 @@
       tags: operator_sdk
 
     - include_role:
+        name: cni_plugins
+      tags: cni_plugins
+
+    - include_role:
+        name: cri_tools
+      tags: cri_tools
+
+    - include_role:
         name: kubectl
       tags: kubectl
 
