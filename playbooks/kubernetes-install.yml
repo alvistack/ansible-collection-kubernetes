@@ -18,23 +18,6 @@
   remote_user: root
   become: true
   handlers:
-    - name: kubelet | systemctl daemon-reload
-      systemd:
-        daemon_reload: true
-      changed_when: false
-      ignore_errors: true
-
-    - name: kubelet | systemctl restart kubelet
-      service:
-        name: "kubelet"
-        state: "restarted"
-        enabled: true
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
-      changed_when: false
-      ignore_errors: true
-
   tasks:
     - include_role:
         name: operator_sdk
@@ -51,23 +34,6 @@
     - include_role:
         name: kubelet
       tags: kubelet
-
-    - name: copy templates
-      template:
-        dest: "{{ item.dest }}"
-        src: "{{ item.src | default('./templates' + item.dest + '.j2') }}"
-        owner: "{{ item.owner | default('root') }}"
-        group: "{{ item.group | default('root') }}"
-        mode: "{{ item.mode | default('0644') }}"
-      loop:
-        - { dest: "/lib/systemd/system/kubelet.service.d/50-crio.service.conf" }
-        - { dest: "/lib/systemd/system/kubelet.service.d/50-etcd.service.conf" }
-      notify:
-        - kubelet | systemctl daemon-reload
-        - kubelet | systemctl restart kubelet
-
-    - name: flush handlers
-      meta: flush_handlers
 
 - hosts: kube_master
   remote_user: root
