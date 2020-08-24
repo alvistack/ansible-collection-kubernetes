@@ -18,6 +18,12 @@
   remote_user: root
   become: true
   tasks:
+    - name: check
+      command: bash -c '[[ $(ceph health | grep -c HEALTH_OK) == 1 ]] && sleep 60'
+      loop: "{{ ansible_play_hosts }}"
+      delegate_to: "{{ item }}"
+      run_once: true
+
     - name: reboot
       reboot:
         reboot_timeout: 1800
