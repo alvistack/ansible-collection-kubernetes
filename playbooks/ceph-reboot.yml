@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: check
-      command: bash -c '[[ $(ceph health | grep -c HEALTH_OK) == 1 ]] && sleep 60'
+      command: bash -c '[[ $(ceph health | grep -c HEALTH_OK) == 1 ]]'
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true

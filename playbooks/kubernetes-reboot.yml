@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: check
-      command: bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]] && sleep 60'
+      command: bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]]'
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
