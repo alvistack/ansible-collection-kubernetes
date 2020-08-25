@@ -17,7 +17,6 @@
 - hosts: kube_master:kube_node
   remote_user: root
   become: true
-  handlers:
   tasks:
     - include_role:
         name: operator_sdk
