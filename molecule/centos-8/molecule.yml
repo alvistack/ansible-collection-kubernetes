@@ -21,7 +21,7 @@ driver:
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
     box: generic/centos8
-    cpu: 4
+    cpu: 2
     memory: 4096
     interfaces:
       - auto_config: true
