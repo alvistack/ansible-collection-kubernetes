@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Shutdown Kubernetes containers before shutting down the system
+  - Shutdown CRI-O containers before shutting down the system
+  - Attach/Detach RBD or CephFS after/before `ceph.target` during startup/shutdown
   - Upgrade Travis CI test as Ubuntu Focal based
   - Upgrade minimal Ansible support to 2.10.0
   - Support openSUSE Leap 15.2
