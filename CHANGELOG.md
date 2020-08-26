@@ -4,12 +4,11 @@
 
 ### Major Changes
 
-  - Upgrade minimal Ansible Lint support to 4.3.2
-
 ## 4.5.0 - 2020-08-26
 
 ### Major Changes
 
+  - Upgrade minimal Ansible Lint support to 4.3.2
   - Shutdown Kubernetes containers before shutting down the system
   - Shutdown CRI-O containers before shutting down the system
   - Attach/Detach RBD or CephFS after/before `ceph.target` during startup/shutdown
