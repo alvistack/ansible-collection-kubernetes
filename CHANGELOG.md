@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Bugfix graceful shutdown deadlock due to systemd dependencies
+
 ## 4.5.0 - 2020-08-26
 
 ### Major Changes
