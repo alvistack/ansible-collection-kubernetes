@@ -15,14 +15,6 @@
 # limitations under the License.
 
 # ceph_common
-ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
-ceph_mon_initial_members: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [host] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
 ceph_mon_host: >-
   {%- set _ns = namespace() -%}
   {%- set _ns._params = [] -%}
@@ -33,14 +25,7 @@ ceph_mon_host: >-
 ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
 
-# ceph_osd
 # etcd
-etcd_cert_file: "/etc/etcd/pki/server.crt"
-etcd_key_file: "/etc/etcd/pki/server.key"
-etcd_trusted_ca_file: "/etc/etcd/pki/ca.crt"
-etcd_peer_cert_file: "/etc/etcd/pki/peer.crt"
-etcd_peer_key_file: "/etc/etcd/pki/peer.key"
-etcd_peer_trusted_ca_file: "/etc/etcd/pki/ca.crt"
 etcd_listen_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380,https://127.0.0.1:2380"
 etcd_listen_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379,https://127.0.0.1:2379"
 etcd_initial_advertise_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380"
@@ -67,8 +52,7 @@ etcd_peer_csr_subject_alt_name: >-
   {%- endfor -%}
   {{ _ns._params }}
 
-# kubernetes
-kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
+# kube_master
 kubernetes_etcd:
   external:
     endpoints: >-
@@ -83,9 +67,7 @@ kubernetes_etcd:
     keyFile: "/etc/kubernetes/pki/apiserver-etcd-client.key"
 kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
 kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
-kube_apiserver_bind_port: "6443"
 kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"
-kube_apiserver_csr_common_name: "{{ groups['kube_master'][0] }}"
 kube_apiserver_csr_subject_alt_name: >-
   {%- set _ns = namespace() -%}
   {%- set _ns._params = ["DNS:localhost", "IP:127.0.0.1"] -%}

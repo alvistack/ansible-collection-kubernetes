@@ -11,9 +11,9 @@ This Ansible collection provides Ansible playbooks and roles for the deployment 
 
 ## Requirements
 
-This playbook require Ansible 2.10 or higher.
+This collection require Ansible 2.10 or higher.
 
-This playbook was designed for:
+This collection was designed for:
 
   - Ubuntu 18.04/20.04
   - RHEL/CentOS 7/8
@@ -79,17 +79,22 @@ Simply execule our default Molecule test case and it will deploy all default com
 
 ### Production
 
+In order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended (i.e. 3 + 3 = 6 nodes if CephFS and Kubernetes are running individually; well, or you could also stack up them together so at least 3 nodes).
+
 For production environment we should backed with [Ceph File System](https://docs.ceph.com/docs/master/cephfs/) for [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) with `ReadWriteMany` support. Corresponding dynamic provisioning could be handled by using [CSI CephFS](https://github.com/ceph/ceph-csi).
 
 Traditionally we could use [Docker](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) or [containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd) as [Kubernetes container runtime (CRI)](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/). Now a day, this collection is default with the modern [CRI-O](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o) implementation.
 
 Moreover, we are using [Weave Net](https://github.com/weaveworks/weave) as [Kubernetes network plugin (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) so we could support [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
-Finally, in order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended (i.e. 3 + 3 = 6 nodes if CephFS and Kubernetes are running individually; well, or you could also stack up them together so at least 3 nodes).
-
 This deployment will setup the follow components:
 
   - [Ceph](https://ceph.io/)
+      - Ceph Monitor Daemon
+      - Ceph Manager Daemon
+      - Ceph Object Storage Daemon
+      - Ceph Metadata Server
+      - Ceph Object Gateway
   - [Kubernetes](https://kubernetes.io/)
       - CRI: [CRI-O](https://cri-o.io/)
       - CNI: [Weave Net](https://github.com/weaveworks/weave)
@@ -130,8 +135,11 @@ Once update now run the playbooks:
 
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Ubuntu 18.04 with Vagrant and Libvirt
-    molecule converge -s ubuntu-18.04
+    # Bootstrap Vagrant
+    ./scripts/bootstrap-vagrant.sh
+    
+    # Run Molecule on Ubuntu 20.04 with Vagrant and Libvirt
+    molecule converge -s ubuntu-20.04
 
 Please refer to [.travis.yml](.travis.yml) for more information on running Molecule.
 
