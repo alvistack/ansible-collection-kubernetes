@@ -14,16 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# release
-ceph_release: "15.2"
+# kernel
 kernel_release: "mainline"
 
-# version
-crictl_version: "v1.18.0"
-cri_o_version: "v1.18.3"
-kubernetes_version: "v1.18.9"
-
 # ceph_common
+ceph_release: "15.2"
 ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
 ceph_mon_initial_members: >-
   {%- set _ns = namespace() -%}
@@ -42,10 +37,8 @@ ceph_mon_host: >-
 ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
 ceph_cluster_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
 
-# ceph_osd
-ceph_volume: []
-
 # etcd
+etcd_version: "v3.4.13"
 etcd_cert_file: "/etc/etcd/pki/server.crt"
 etcd_key_file: "/etc/etcd/pki/server.key"
 etcd_trusted_ca_file: "/etc/etcd/pki/ca.crt"
@@ -78,7 +71,14 @@ etcd_peer_csr_subject_alt_name: >-
   {%- endfor -%}
   {{ _ns._params }}
 
-# kubernetes
+# cri_tools
+crictl_version: "v1.18.0"
+
+# cri_o
+cri_o_version: "v1.18.3"
+
+# kube_master
+kubernetes_version: "v1.18.9"
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd:
   external:
