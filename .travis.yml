@@ -64,7 +64,7 @@ script:
 
 after_success:
   - |
-    if [[ -n "$TRAVIS_TAG" ]]; then
+    if [[ -n "$TRAVIS_TAG" ]] && [[ "ubuntu-20.04" =~ ^$MOLECULE_SCENARIO_NAME ]]; then
       sed -i "s/VERSION/$TRAVIS_TAG/g" galaxy.yml
       sudo -E ansible-galaxy collection build
       sudo -E ansible-galaxy collection publish --api-key $ANSIBLE_GALAXY_API_KEY --no-wait *.tar.gz
