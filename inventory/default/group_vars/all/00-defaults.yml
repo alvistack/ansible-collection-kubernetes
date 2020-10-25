@@ -75,7 +75,7 @@ etcd_peer_csr_subject_alt_name: >-
 crictl_version: "v1.18.0"
 
 # cri_o
-cri_o_version: "v1.18.3"
+cri_o_version: "v1.18.4"
 
 # kube_master
 kubernetes_version: "v1.18.10"
