@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Ubuntu 20.10
   - Bugfix graceful shutdown deadlock due to systemd dependencies
 
 ## 4.5.0 - 2020-08-26

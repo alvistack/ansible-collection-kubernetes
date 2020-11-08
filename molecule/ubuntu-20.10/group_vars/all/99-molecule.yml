@@ -1,0 +1,95 @@
+---
+
+# (c) Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# ceph_common
+ceph_mon_host: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['ceph_mon'] -%}
+  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
+ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
+ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
+
+# etcd
+etcd_listen_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380,https://127.0.0.1:2380"
+etcd_listen_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379,https://127.0.0.1:2379"
+etcd_initial_advertise_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380"
+etcd_initial_cluster: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['etcd'] -%}
+  {%-   set _ns._params = _ns._params + [host + "=https://" + hostvars[host].ansible_eth1.ipv4.address + ":2380"] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
+etcd_advertise_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379"
+etcd_csr_subject_alt_name: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = ["DNS:localhost", "IP:127.0.0.1"] -%}
+  {%- for host in groups['etcd'] -%}
+  {%-   set _ns._params = _ns._params + ["DNS:" + host, "IP:" + hostvars[host].ansible_eth1.ipv4.address] -%}
+  {%- endfor -%}
+  {{ _ns._params }}
+etcd_peer_csr_subject_alt_name: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = ["DNS:localhost", "IP:127.0.0.1"] -%}
+  {%- for host in groups['etcd'] -%}
+  {%-   set _ns._params = _ns._params + ["DNS:" + host, "IP:" + hostvars[host].ansible_eth1.ipv4.address] -%}
+  {%- endfor -%}
+  {{ _ns._params }}
+
+# kube_master
+kubernetes_etcd:
+  external:
+    endpoints: >-
+      {%- set _ns = namespace() -%}
+      {%- set _ns._params = [] -%}
+      {%- for host in groups['etcd'] -%}
+      {%-   set _ns._params = _ns._params + ["https://" + hostvars[host].ansible_eth1.ipv4.address + ":2379"] -%}
+      {%- endfor -%}
+      {{ _ns._params }}
+    caFile: "/etc/kubernetes/pki/etcd/ca.crt"
+    certFile: "/etc/kubernetes/pki/apiserver-etcd-client.crt"
+    keyFile: "/etc/kubernetes/pki/apiserver-etcd-client.key"
+kubelet_node_ip: "{{ ansible_eth1.ipv4.address }}"
+kube_apiserver_advertise_address: "{{ ansible_eth1.ipv4.address }}"
+kube_apiserver_endpoint: "{{ hostvars[groups['kube_master'][0]].ansible_eth1.ipv4.address }}:{{ kube_apiserver_bind_port }}"
+kube_apiserver_csr_subject_alt_name: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = ["DNS:localhost", "IP:127.0.0.1"] -%}
+  {%- for host in groups['kube_master'] -%}
+  {%-   set _ns._params = _ns._params + ["DNS:" + host, "IP:" + hostvars[host].ansible_eth1.ipv4.address] -%}
+  {%- endfor -%}
+  {{ _ns._params }}
+
+# kubernetes_csi_cephfs
+csi_cephfs_monitors: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['ceph_mon'] -%}
+  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address + ":6789"] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
+
+# kubernetes_csi_rbd
+csi_rbd_monitors: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['ceph_mon'] -%}
+  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address + ":6789"] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
