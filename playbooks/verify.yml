@@ -14,6 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ceph-verify.yml
 - import_playbook: kubernetes-verify.yml
-- import_playbook: kubernetes_csi_cephfs-verify.yml
+- import_playbook: kubernetes_csi_hostpath-verify.yml

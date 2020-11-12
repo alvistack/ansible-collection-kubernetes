@@ -18,26 +18,6 @@ ceph11
 ceph12
 ceph13
 
-[ceph_mgr]
-ceph11
-ceph12
-ceph13
-
-[ceph_osd]
-ceph11
-ceph12
-ceph13
-
-[ceph_mds]
-ceph11
-ceph12
-ceph13
-
-[ceph_rgw]
-ceph11
-ceph12
-ceph13
-
 [etcd]
 kube11
 kube12

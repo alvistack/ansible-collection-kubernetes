@@ -57,11 +57,6 @@ Simply execule our default Molecule test case and it will deploy all default com
     # Run Molecule test case
     molecule test -s default
     
-    # Confirm the version and status of Ceph
-    ceph --version
-    ceph --status
-    ceph health detail
-    
     # Confirm the version and status of Kubernetes
     kubectl version
     kubectl get node --output wide
@@ -69,7 +64,7 @@ Simply execule our default Molecule test case and it will deploy all default com
 
 ### Production
 
-In order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended (i.e. 3 + 3 = 6 nodes if CephFS and Kubernetes are running individually; well, or you could also stack up them together so at least 3 nodes).
+In order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for Kubernetes is recommended.
 
 For production environment we should backed with [Ceph File System](https://docs.ceph.com/docs/master/cephfs/) for [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) with `ReadWriteMany` support. Corresponding dynamic provisioning could be handled by using [CSI CephFS](https://github.com/ceph/ceph-csi).
 
@@ -79,16 +74,10 @@ Moreover, we are using [Weave Net](https://github.com/weaveworks/weave) as [Kube
 
 This deployment will setup the follow components:
 
-  - [Ceph](https://ceph.io/)
-      - Ceph Monitor Daemon
-      - Ceph Manager Daemon
-      - Ceph Object Storage Daemon
-      - Ceph Metadata Server
-      - Ceph Object Gateway
   - [Kubernetes](https://kubernetes.io/)
       - CRI: [CRI-O](https://cri-o.io/)
       - CNI: [Weave Net](https://github.com/weaveworks/weave)
-      - CSI: [CSI Ceph](https://github.com/ceph/ceph-csi)
+      - CSI: [CSI Hostpath](https://github.com/kubernetes-csi/csi-driver-host-path)
       - Addons:
           - [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
           - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
@@ -110,11 +99,6 @@ Once update now run the playbooks:
 
     # Run playbooks
     ansible-playbook -i inventory/myinventory/hosts playbooks/converge.yml
-    
-    # Confirm the version and status of Ceph
-    ceph --version
-    ceph --status
-    ceph health detail
     
     # Confirm the version and status of Kubernetes
     kubectl version

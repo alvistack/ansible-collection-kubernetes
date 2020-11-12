@@ -15,5 +15,4 @@
 # limitations under the License.
 
 - import_playbook: kubernetes-reboot.yml
-- import_playbook: ceph-reboot.yml
 - import_playbook: ansible-reboot.yml

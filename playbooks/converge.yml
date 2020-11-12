@@ -17,7 +17,6 @@
 - import_playbook: hosts-install.yml
 - import_playbook: kernel-install.yml
 - import_playbook: ansible-install.yml
-- import_playbook: ceph-install.yml
 - import_playbook: docker-install.yml
 - import_playbook: podman-install.yml
 - import_playbook: cri_o-install.yml
@@ -27,4 +26,4 @@
 - import_playbook: kubernetes_dashboard-install.yml
 - import_playbook: kubernetes_ingress_nginx-install.yml
 - import_playbook: kubernetes_cert_manager-install.yml
-- import_playbook: kubernetes_csi_cephfs-install.yml
+- import_playbook: kubernetes_csi_hostpath-install.yml

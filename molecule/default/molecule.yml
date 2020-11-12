@@ -24,11 +24,6 @@ platforms:
   - name: localhost
     groups:
       - ansible
-      - ceph_mon
-      - ceph_mgr
-      - ceph_osd
-      - ceph_mds
-      - ceph_rgw
       - etcd
       - kube_master
       - kube_node
