@@ -23,7 +23,3 @@
 - import_playbook: etcd-install.yml
 - import_playbook: kubernetes-install.yml
 - import_playbook: kubernetes_weave-install.yml
-- import_playbook: kubernetes_dashboard-install.yml
-- import_playbook: kubernetes_ingress_nginx-install.yml
-- import_playbook: kubernetes_cert_manager-install.yml
-- import_playbook: kubernetes_csi_hostpath-install.yml
