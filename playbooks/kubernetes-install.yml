@@ -70,10 +70,6 @@
         name: kube_master
       tags: kube_master
 
-    - include_role:
-        name: kubernetes_addon_manager
-      tags: kubernetes_addon_manager
-
 - hosts: kube_node:!kube_master
   remote_user: root
   become: true

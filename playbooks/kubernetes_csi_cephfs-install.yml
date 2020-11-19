@@ -42,6 +42,10 @@
       tags: kubernetes_csi_cephfs
 
     - include_role:
+        name: kubernetes_addon_manager
+      tags: kubernetes_addon_manager
+
+    - include_role:
         name: kubernetes_csi_cephfs
       vars:
         csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"

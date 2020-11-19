@@ -22,4 +22,3 @@
 - import_playbook: cri_o-install.yml
 - import_playbook: etcd-install.yml
 - import_playbook: kubernetes-install.yml
-- import_playbook: kubernetes_weave-install.yml
