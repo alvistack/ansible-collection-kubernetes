@@ -14,21 +14,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: ceph_mon:ceph_mgr:ceph_osd:ceph_mds:ceph_rgw
+- hosts: all
   remote_user: root
   become: true
   tasks:
-    - name: ceph --version
-      command: ceph --version
-      register: result
-      changed_when: result is not succeeded
+    - include_role:
+        name: cni_plugins
+      tags: cni_plugins
 
-    - name: rbd --version
-      command: rbd --version
-      register: result
-      changed_when: result is not succeeded
+    - include_role:
+        name: containers_common
+      tags: containers_common
 
-    - name: mount.ceph -h
-      command: mount.ceph -h
-      register: result
-      changed_when: result is not succeeded
+    - include_role:
+        name: runc
+      tags: runc
+
+    - include_role:
+        name: conmon
+      tags: conmon
+
+    - include_role:
+        name: skopeo
+      tags: skopeo
+
+    - include_role:
+        name: buildah
+      tags: buildah
+
+    - include_role:
+        name: podman
+      tags: podman

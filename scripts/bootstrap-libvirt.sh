@@ -21,29 +21,17 @@ cd "$(cd "$(dirname "$0")"; pwd -P)/../"
 # Prepare APT dependencies
 if [ -x "$(command -v apt-get)" ]; then
     apt-get update
-    apt-get dist-upgrade -y
-    apt-get install -y ca-certificates curl gcc iproute2 python3 python3-dev sudo
+    apt-get install -y binutils bridge-utils dnsmasq-base ebtables libguestfs-tools libvirt-clients libvirt-daemon-system libvirt-dev make qemu-kvm qemu-utils ruby-dev
 fi
 
 # Prepare YUM dependencies
 if [ -x "$(command -v yum)" ]; then
     yum makecache
-    yum update -y
-    yum install -y ca-certificates curl gcc iproute python3 python3-devel sudo
+    yum install -y binutils dnsmasq ebtables libguestfs-tools-c libvirt libvirt-client libvirt-devel make qemu-img qemu-kvm ruby-devel virt-install
 fi
 
 # Prepare Zypper dependencies
 if [ -x "$(command -v zypper)" ]; then
     zypper -n --gpg-auto-import-keys refresh
-    zypper -n update -y
-    zypper -n install -y ca-certificates curl gcc iproute2 python3 python3-devel sudo
+    zypper -n install -y binutils-gold bridge-utils dnsmasq ebtables guestfs-tools libvirt libvirt-client libvirt-devel make qemu-kvm qemu-tools ruby-devel virt-install
 fi
-
-# Install PIP
-curl -skL https://bootstrap.pypa.io/get-pip.py | python3 - --prefix=/usr/local
-
-# Install PIP dependencies
-pip3 install --prefix=/usr/local --upgrade --ignore-installed --requirement requirements.txt
-
-# Install Ansible Collection dependencies
-ansible-galaxy collection install --force --requirements-file ansible-galaxy-requirements.yml

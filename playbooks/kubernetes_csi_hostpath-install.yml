@@ -23,25 +23,9 @@
   become: true
   tasks:
     - include_role:
-        name: kubernetes_csi_hostpath
-      tags: kubernetes_csi_hostpath
+        name: kubernetes_addon_manager
+      tags: kubernetes_addon_manager
 
-    - name: setup csi-hostpath as default storageclass
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      vars:
-        ansible_python_interpreter: "python3"
-      community.kubernetes.k8s:
-        definition:
-          apiVersion: storage.k8s.io/v1
-          kind: StorageClass
-          metadata:
-            name: csi-hostpath
-            annotations:
-              storageclass.kubernetes.io/is-default-class: "true"
-        state: present
-      when: inventory_hostname == groups['kube_master'][0]
-      register: result
-      until: result is succeeded
-      retries: 15
+    - include_role:
+        name: kubernetes_csi_hostpath
       tags: kubernetes_csi_hostpath

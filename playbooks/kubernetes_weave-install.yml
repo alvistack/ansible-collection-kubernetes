@@ -19,5 +19,9 @@
   become: true
   tasks:
     - include_role:
+        name: kubernetes_addon_manager
+      tags: kubernetes_addon_manager
+
+    - include_role:
         name: kubernetes_weave
       tags: kubernetes_weave

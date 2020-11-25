@@ -18,7 +18,7 @@
   remote_user: root
   become: true
   tasks:
-    - name: setup csi-cephfs as default storageclass
+    - name: setup csi-rbd as default storageclass
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
@@ -28,7 +28,7 @@
           apiVersion: storage.k8s.io/v1
           kind: StorageClass
           metadata:
-            name: csi-cephfs
+            name: csi-rbd
             annotations:
               storageclass.kubernetes.io/is-default-class: "true"
         state: present

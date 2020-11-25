@@ -17,26 +17,6 @@
 # kernel
 kernel_release: "mainline"
 
-# ceph_common
-ceph_release: "15.2"
-ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
-ceph_mon_initial_members: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [host] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
-ceph_mon_host: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_default_ipv4.address] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
-ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
-ceph_cluster_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
-
 # etcd
 etcd_version: "v3.4.13"
 etcd_cert_file: "/etc/etcd/pki/server.crt"
@@ -75,10 +55,10 @@ etcd_peer_csr_subject_alt_name: >-
 crictl_version: "v1.18.0"
 
 # cri_o
-cri_o_version: "v1.18.3"
+cri_o_version: "v1.18.4"
 
 # kube_master
-kubernetes_version: "v1.18.9"
+kubernetes_version: "v1.18.12"
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd:
   external:
@@ -104,6 +84,26 @@ kube_apiserver_csr_subject_alt_name: >-
   {%-   set _ns._params = _ns._params + ["DNS:" + host, "IP:" + hostvars[host].ansible_default_ipv4.address] -%}
   {%- endfor -%}
   {{ _ns._params }}
+
+# ceph_common
+ceph_release: "15.2"
+ceph_fsid: "{{ hostvars[groups['ceph_mon'][0]].ansible_machine_id | to_uuid }}"
+ceph_mon_initial_members: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['ceph_mon'] -%}
+  {%-   set _ns._params = _ns._params + [host] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
+ceph_mon_host: >-
+  {%- set _ns = namespace() -%}
+  {%- set _ns._params = [] -%}
+  {%- for host in groups['ceph_mon'] -%}
+  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_default_ipv4.address] -%}
+  {%- endfor -%}
+  {{ _ns._params | join(',') }}
+ceph_public_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
+ceph_cluster_network: "{{ (ansible_default_ipv4.network + '/' + ansible_default_ipv4.netmask) | ipaddr('net') }}"
 
 # kubernetes_csi_cephfs
 csi_cephfs_monitors: >-

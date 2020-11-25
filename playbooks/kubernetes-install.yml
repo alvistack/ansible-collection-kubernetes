@@ -23,14 +23,6 @@
       tags: operator_sdk
 
     - include_role:
-        name: cni_plugins
-      tags: cni_plugins
-
-    - include_role:
-        name: cri_tools
-      tags: cri_tools
-
-    - include_role:
         name: kubectl
       tags: kubectl
 
@@ -77,10 +69,6 @@
     - include_role:
         name: kube_master
       tags: kube_master
-
-    - include_role:
-        name: kubernetes_addon_manager
-      tags: kubernetes_addon_manager
 
 - hosts: kube_node:!kube_master
   remote_user: root

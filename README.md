@@ -1,6 +1,6 @@
 # Ansible Collection for Kubernetes
 
-[![Travis](https://img.shields.io/travis/com/alvistack/ansible-collection-kubernetes.svg)](https://travis-ci.com/alvistack/ansible-collection-kubernetes)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-collection-kubernetes/master)](https://gitlab.com/alvistack/ansible-collection-kubernetes/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
 [![Ansible Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes)
@@ -15,27 +15,17 @@ This collection require Ansible 2.10 or higher.
 
 This collection was designed for:
 
-  - Ubuntu 18.04/20.04
+  - Ubuntu 18.04/20.04/20.10
   - RHEL/CentOS 7/8
   - openSUSE Leap 15.2
   - Debian 10
-  - Fedora 32
-
-### Fedora 32
-
-Our default Ceph 15.2 is not supported by Fedora 32 (only Ceph 14.2), with solution:
-
-  - Switch our variable as `ceph_release: "14.2"` for deployment (see [inventory/default/group\_vars/all/00-defaults.yml](inventory/default/group_vars/all/00-defaults.yml))
-
-Fedora 31+ is now using cgroup v2 by default which not supported by kubelet (see <https://github.com/kubernetes/enhancements/blob/master/keps/sig-node/20191118-cgroups-v2.md>), with solution:
-
-  - Setup `systemd.unified_cgroup_hierarchy=1` to the kernel arguments and reboot (see <https://github.com/rancher/k3s/issues/900#issuecomment-551337575>)
+  - Fedora 33
 
 ## Quick Start
 
 ### Bootstrap Ansible and Roles
 
-Start by cloning the Alvistack-Ansible repository, checkout the corresponding branch, and init with `git submodule`, then bootstrap Python3 + Ansible with provided helper script:
+Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then bootstrap Python3 + Ansible with provided helper script:
 
     # GIT clone the development branch
     git clone --branch develop https://github.com/alvistack/ansible-collection-kubernetes
@@ -67,11 +57,6 @@ Simply execule our default Molecule test case and it will deploy all default com
     # Run Molecule test case
     molecule test -s default
     
-    # Confirm the version and status of Ceph
-    ceph --version
-    ceph --status
-    ceph health detail
-    
     # Confirm the version and status of Kubernetes
     kubectl version
     kubectl get node --output wide
@@ -79,7 +64,7 @@ Simply execule our default Molecule test case and it will deploy all default com
 
 ### Production
 
-In order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for CephFS and 3 instances for Kubernetes is recommended (i.e. 3 + 3 = 6 nodes if CephFS and Kubernetes are running individually; well, or you could also stack up them together so at least 3 nodes).
+In order to avoid [Single Point of Failure](https://en.wikipedia.org/wiki/Single_point_of_failure), at least 3 instances for Kubernetes is recommended.
 
 For production environment we should backed with [Ceph File System](https://docs.ceph.com/docs/master/cephfs/) for [Kubernetes Persistent Volumes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) with `ReadWriteMany` support. Corresponding dynamic provisioning could be handled by using [CSI CephFS](https://github.com/ceph/ceph-csi).
 
@@ -89,16 +74,10 @@ Moreover, we are using [Weave Net](https://github.com/weaveworks/weave) as [Kube
 
 This deployment will setup the follow components:
 
-  - [Ceph](https://ceph.io/)
-      - Ceph Monitor Daemon
-      - Ceph Manager Daemon
-      - Ceph Object Storage Daemon
-      - Ceph Metadata Server
-      - Ceph Object Gateway
   - [Kubernetes](https://kubernetes.io/)
       - CRI: [CRI-O](https://cri-o.io/)
       - CNI: [Weave Net](https://github.com/weaveworks/weave)
-      - CSI: [CSI Ceph](https://github.com/ceph/ceph-csi)
+      - CSI: [CSI Hostpath](https://github.com/kubernetes-csi/csi-driver-host-path)
       - Addons:
           - [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
           - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
@@ -121,11 +100,6 @@ Once update now run the playbooks:
     # Run playbooks
     ansible-playbook -i inventory/myinventory/hosts playbooks/converge.yml
     
-    # Confirm the version and status of Ceph
-    ceph --version
-    ceph --status
-    ceph health detail
-    
     # Confirm the version and status of Kubernetes
     kubectl version
     kubectl get node --output wide
@@ -135,10 +109,10 @@ Once update now run the playbooks:
 
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Bootstrap Vagrant
+    # Bootstrap Vagrant and Libvirt
     ./scripts/bootstrap-vagrant.sh
     
-    # Run Molecule on Ubuntu 20.04 with Vagrant and Libvirt
+    # Run Molecule on Ubuntu 20.04
     molecule converge -s ubuntu-20.04
 
 Please refer to [.travis.yml](.travis.yml) for more information on running Molecule.

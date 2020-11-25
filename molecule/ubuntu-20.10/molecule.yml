@@ -20,7 +20,7 @@ driver:
     name: libvirt
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: generic/fedora32
+    box: generic/ubuntu2010
     cpu: 2
     memory: 4096
     interfaces:
@@ -35,11 +35,6 @@ platforms:
       - 'storage :file, bus: "virtio", cache: "none"'
     groups:
       - ansible
-      - ceph_mon
-      - ceph_mgr
-      - ceph_osd
-      - ceph_mds
-      - ceph_rgw
       - etcd
       - kube_master
       - kube_node
@@ -56,6 +51,7 @@ dependency:
     requirements-file: ansible-galaxy-requirements.yml
     collections-path: ${HOME}/.ansible/collections
     ignore-errors: true
+    force: false
 provisioner:
   name: ansible
   config_options:

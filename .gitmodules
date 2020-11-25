@@ -14,26 +14,6 @@
 	path = roles/ceph_common
 	url = https://github.com/alvistack/ansible-role-ceph_common.git
 	branch = develop
-[submodule "roles/ceph_mds"]
-	path = roles/ceph_mds
-	url = https://github.com/alvistack/ansible-role-ceph_mds.git
-	branch = develop
-[submodule "roles/ceph_mgr"]
-	path = roles/ceph_mgr
-	url = https://github.com/alvistack/ansible-role-ceph_mgr.git
-	branch = develop
-[submodule "roles/ceph_mon"]
-	path = roles/ceph_mon
-	url = https://github.com/alvistack/ansible-role-ceph_mon.git
-	branch = develop
-[submodule "roles/ceph_osd"]
-	path = roles/ceph_osd
-	url = https://github.com/alvistack/ansible-role-ceph_osd.git
-	branch = develop
-[submodule "roles/ceph_rgw"]
-	path = roles/ceph_rgw
-	url = https://github.com/alvistack/ansible-role-ceph_rgw.git
-	branch = develop
 [submodule "roles/chrony"]
 	path = roles/chrony
 	url = https://github.com/alvistack/ansible-role-chrony.git
@@ -73,6 +53,10 @@
 [submodule "roles/git"]
 	path = roles/git
 	url = https://github.com/alvistack/ansible-role-git.git
+	branch = develop
+[submodule "roles/kata"]
+	path = roles/kata
+	url = https://github.com/alvistack/ansible-role-kata.git
 	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel

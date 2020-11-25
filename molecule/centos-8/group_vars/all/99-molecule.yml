@@ -14,17 +14,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# ceph_common
-ceph_mon_host: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
-ceph_public_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
-ceph_cluster_network: "{{ (ansible_eth1.ipv4.network + '/' + ansible_eth1.ipv4.netmask) | ipaddr('net') }}"
-
 # etcd
 etcd_listen_peer_urls: "https://{{ ansible_eth1.ipv4.address }}:2380,https://127.0.0.1:2380"
 etcd_listen_client_urls: "https://{{ ansible_eth1.ipv4.address }}:2379,https://127.0.0.1:2379"
@@ -75,21 +64,3 @@ kube_apiserver_csr_subject_alt_name: >-
   {%-   set _ns._params = _ns._params + ["DNS:" + host, "IP:" + hostvars[host].ansible_eth1.ipv4.address] -%}
   {%- endfor -%}
   {{ _ns._params }}
-
-# kubernetes_csi_cephfs
-csi_cephfs_monitors: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address + ":6789"] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
-
-# kubernetes_csi_rbd
-csi_rbd_monitors: >-
-  {%- set _ns = namespace() -%}
-  {%- set _ns._params = [] -%}
-  {%- for host in groups['ceph_mon'] -%}
-  {%-   set _ns._params = _ns._params + [hostvars[host].ansible_eth1.ipv4.address + ":6789"] -%}
-  {%- endfor -%}
-  {{ _ns._params | join(',') }}
