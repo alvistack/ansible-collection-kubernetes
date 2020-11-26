@@ -23,6 +23,11 @@ default:
       mkdir -p $HOME/.ansible/collections/alvistack
       ln -s $CI_PROJECT_DIR $HOME/.ansible/collections/alvistack/$COLLECTION
 
+    - |
+      git submodule init
+      git submodule sync --recursive
+      git submodule update --recursive
+
 ubuntu-20.04:
   script:
     - |
