@@ -88,3 +88,13 @@ fedora-33:
     - |
       source ./scripts/run-tests.sh
       sudo -E molecule test -s fedora-33
+
+ansible-galaxy:
+  stage: deploy
+  script:
+    - |
+      if [[ -n "$CI_COMMIT_TAG" ]]; then
+        sed -i "s/VERSION/$CI_COMMIT_TAG/g" galaxy.yml
+        sudo -E ansible-galaxy collection build
+        sudo -E ansible-galaxy collection publish --api-key $ANSIBLE_GALAXY_API_KEY *.tar.gz
+      fi
