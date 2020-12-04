@@ -28,18 +28,21 @@ default:
       git submodule update --init --recursive
 
 ubuntu-20.04:
+  stage: build
   script:
     - |
       source ./scripts/run-tests.sh
       sudo -E molecule test -s ubuntu-20.04
 
 ubuntu-18.04:
+  stage: build
   script:
     - |
       source ./scripts/run-tests.sh
       sudo -E molecule test -s ubuntu-18.04
 
 ubuntu-20.10:
+  stage: test
   allow_failure: true
   script:
     - |
@@ -47,6 +50,7 @@ ubuntu-20.10:
       sudo -E molecule test -s ubuntu-20.10
 
 centos-8:
+  stage: test
   allow_failure: true
   script:
     - |
@@ -54,6 +58,7 @@ centos-8:
       sudo -E molecule test -s centos-8
 
 centos-7:
+  stage: test
   allow_failure: true
   script:
     - |
@@ -61,6 +66,7 @@ centos-7:
       sudo -E molecule test -s centos-7
 
 suse-15:
+  stage: test
   allow_failure: true
   script:
     - |
@@ -68,6 +74,7 @@ suse-15:
       sudo -E molecule test -s suse-15
 
 debian-10:
+  stage: test
   allow_failure: true
   script:
     - |
@@ -75,6 +82,7 @@ debian-10:
       sudo -E molecule test -s debian-10
 
 fedora-33:
+  stage: test
   allow_failure: true
   script:
     - |

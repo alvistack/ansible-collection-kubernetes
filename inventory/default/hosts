@@ -1,34 +1,17 @@
 [all]
-ansible ansible_host=192.168.0.11
-ceph11  ansible_host=192.168.0.21
-ceph12  ansible_host=192.168.0.22
-ceph13  ansible_host=192.168.0.23
-kube11  ansible_host=192.168.0.31
-kube12  ansible_host=192.168.0.32
-kube13  ansible_host=192.168.0.33
-kube14  ansible_host=192.168.0.34
-kube15  ansible_host=192.168.0.35
-kube16  ansible_host=192.168.0.36
+localhost ansible_host=127.0.0.1 ansible_connection=local
 
 [ansible]
-ansible
+localhost
 
 [etcd]
-kube11
-kube12
-kube13
+localhost
 
 [kube_master]
-kube11
-kube12
-kube13
+localhost
 
 [kube_node]
-kube14
-kube15
-kube16
+localhost
 
 [ceph_mon]
-ceph11
-ceph12
-ceph13
+localhost
