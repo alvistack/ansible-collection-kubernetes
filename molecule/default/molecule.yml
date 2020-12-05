@@ -44,7 +44,8 @@ dependency:
 provisioner:
   name: ansible
   env:
-    ANSIBLE_ROLES_PATH: ${HOME}/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+    ANSIBLE_FORCE_COLOR: 1
+    PY_COLORS: 1
   config_options:
     defaults:
       forks: 20
