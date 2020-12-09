@@ -1,100 +1,120 @@
 ---
 
+.script-git-submodule: &script-git-submodule
+  - |
+    git submodule sync --recursive
+    git submodule update --init --recursive
+
+.script-symlink-ansible-collection: &script-symlink-ansible-collection
+  - |
+    export _COLLECTION=$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')
+    mkdir -p $HOME/.ansible/collections/alvistack
+    ln -s $CI_PROJECT_DIR $HOME/.ansible/collections/alvistack/$_COLLECTION
+
+.script-bootstrap-vagrant: &script-bootstrap-vagrant
+  - |
+    curl -skL -O https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
+    sudo dpkg -i vagrant_2.2.14_x86_64.deb
+    rm -rf vagrant_2.2.14_*
+
+.script-bootstrap-libvirt: &script-bootstrap-libvirt
+  - |
+    sudo apt-get update
+    sudo apt-get install -y binutils bridge-utils dnsmasq-base ebtables gcc libguestfs-tools libvirt-clients libvirt-daemon-system libvirt-dev make qemu-kvm qemu-utils ruby-dev
+    vagrant plugin install vagrant-libvirt
+    sudo systemctl start libvirtd.service
+
+.script-bootstrap-ansible: &script-bootstrap-ansible
+  - |
+    sudo apt-get update
+    sudo apt-get -y install ca-certificates curl gcc iproute2 pwgen python3 python3-dev sudo
+    curl -skL https://bootstrap.pypa.io/get-pip.py | sudo -H python3 - --prefix=/usr/local
+    sudo -H pip3 install --prefix=/usr/local --upgrade --ignore-installed --requirement requirements.txt
+
+.script-molecule-test: &script-molecule-test
+  - |
+    source ./scripts/run-tests.sh
+    sudo -E molecule test -s $_MOLECULE_SCENARIO_NAME
+
+.script-ansible-galaxy-collection-publish: &script-ansible-galaxy-collection-publish
+  - |
+    if [[ -n "$CI_COMMIT_TAG" ]]; then
+      sed -i "s/VERSION/$CI_COMMIT_TAG/g" galaxy.yml
+      sudo -E ansible-galaxy collection build
+      sudo -E ansible-galaxy collection publish --token $ANSIBLE_GALAXY_TOKEN *.tar.gz
+    fi
+
+.job-molecule: &job-molecule
+  script:
+    - *script-bootstrap-vagrant
+    - *script-bootstrap-libvirt
+    - *script-bootstrap-ansible
+    - *script-molecule-test
+
+.job-ansible-galaxy: &job-ansible-galaxy
+  script:
+    - *script-bootstrap-ansible
+    - *script-ansible-galaxy-collection-publish
+
 default:
   before_script:
-    - |
-      curl -Os https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
-      sudo dpkg -i vagrant_2.2.14_x86_64.deb
-      rm -rf vagrant_2.2.14_*
-
-    - |
-      sudo apt-get update
-      sudo apt-get install -y binutils bridge-utils dnsmasq-base ebtables gcc libguestfs-tools libvirt-clients libvirt-daemon-system libvirt-dev make qemu-kvm qemu-utils ruby-dev
-      vagrant plugin install vagrant-libvirt
-
-    - |
-      sudo apt-get update
-      sudo apt-get -y install ca-certificates curl gcc iproute2 pwgen python3 python3-dev sudo
-      curl -skL https://bootstrap.pypa.io/get-pip.py | sudo -H python3 - --prefix=/usr/local
-      sudo -H pip3 install --prefix=/usr/local --upgrade --ignore-installed --requirement requirements.txt
-
-    - |
-      export COLLECTION=$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')
-      mkdir -p $HOME/.ansible/collections/alvistack
-      ln -s $CI_PROJECT_DIR $HOME/.ansible/collections/alvistack/$COLLECTION
-
-    - |
-      git submodule sync --recursive
-      git submodule update --init --recursive
+    - *script-git-submodule
+    - *script-symlink-ansible-collection
 
 ubuntu-20.04:
+  <<: *job-molecule
   stage: build
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s ubuntu-20.04
+  variables:
+    _MOLECULE_SCENARIO_NAME: "ubuntu-20.04"
 
 ubuntu-18.04:
+  <<: *job-molecule
   stage: build
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s ubuntu-18.04
+  variables:
+    _MOLECULE_SCENARIO_NAME: "ubuntu-18.04"
 
 ubuntu-20.10:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s ubuntu-20.10
+  variables:
+    _MOLECULE_SCENARIO_NAME: "ubuntu-20.10"
 
 centos-8:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s centos-8
+  variables:
+    _MOLECULE_SCENARIO_NAME: "centos-8"
 
 centos-7:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s centos-7
+  variables:
+    _MOLECULE_SCENARIO_NAME: "centos-7"
 
 suse-15:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s suse-15
+  variables:
+    _MOLECULE_SCENARIO_NAME: "suse-15"
 
 debian-10:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s debian-10
+  variables:
+    _MOLECULE_SCENARIO_NAME: "debian-10"
 
 fedora-33:
+  <<: *job-molecule
   stage: test
   allow_failure: true
-  script:
-    - |
-      source ./scripts/run-tests.sh
-      sudo -E molecule test -s fedora-33
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-33"
 
 ansible-galaxy:
+  <<: *job-ansible-galaxy
   stage: deploy
-  script:
-    - |
-      if [[ -n "$CI_COMMIT_TAG" ]]; then
-        sed -i "s/VERSION/$CI_COMMIT_TAG/g" galaxy.yml
-        sudo -E ansible-galaxy collection build
-        sudo -E ansible-galaxy collection publish --api-key $ANSIBLE_GALAXY_API_KEY *.tar.gz
-      fi
