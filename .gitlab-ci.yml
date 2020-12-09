@@ -1,5 +1,16 @@
 ---
 
+.script-git-submodule: &script-git-submodule
+  - |
+    git submodule sync --recursive
+    git submodule update --init --recursive
+
+.script-symlink-ansible-collection: &script-symlink-ansible-collection
+  - |
+    export _COLLECTION=$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')
+    mkdir -p $HOME/.ansible/collections/alvistack
+    ln -s $CI_PROJECT_DIR $HOME/.ansible/collections/alvistack/$_COLLECTION
+
 .script-bootstrap-vagrant: &script-bootstrap-vagrant
   - |
     curl -skL -O https://releases.hashicorp.com/vagrant/2.2.14/vagrant_2.2.14_x86_64.deb
@@ -47,14 +58,8 @@
 
 default:
   before_script:
-    - |
-      git submodule sync --recursive
-      git submodule update --init --recursive
-
-    - |
-      export _COLLECTION=$(echo $CI_PROJECT_NAME | sed 's/^ansible-role-//g')
-      mkdir -p $HOME/.ansible/collections/alvistack
-      ln -s $CI_PROJECT_DIR $HOME/.ansible/collections/alvistack/$_COLLECTION
+    - *script-git-submodule
+    - *script-symlink-ansible-collection
 
 ubuntu-20.04:
   <<: *job-molecule
