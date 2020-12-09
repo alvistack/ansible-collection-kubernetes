@@ -43,7 +43,7 @@ platforms:
       - kube_master
       - kube_node
 lint: |
-  set -ex
+  set -euo pipefail
   yamllint .
   ansible-lint
   flake8
