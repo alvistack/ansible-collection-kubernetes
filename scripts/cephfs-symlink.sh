@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -o xtrace
+set -euo pipefail
 
 kubectl get pv -o name | while read line
 do

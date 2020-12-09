@@ -14,7 +14,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -o xtrace
+set -euo pipefail
 
 PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
