@@ -118,6 +118,3 @@ fedora-33:
 ansible-galaxy:
   <<: *job-ansible-galaxy
   stage: deploy
-  artifacts:
-    paths:
-      - *.tar.gz
