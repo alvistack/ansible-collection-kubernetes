@@ -34,7 +34,7 @@
 .script-molecule-test: &script-molecule-test
   - |
     source ./scripts/run-tests.sh
-    sudo -E molecule test -s $_MOLECULE_SCENARIO_NAME
+    molecule test -s $_MOLECULE_SCENARIO_NAME
 
 .script-ansible-galaxy-collection-publish: &script-ansible-galaxy-collection-publish
   - |
