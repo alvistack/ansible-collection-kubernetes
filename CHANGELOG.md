@@ -1,9 +1,14 @@
 # Ansible Collection for Kubernetes
 
-## 4.6.0 - TBC
+## 4.7.0 - TBC
 
 ### Major Changes
 
+## 4.6.0 - 2020-12-28
+
+### Major Changes
+
+  - Simplify Molecule scenario for vagrant-libvirt
   - Migrate from Travis CI to GitLab CI
   - Split Ceph related to `alvistack/ansible-collection-ceph`
   - Support Fedora 33
