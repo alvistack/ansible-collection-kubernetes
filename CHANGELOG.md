@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Simplify Molecule scenario for vagrant-libvirt
   - Migrate from Travis CI to GitLab CI
   - Split Ceph related to `alvistack/ansible-collection-ceph`
   - Support Fedora 33
