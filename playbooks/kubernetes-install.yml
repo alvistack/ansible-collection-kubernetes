@@ -49,7 +49,7 @@
           - "{{ kubernetes_etcd.external.keyFile }}"
       args:
         executable: "/bin/bash"
-      when: inventory_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == groups['kube_master'][0]
       delegate_to: "{{ groups['etcd'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
@@ -61,7 +61,7 @@
         echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
         executable: "/bin/bash"
-      when: inventory_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == groups['kube_master'][0]
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
       tags: kube_master
@@ -77,9 +77,9 @@
     - name: base64 encode
       shell: |
         set -euo pipefail
-        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
-      with_dict:
-        base64:
+        tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+      vars:
+        _params:
           - "/etc/kubernetes/admin.conf"
       args:
         executable: "/bin/bash"
@@ -91,7 +91,7 @@
     - name: base64 decode
       shell: |
         set -euo pipefail
-        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
+        echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
         executable: "/bin/bash"
       register: base64_decode_result
@@ -107,16 +107,16 @@
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
-      register: kube_admin_token_result
-      until: kube_admin_token_result is succeeded
-      changed_when: kube_admin_token_result is not succeeded
+      register: kubeadm_token_result
+      until: kubeadm_token_result is succeeded
+      changed_when: kubeadm_token_result is not succeeded
       ignore_errors: true
       tags: kube_node
 
     - include_role:
         name: kube_node
       vars:
-        kubeadm_token: "{{ kube_admin_token_result.stdout }}"
+        kubeadm_token: "{{ kubeadm_token_result.stdout }}"
       tags: kube_node
 
 - hosts: ansible
@@ -134,9 +134,9 @@
     - name: base64 encode
       shell: |
         set -euo pipefail
-        tar zcfP - {{ item.value | join(' ') }} | base64 -w 0
-      with_dict:
-        base64:
+        tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+      vars:
+        _params:
           - "/etc/kubernetes/admin.conf"
       args:
         executable: "/bin/bash"
@@ -148,7 +148,7 @@
     - name: base64 decode
       shell: |
         set -euo pipefail
-        echo -n {{ base64_encode_result.results[0].stdout | quote }} | base64 -d | tar zx -C /
+        echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
         executable: "/bin/bash"
       register: base64_decode_result
