@@ -60,7 +60,7 @@
     - *script-ansible-galaxy-collection-publish
 
 default:
-  retry: 3
+  retry: 2
   before_script:
     - *script-git-submodule
     - *script-symlink-ansible-collection
