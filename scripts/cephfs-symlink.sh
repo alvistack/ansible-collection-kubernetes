@@ -29,7 +29,7 @@ do
 
     mkdir -p symlinks/$namespace
     cd symlinks/$namespace
-    rm $name
+    rm $name >/dev/null 2>&1
     ln -fs ../../$path $name
     cd ../../
 done
