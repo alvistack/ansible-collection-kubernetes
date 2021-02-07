@@ -19,12 +19,12 @@
   become: true
   tasks:
     - include_role:
-        name: bootstrap
-      tags: bootstrap
-
-    - include_role:
         name: python
       tags: python
+
+    - include_role:
+        name: bootstrap
+      tags: bootstrap
 
     - include_role:
         name: git
