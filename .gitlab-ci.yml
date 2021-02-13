@@ -45,8 +45,10 @@
 
 .script-ansible-galaxy-collection-publish: &script-ansible-galaxy-collection-publish
   - |
-    if [[ -n "$CI_COMMIT_TAG" ]]; then
+    if [[ -n "$CI_COMMIT_TAG" ]] && [[ "$CI_COMMIT_TAG" =~ ^[0-9]+\.[0-9]+\.[0-9]+ ]]; then
       export _VERSION=$CI_COMMIT_TAG
+    elif [[ -n "$CI_COMMIT_BRANCH" ]] && [[ "$CI_COMMIT_BRANCH" =~ master ]]; then
+      export _VERSION=$(date +%Y%m%d).0.0
     else
       exit 0
     fi
