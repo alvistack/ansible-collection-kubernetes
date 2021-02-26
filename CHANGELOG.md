@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Support RHEL 8 with Molecule
+  - Support RHEL 7 with Molecule
+  - Remove CentOS 8 support
   - Support CentOS 8 Stream
   - Support openSUSE Tumbleweed
   - Migrate base Vagrant box from `generic/*` to `alvistack/*`
