@@ -15,7 +15,6 @@
 # limitations under the License.
 
 # etcd
-etcd_version: "v3.4.13"
 etcd_trusted_ca_file: "/etc/etcd/pki/ca.crt"
 
 # cri_tools
