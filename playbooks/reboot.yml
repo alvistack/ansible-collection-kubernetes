@@ -14,5 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: kubernetes-reboot.yml
-- import_playbook: ansible-reboot.yml
+- import_playbook: 50-kubernetes-reboot.yml
+- import_playbook: 90-ansible-reboot.yml
