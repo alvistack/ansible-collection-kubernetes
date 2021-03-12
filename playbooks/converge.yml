@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: hosts-install.yml
-- import_playbook: kernel-install.yml
-- import_playbook: ansible-install.yml
-- import_playbook: docker-install.yml
-- import_playbook: podman-install.yml
-- import_playbook: cri_o-install.yml
-- import_playbook: etcd-install.yml
-- import_playbook: kubernetes-install.yml
+- import_playbook: 00-hosts-install.yml
+- import_playbook: 10-kernel-install.yml
+- import_playbook: 20-ansible-install.yml
+
+- import_playbook: 30-docker-install.yml
+- import_playbook: 30-podman-install.yml
+- import_playbook: 30-cri_o-install.yml
+- import_playbook: 30-etcd-install.yml
+
+- import_playbook: 50-kubernetes-install.yml
