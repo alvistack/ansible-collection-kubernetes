@@ -18,10 +18,12 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: kubernetes_addon_manager
       tags: kubernetes_addon_manager
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubernetes_cert_manager
       tags: kubernetes_cert_manager

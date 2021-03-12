@@ -18,14 +18,17 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: ansible
       tags: ansible
 
-    - include_role:
+    - name: include role
+      include_role:
         name: rclone
       tags: rclone
 
-    - include_role:
+    - name: include role
+      include_role:
         name: restic
       tags: restic
