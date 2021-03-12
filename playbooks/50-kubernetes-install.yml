@@ -18,15 +18,18 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: kubectl
       tags: kubectl
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubeadm
       tags: kubeadm
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubelet
       tags: kubelet
 
@@ -62,7 +65,8 @@
       changed_when: base64_decode_result is not succeeded
       tags: kube_master
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kube_master
       tags: kube_master
 
@@ -109,7 +113,8 @@
       ignore_errors: true
       tags: kube_node
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kube_node
       vars:
         kubeadm_token: "{{ kubeadm_token_result.stdout }}"
@@ -119,11 +124,13 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: operator_sdk
       tags: operator_sdk
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubectl
       tags: kubectl
 

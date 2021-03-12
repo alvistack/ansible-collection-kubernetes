@@ -18,7 +18,8 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: etcd
       tags: etcd
 

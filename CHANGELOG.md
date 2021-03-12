@@ -1,9 +1,16 @@
 # Ansible Collection for Kubernetes
 
-## 4.7.0 - TBC
+## YYYYMMDD.Y.Z - TBC
 
 ### Major Changes
 
+## 20210313.1.1 - 2021-03-13
+
+### Major Changes
+
+  - Bugfix [ansible-lint `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
+  - Bugfix [ansible-lint `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
+  - Bugfix [ansible-lint `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
   - Install Python package with `pipx`
   - Simplify Python dependency with system packages
   - Support RHEL 8 with Molecule

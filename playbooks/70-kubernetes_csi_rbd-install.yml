@@ -22,7 +22,8 @@
   remote_user: root
   become: true
   tasks:
-    - include_role:
+    - name: include role
+      include_role:
         name: ceph_common
       tags: ceph_common
 
@@ -41,11 +42,13 @@
       changed_when: ceph_client_admin_result is not succeeded
       tags: kubernetes_csi_rbd
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubernetes_addon_manager
       tags: kubernetes_addon_manager
 
-    - include_role:
+    - name: include role
+      include_role:
         name: kubernetes_csi_rbd
       vars:
         csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
