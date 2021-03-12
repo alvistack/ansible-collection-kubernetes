@@ -19,10 +19,6 @@
   become: true
   tasks:
     - include_role:
-        name: operator_sdk
-      tags: operator_sdk
-
-    - include_role:
         name: kubectl
       tags: kubectl
 
