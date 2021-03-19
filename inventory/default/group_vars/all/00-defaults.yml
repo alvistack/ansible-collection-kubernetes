@@ -24,7 +24,7 @@ crictl_version: "v1.18.0"
 cri_o_version: "v1.18.4"
 
 # kube_master
-kubernetes_version: "v1.18.16"
+kubernetes_version: "v1.18.17"
 kubernetes_cluster_name: "{{ hostvars[groups['kube_master'][0]].ansible_machine_id | to_uuid }}"
 kubernetes_etcd:
   external:
