@@ -34,7 +34,7 @@ echo $$ 1>&9
 exec 1> >(tee -a $LOG_FILE) 2>&1
 
 # RESTIC - mount
-mkdir -p $RESTIC_MOUNT_DIR
+! mkdir -p $RESTIC_MOUNT_DIR
 ! umount $RESTIC_MOUNT_DIR
 restic unlock \
     --repo $RESTIC_REPOSITORY \
