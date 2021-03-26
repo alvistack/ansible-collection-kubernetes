@@ -20,7 +20,7 @@ PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
 TIMESTAMP=${TIMESTAMP:-$(date +%s)}
 
-RESTIC_MOUNT_DIR=${RESTIC_REPOSITORY:-"/root/restores/restic/ceph"}
+RESTIC_MOUNT_DIR=${RESTIC_MOUNT_DIR:-"/root/restores/restic/ceph"}
 
 RESTIC_OPTS=${RESTIC_OPTS:-"--verbose"}
 RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/ceph"}
