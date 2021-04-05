@@ -73,7 +73,7 @@
           spec:
             containers:
               - name: busybox
-                image: busybox
+                image: busybox:latest
                 command:
                   - sleep
                   - "3600"
