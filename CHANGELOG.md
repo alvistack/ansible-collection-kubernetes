@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Support Ubuntu 21.04
+
 ## 20210313.1.1 - 2021-03-13
 
 ### Major Changes

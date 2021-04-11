@@ -15,7 +15,7 @@ This collection require Ansible 2.10 or higher.
 
 This collection was designed for:
 
-  - Ubuntu 18.04, 20.04, 20.10
+  - Ubuntu 18.04, 20.04, 20.10, 21.04
   - CentOS 7, 8 Stream
   - openSUSE Leap 15.2, Tumbleweed
   - Debian 10
