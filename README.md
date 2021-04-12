@@ -19,7 +19,7 @@ This collection was designed for:
   - CentOS 7, 8 Stream
   - openSUSE Leap 15.2, Tumbleweed
   - Debian 10
-  - Fedora 33
+  - Fedora 33, 34
   - RHEL 7, 8
 
 ## Quick Start
