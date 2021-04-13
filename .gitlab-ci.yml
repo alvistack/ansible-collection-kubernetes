@@ -105,6 +105,13 @@ build:ubuntu-18.04:
   variables:
     _MOLECULE_SCENARIO_NAME: "ubuntu-18.04"
 
+test:ubuntu-21.04:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "ubuntu-21.04"
+  allow_failure: true
+
 test:ubuntu-20.10:
   <<: *job-molecule
   stage: test
@@ -145,6 +152,13 @@ test:debian-10:
   stage: test
   variables:
     _MOLECULE_SCENARIO_NAME: "debian-10"
+  allow_failure: true
+
+test:fedora-34:
+  <<: *job-molecule
+  stage: test
+  variables:
+    _MOLECULE_SCENARIO_NAME: "fedora-34"
   allow_failure: true
 
 test:fedora-33:
