@@ -110,7 +110,7 @@
       register: kubeadm_token_result
       until: kubeadm_token_result is succeeded
       changed_when: kubeadm_token_result is not succeeded
-      ignore_errors: true
+      failed_when: false
       tags: kube_node
 
     - name: include role

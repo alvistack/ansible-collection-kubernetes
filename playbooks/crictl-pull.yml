@@ -27,7 +27,7 @@
       register: result
       delegate_to: "{{ groups['kube_master'][0] }}"
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: crictl pull image
       command: crictl pull {{ item }}
@@ -42,7 +42,7 @@
         executable: "/bin/bash"
       register: result
       changed_when: false
-      ignore_errors: true
+      failed_when: false
 
     - name: crictl rmi
       command: crictl rmi {{ item }}
