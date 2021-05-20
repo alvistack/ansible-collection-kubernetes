@@ -40,8 +40,17 @@ echo $$ 1>&9
 
 exec 1> >(tee -a $LOG_FILE) 2>&1
 
+# RESTIC - Init
+mkdir -p $RESTIC_REPOSITORY
+if [[ ! -f $RESTIC_REPOSITORY/config ]]; then
+restic init \
+    --repo $RESTIC_REPOSITORY \
+    --password-file $RESTIC_PASSWORD_FILE \
+    $RESTIC_OPTS
+fi
+
 # CEPHFS - Mount
-! mount $CEPHFS_DIR
+mount $CEPHFS_DIR || echo $?
 
 # CEPHFS - Snapshot
 mkdir -p $CEPHFS_SNAPSHOT_DIR
