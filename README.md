@@ -11,7 +11,7 @@ This Ansible collection provides Ansible playbooks and roles for the deployment 
 
 ## Requirements
 
-This collection require Ansible 2.10 or higher.
+This collection require Ansible 4.0 or higher.
 
 This collection was designed for:
 
