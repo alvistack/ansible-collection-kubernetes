@@ -33,7 +33,7 @@
   tasks:
     - name: fetch ceph client.admin key
       shell: |
-        set -euo pipefail
+        set -euxo pipefail
         ceph auth get-key client.admin
       args:
         executable: "/bin/bash"
