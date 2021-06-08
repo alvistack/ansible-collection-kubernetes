@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Debian 11
   - Support openSUSE Leap 15.3
 
 ## 20210602.1.1 - 2021-06-02
