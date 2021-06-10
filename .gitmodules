@@ -22,6 +22,10 @@
 	path = roles/conmon
 	url = https://github.com/alvistack/ansible-role-conmon.git
 	branch = develop
+[submodule "roles/containernetworking_plugins"]
+	path = roles/containernetworking_plugins
+	url = https://github.com/alvistack/ansible-role-containernetworking_plugins.git
+	branch = develop
 [submodule "roles/containers_common"]
 	path = roles/containers_common
 	url = https://github.com/alvistack/ansible-role-containers_common.git
@@ -45,6 +49,10 @@
 [submodule "roles/etcd"]
 	path = roles/etcd
 	url = https://github.com/alvistack/ansible-role-etcd.git
+	branch = develop
+[submodule "roles/fuse_overlayfs"]
+	path = roles/fuse_overlayfs
+	url = https://github.com/alvistack/ansible-role-fuse_overlayfs.git
 	branch = develop
 [submodule "roles/git"]
 	path = roles/git
@@ -165,8 +173,4 @@
 [submodule "roles/vim"]
 	path = roles/vim
 	url = https://github.com/alvistack/ansible-role-vim.git
-	branch = develop
-[submodule "roles/containernetworking_plugins"]
-	path = roles/containernetworking_plugins
-	url = git@github.com:alvistack/ansible-role-containernetworking_plugins.git
 	branch = develop
