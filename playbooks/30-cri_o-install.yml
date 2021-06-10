@@ -20,18 +20,23 @@
   tasks:
     - name: include role
       include_role:
-        name: cni_plugins
-      tags: cni_plugins
+        name: containernetworking_plugins
+      tags: containernetworking_plugins
 
     - name: include role
       include_role:
-        name: cri_tools
-      tags: cri_tools
+        name: fuse_overlayfs
+      tags: fuse_overlayfs
 
     - name: include role
       include_role:
         name: containers_common
       tags: containers_common
+
+    - name: include role
+      include_role:
+        name: cri_tools
+      tags: cri_tools
 
     - name: include role
       include_role:
