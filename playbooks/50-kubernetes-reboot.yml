@@ -18,20 +18,22 @@
   remote_user: root
   become: true
   tasks:
-    - name: check
-      command: bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]]'
+    - name: ceph health
+      environment:
+        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+      command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed') && sleep 60"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
-      retries: 15
+      retries: 60
 
     - name: reboot
       reboot:
         reboot_timeout: 1800
-        test_command: bash -c '[[ $(kubectl get node --no-headers | grep -c NotReady) ==  0 ]] && sleep 60'
+        test_command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed') && sleep 60"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true

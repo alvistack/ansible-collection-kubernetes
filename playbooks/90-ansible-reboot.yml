@@ -21,7 +21,7 @@
     - name: reboot
       reboot:
         reboot_timeout: 1800
-        test_command: bash -c 'whoami && sleep 60'
+        test_command: bash -c "(whoami) && sleep 60"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
