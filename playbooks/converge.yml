@@ -21,6 +21,5 @@
 - import_playbook: 30-docker-install.yml
 - import_playbook: 30-podman-install.yml
 - import_playbook: 30-cri_o-install.yml
-- import_playbook: 30-etcd-install.yml
 
 - import_playbook: 50-kubernetes-install.yml
