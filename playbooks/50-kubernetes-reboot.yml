@@ -21,7 +21,7 @@
     - name: ceph health
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
-      command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed') && sleep 60"
+      command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed')"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
