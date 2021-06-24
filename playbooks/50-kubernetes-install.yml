@@ -66,6 +66,11 @@
   tasks:
     - name: include role
       include_role:
+        name: sonobuoy
+      tags: sonobuoy
+
+    - name: include role
+      include_role:
         name: operator_sdk
       tags: operator_sdk
 
