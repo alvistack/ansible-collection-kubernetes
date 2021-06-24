@@ -33,6 +33,17 @@ platforms:
       - ansible
       - etcd
       - kube_master
+  - name: ${MOLECULE_INSTANCE_NAME}-2
+    box: alvistack/ubuntu-18.04
+    cpu: 2
+    memory: 4096
+    provider_raw_config_args:
+      - "disk_bus = 'virtio'"
+      - "nic_model_type = 'virtio'"
+      - "video_type = 'virtio'"
+      - "disk_driver :cache => 'writeback'"
+      - "storage :file, bus: 'virtio', cache: 'writeback'"
+    groups:
       - kube_node
 lint: |
   set -euxo pipefail
