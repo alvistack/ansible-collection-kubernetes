@@ -162,6 +162,10 @@
 	path = roles/skopeo
 	url = https://github.com/alvistack/ansible-role-skopeo.git
 	branch = develop
+[submodule "roles/sonobuoy"]
+	path = roles/sonobuoy
+	url = https://github.com/alvistack/ansible-role-sonobuoy.git
+	branch = develop
 [submodule "roles/sshd"]
 	path = roles/sshd
 	url = https://github.com/alvistack/ansible-role-sshd.git

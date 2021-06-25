@@ -22,7 +22,7 @@ platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
     box: alvistack/rhel-8
     cpu: 2
-    memory: 4096
+    memory: 8192
     provider_raw_config_args:
       - "disk_bus = 'virtio'"
       - "nic_model_type = 'virtio'"
@@ -33,6 +33,29 @@ platforms:
       - ansible
       - etcd
       - kube_master
+  - name: ${MOLECULE_INSTANCE_NAME}-2
+    box: alvistack/rhel-8
+    cpu: 2
+    memory: 8192
+    provider_raw_config_args:
+      - "disk_bus = 'virtio'"
+      - "nic_model_type = 'virtio'"
+      - "video_type = 'virtio'"
+      - "disk_driver :cache => 'writeback'"
+      - "storage :file, bus: 'virtio', cache: 'writeback'"
+    groups:
+      - kube_node
+  - name: ${MOLECULE_INSTANCE_NAME}-3
+    box: alvistack/rhel-8
+    cpu: 2
+    memory: 8192
+    provider_raw_config_args:
+      - "disk_bus = 'virtio'"
+      - "nic_model_type = 'virtio'"
+      - "video_type = 'virtio'"
+      - "disk_driver :cache => 'writeback'"
+      - "storage :file, bus: 'virtio', cache: 'writeback'"
+    groups:
       - kube_node
 lint: |
   set -euxo pipefail
