@@ -18,7 +18,7 @@
   remote_user: root
   become: true
   tasks:
-    - name: ceph health
+    - name: kubectl get --raw='/readyz?verbose'
       environment:
         PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed')"
