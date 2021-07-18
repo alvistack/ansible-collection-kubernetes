@@ -25,13 +25,13 @@
 
     - name: include role
       include_role:
-        name: kubeadm
-      tags: kubeadm
+        name: kubelet
+      tags: kubelet
 
     - name: include role
       include_role:
-        name: kubelet
-      tags: kubelet
+        name: kubeadm
+      tags: kubeadm
 
 - hosts: etcd
   remote_user: root
