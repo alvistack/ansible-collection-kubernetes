@@ -178,3 +178,7 @@
 	path = roles/vim
 	url = https://github.com/alvistack/ansible-role-vim.git
 	branch = develop
+[submodule "roles/zram_generator"]
+	path = roles/zram_generator
+	url = https://github.com/alvistack/ansible-role-zram_generator.git
+	branch = develop

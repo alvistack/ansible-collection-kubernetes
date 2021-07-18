@@ -14,8 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# kube_master
-kubernetes_release: "1.20"
-
-# ceph_common
-ceph_release: "15.2"
+- hosts: all
+  remote_user: root
+  become: true
+  tasks:
+    - name: include role
+      include_role:
+        name: zram_generator
+      tags: zram_generator
