@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-containers_common_engine_runtime: "runc"
+_ceph_release: "15.2"

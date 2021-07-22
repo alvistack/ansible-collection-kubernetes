@@ -20,26 +20,6 @@
   tasks:
     - name: include role
       include_role:
-        name: containernetworking_plugins
-      tags: containernetworking_plugins
-
-    - name: include role
-      include_role:
-        name: fuse_overlayfs
-      tags: fuse_overlayfs
-
-    - name: include role
-      include_role:
-        name: containers_common
-      tags: containers_common
-
-    - name: include role
-      include_role:
-        name: cri_tools
-      tags: cri_tools
-
-    - name: include role
-      include_role:
         name: runc
       tags: runc
 
@@ -55,6 +35,21 @@
 
     - name: include role
       include_role:
+        name: fuse_overlayfs
+      tags: fuse_overlayfs
+
+    - name: include role
+      include_role:
+        name: containers_common
+      tags: containers_common
+
+    - name: include role
+      include_role:
+        name: containernetworking_plugins
+      tags: containernetworking_plugins
+
+    - name: include role
+      include_role:
         name: conmon
       tags: conmon
 
@@ -62,3 +57,8 @@
       include_role:
         name: cri_o
       tags: cri_o
+
+    - name: include role
+      include_role:
+        name: cri_tools
+      tags: cri_tools
