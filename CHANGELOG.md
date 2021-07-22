@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Predefine `ceph_release` with latest available per distribution
   - Restructure dependency packages with upstream repository
 
 ## 20210718.1.1 - 2021-07-18
