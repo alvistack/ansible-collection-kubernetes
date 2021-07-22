@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Upgrade minimal Ansible community package support to 4.3.0
   - Predefine `ceph_release` with latest available per distribution
   - Restructure dependency packages with upstream repository
 

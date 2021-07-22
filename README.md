@@ -17,7 +17,7 @@ deployment and configuration of an
 
 ## Requirements
 
-This collection require Ansible community package 4.2 or higher.
+This collection require Ansible community package 4.3 or higher.
 
 This collection was designed for:
 
