@@ -70,10 +70,6 @@
 	path = roles/kube_addon_manager
 	url = https://github.com/alvistack/ansible-role-kube_addon_manager.git
 	branch = develop
-[submodule "roles/kubeadm"]
-	path = roles/kubeadm
-	url = https://github.com/alvistack/ansible-role-kubeadm.git
-	branch = develop
 [submodule "roles/kube_cert_manager"]
 	path = roles/kube_cert_manager
 	url = https://github.com/alvistack/ansible-role-kube_cert_manager.git
@@ -90,10 +86,6 @@
 	path = roles/kube_csi_rbd
 	url = https://github.com/alvistack/ansible-role-kube_csi_rbd.git
 	branch = develop
-[submodule "roles/kubectl"]
-	path = roles/kubectl
-	url = https://github.com/alvistack/ansible-role-kubectl.git
-	branch = develop
 [submodule "roles/kube_dashboard"]
 	path = roles/kube_dashboard
 	url = https://github.com/alvistack/ansible-role-kube_dashboard.git
@@ -106,9 +98,17 @@
 	path = roles/kube_ingress_nginx
 	url = https://github.com/alvistack/ansible-role-kube_ingress_nginx.git
 	branch = develop
-[submodule "roles/kubelet"]
-	path = roles/kubelet
-	url = https://github.com/alvistack/ansible-role-kubelet.git
+[submodule "roles/kube_kubeadm"]
+	path = roles/kube_kubeadm
+	url = https://github.com/alvistack/ansible-role-kube_kubeadm.git
+	branch = develop
+[submodule "roles/kube_kubectl"]
+	path = roles/kube_kubectl
+	url = https://github.com/alvistack/ansible-role-kube_kubectl.git
+	branch = develop
+[submodule "roles/kube_kubelet"]
+	path = roles/kube_kubelet
+	url = https://github.com/alvistack/ansible-role-kube_kubelet.git
 	branch = develop
 [submodule "roles/kube_master"]
 	path = roles/kube_master
