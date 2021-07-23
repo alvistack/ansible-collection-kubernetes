@@ -20,18 +20,18 @@
   tasks:
     - name: include role
       include_role:
-        name: kubectl
-      tags: kubectl
+        name: kube_kubectl
+      tags: kube_kubectl
 
     - name: include role
       include_role:
-        name: kubelet
-      tags: kubelet
+        name: kube_kubelet
+      tags: kube_kubelet
 
     - name: include role
       include_role:
-        name: kubeadm
-      tags: kubeadm
+        name: kube_kubeadm
+      tags: kube_kubeadm
 
 - hosts: etcd
   remote_user: root
@@ -76,8 +76,8 @@
 
     - name: include role
       include_role:
-        name: kubectl
-      tags: kubectl
+        name: kube_kubectl
+      tags: kube_kubectl
 
     - name: base64 encode
       shell: |
@@ -91,7 +91,7 @@
       delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
-      tags: kubectl
+      tags: kube_kubectl
 
     - name: base64 decode
       shell: |
@@ -101,4 +101,4 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
-      tags: kubectl
+      tags: kube_kubectl

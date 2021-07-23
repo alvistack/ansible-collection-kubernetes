@@ -13,11 +13,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-containers_common_engine_runtime: "runc"
-
-cri_o_crio_runtime_cgroup_manager: "cgroupfs"
-cri_o_crio_runtime_conmon_cgroup: "pod"
-
-kubelet_cgroup_driver: "cgroupfs"
-kubelet_kubelet_cgroups: "pod"

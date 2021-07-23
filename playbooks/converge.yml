@@ -22,5 +22,5 @@
 - import_playbook: 30-podman-install.yml
 - import_playbook: 30-cri_o-install.yml
 
-- import_playbook: 50-kubernetes-install.yml
-- import_playbook: 60-kubernetes_weave-install.yml
+- import_playbook: 50-kube-install.yml
+- import_playbook: 60-kube_weave-install.yml

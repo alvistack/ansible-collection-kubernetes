@@ -14,8 +14,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# kube_master
-# kube_release: "1.21"
+- hosts: kube_master
+  remote_user: root
+  become: true
+  tasks:
+    - name: include role
+      include_role:
+        name: kube_addon_manager
+      tags: kube_addon_manager
 
-# ceph_common
-# ceph_release: "16.2"
+    - name: include role
+      include_role:
+        name: kube_cert_manager
+      tags: kube_cert_manager

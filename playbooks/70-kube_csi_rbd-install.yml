@@ -14,16 +14,42 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master
+- hosts: all
+  remote_user: root
+  become: true
+
+- hosts: kube_master:kube_node
   remote_user: root
   become: true
   tasks:
     - name: include role
       include_role:
-        name: kubernetes_addon_manager
-      tags: kubernetes_addon_manager
+        name: ceph_common
+      tags: ceph_common
+
+- hosts: kube_master
+  remote_user: root
+  become: true
+  tasks:
+    - name: fetch ceph client.admin key
+      shell: |
+        set -euxo pipefail
+        ceph auth get-key client.admin
+      args:
+        executable: "/bin/bash"
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
+      register: ceph_client_admin_result
+      changed_when: ceph_client_admin_result is not succeeded
+      tags: kube_csi_rbd
 
     - name: include role
       include_role:
-        name: kubernetes_weave
-      tags: kubernetes_weave
+        name: kube_addon_manager
+      tags: kube_addon_manager
+
+    - name: include role
+      include_role:
+        name: kube_csi_rbd
+      vars:
+        csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+      tags: kube_csi_rbd
