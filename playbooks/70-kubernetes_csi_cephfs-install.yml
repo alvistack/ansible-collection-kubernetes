@@ -40,16 +40,16 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
-      tags: kubernetes_csi_cephfs
+      tags: kube_csi_cephfs
 
     - name: include role
       include_role:
-        name: kubernetes_addon_manager
-      tags: kubernetes_addon_manager
+        name: kube_addon_manager
+      tags: kube_addon_manager
 
     - name: include role
       include_role:
-        name: kubernetes_csi_cephfs
+        name: kube_csi_cephfs
       vars:
         csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
-      tags: kubernetes_csi_cephfs
+      tags: kube_csi_cephfs

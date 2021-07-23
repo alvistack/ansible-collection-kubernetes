@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # kube_master
-# kubernetes_release: "1.21"
+# kube_release: "1.21"
 
 # ceph_common
 # ceph_release: "16.2"

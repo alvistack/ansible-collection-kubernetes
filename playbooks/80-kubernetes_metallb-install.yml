@@ -20,10 +20,10 @@
   tasks:
     - name: include role
       include_role:
-        name: kubernetes_addon_manager
-      tags: kubernetes_addon_manager
+        name: kube_addon_manager
+      tags: kube_addon_manager
 
     - name: include role
       include_role:
-        name: kubernetes_metallb
-      tags: kubernetes_metallb
+        name: kube_metallb
+      tags: kube_metallb
