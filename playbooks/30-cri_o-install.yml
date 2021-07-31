@@ -30,11 +30,6 @@
 
     - name: include role
       include_role:
-        name: kata
-      tags: kata
-
-    - name: include role
-      include_role:
         name: fuse_overlayfs
       tags: fuse_overlayfs
 

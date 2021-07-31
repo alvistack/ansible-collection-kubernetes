@@ -42,10 +42,6 @@
 	path = roles/crun
 	url = https://github.com/alvistack/ansible-role-crun.git
 	branch = develop
-[submodule "roles/docker"]
-	path = roles/docker
-	url = https://github.com/alvistack/ansible-role-docker.git
-	branch = develop
 [submodule "roles/etcd"]
 	path = roles/etcd
 	url = https://github.com/alvistack/ansible-role-etcd.git
@@ -57,10 +53,6 @@
 [submodule "roles/git"]
 	path = roles/git
 	url = https://github.com/alvistack/ansible-role-git.git
-	branch = develop
-[submodule "roles/kata"]
-	path = roles/kata
-	url = https://github.com/alvistack/ansible-role-kata.git
 	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
