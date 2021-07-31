@@ -18,7 +18,6 @@
 - import_playbook: 10-kernel-install.yml
 - import_playbook: 20-ansible-install.yml
 
-- import_playbook: 30-docker-install.yml
 - import_playbook: 30-podman-install.yml
 - import_playbook: 30-cri_o-install.yml
 
