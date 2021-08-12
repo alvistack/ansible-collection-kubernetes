@@ -51,5 +51,5 @@
       include_role:
         name: kube_csi_cephfs
       vars:
-        csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        kube_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
       tags: kube_csi_cephfs
