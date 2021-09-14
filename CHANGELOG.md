@@ -4,8 +4,9 @@
 
 ### Major Changes
 
+  - Install dependencies with package manager
+  - Upgrade minimal Ansible community package support to 4.5.0
   - Rename prefix with `kube_`
-  - Upgrade minimal Ansible community package support to 4.4.0
   - Predefine `ceph_release` with latest available per distribution
   - Restructure dependency packages with upstream repository
 
