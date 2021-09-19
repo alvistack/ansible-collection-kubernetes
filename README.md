@@ -26,23 +26,26 @@ This collection was designed for:
 
 ### Bootstrap Ansible and Roles
 
-Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then bootstrap Python3 + Ansible with provided helper script:
+Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then install Ansible:
 
-    # GIT clone the development branch
-    git clone --branch develop https://github.com/alvistack/ansible-collection-kubernetes
-    cd ansible-collection-kubernetes
-    
-    # Setup Roles with GIT submodule
-    git submodule init
-    git submodule sync
-    git submodule update
-    
+    # GIT checkout development branch
+    mkdir -p /opt/ansible-collection-kubernetes
+    cd /opt/ansible-collection-kubernetes
+    git init
+    git remote add alvistack https://github.com/alvistack/ansible-collection-kubernetes.git
+    git fetch --all --prune
+    git checkout alvistack/develop -- .
+    git submodule sync --recursive
+    git submodule update --init --recursive
+
     # Bootstrap Ansible
-    ./scripts/bootstrap-ansible.sh
+    # See https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack
+    echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_20.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    apt update
+    apt install ansible
     
-    # Confirm the version of Python3, PIP3 and Ansible
-    python3 --version
-    pip3 --version
+    # Confirm the version of Ansible
     ansible --version
 
 ### AIO
@@ -87,19 +90,21 @@ This deployment will setup the follow components:
 Start by copying the default inventory for customization:
 
     # Copy default inventory
-    cp -rfp inventory/default inventory/myinventory
+    mkdir -p /etc/ansible
+    rsync -av /opt/ansible-collection-kubernetes/inventory/default/ /etc/ansible
 
 You should update the following files as per your production environment:
 
-    - `inventory/myinventory/hosts`
+    - `/etc/ansible/hosts`
       - Update with your inventory hostnames and IPs
-    - `inventory/myinventory/group_vars/all/00-defaults.yml`
+    - `/etc/ansible/group_vars/all/*.yml`
       - Update `*_release` and `*_version` if you hope to pin the deployment into any legacy supported version
 
 Once update now run the playbooks:
 
     # Run playbooks
-    ansible-playbook -i inventory/myinventory/hosts playbooks/converge.yml
+    cd /opt/ansible-collection-kubernetes
+    ansible-playbook playbooks/converge.yml
     
     # Confirm the version and status of Kubernetes
     kubectl version
@@ -110,13 +115,10 @@ Once update now run the playbooks:
 
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Bootstrap Vagrant and Libvirt
-    ./scripts/bootstrap-vagrant.sh
-    
     # Run Molecule on Ubuntu 20.04
     molecule converge -s ubuntu-20.04
 
-Please refer to [.travis.yml](.travis.yml) for more information on running Molecule.
+Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
 ## License
 
