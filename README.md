@@ -1,5 +1,7 @@
 # Ansible Collection for Kubernetes
 
+<img src="/alvistack.svg" width="75" alt="AlviStack">
+
 [![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-collection-kubernetes/master)](https://gitlab.com/alvistack/ansible-collection-kubernetes/-/pipelines)
 [![GitHub release](https://img.shields.io/github/release/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/releases)
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
