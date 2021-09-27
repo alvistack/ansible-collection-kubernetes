@@ -40,7 +40,7 @@ restic unlock \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
     $RESTIC_OPTS
-restic mount \
+screen -dm restic mount \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
-    $RESTIC_OPTS $RESTIC_MOUNT_DIR &
+    $RESTIC_OPTS $RESTIC_MOUNT_DIR
