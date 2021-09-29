@@ -19,8 +19,6 @@
   become: true
   tasks:
     - name: setup csi-cephfs as default storageclass
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       community.kubernetes.k8s:
@@ -38,8 +36,6 @@
       retries: 15
 
     - name: create pvc
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       community.kubernetes.k8s:
@@ -62,8 +58,6 @@
       retries: 15
 
     - name: create pod
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       vars:
         ansible_python_interpreter: "python3"
       community.kubernetes.k8s:
