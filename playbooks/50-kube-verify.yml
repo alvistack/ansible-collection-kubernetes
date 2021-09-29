@@ -19,15 +19,11 @@
   become: true
   tasks:
     - name: kubectl version
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       command: kubectl version
       register: result
       changed_when: result is not succeeded
 
     - name: kubectl get --raw='/readyz?verbose'
-      environment:
-        PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
       shell: |
         set -euxo pipefail
         kubectl get --raw='/readyz?verbose' | grep 'check passed'
