@@ -4,8 +4,9 @@
 
 ### Major Changes
 
+  - Support Ubuntu 21.10
+  - Upgrade minimal Ansible community package support to 4.6.0
   - Install dependencies with package manager
-  - Upgrade minimal Ansible community package support to 4.5.0
   - Rename prefix with `kube_`
   - Predefine `ceph_release` with latest available per distribution
   - Restructure dependency packages with upstream repository
