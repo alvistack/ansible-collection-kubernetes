@@ -34,12 +34,12 @@ Start by cloning the repository, checkout the corresponding branch, and init wit
     mkdir -p /opt/ansible-collection-kubernetes
     cd /opt/ansible-collection-kubernetes
     git init
-    git remote add alvistack https://github.com/alvistack/ansible-collection-kubernetes.git
+    git remote add upstream https://github.com/alvistack/ansible-collection-kubernetes.git
     git fetch --all --prune
-    git checkout alvistack/develop -- .
+    git checkout upstream/develop -- .
     git submodule sync --recursive
     git submodule update --init --recursive
-
+    
     # Bootstrap Ansible
     # See https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack
     echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
@@ -83,7 +83,7 @@ This deployment will setup the follow components:
   - [Kubernetes](https://kubernetes.io/)
       - CRI: [CRI-O](https://cri-o.io/)
       - CNI: [Weave Net](https://github.com/weaveworks/weave)
-      - CSI: [CSI Hostpath](https://github.com/kubernetes-csi/csi-driver-host-path)
+      - CSI: [CSI CephFS](https://github.com/ceph/ceph-csi)
       - Addons:
           - [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
           - [NGINX Ingress Controller](https://github.com/kubernetes/ingress-nginx)
@@ -97,9 +97,9 @@ Start by copying the default inventory for customization:
 
 You should update the following files as per your production environment:
 
-    - `/etc/ansible/hosts`
+  - `/etc/ansible/hosts`
       - Update with your inventory hostnames and IPs
-    - `/etc/ansible/group_vars/all/*.yml`
+  - `/etc/ansible/group_vars/all/*.yml`
       - Update `*_release` and `*_version` if you hope to pin the deployment into any legacy supported version
 
 Once update now run the playbooks:
@@ -107,6 +107,13 @@ Once update now run the playbooks:
     # Run playbooks
     cd /opt/ansible-collection-kubernetes
     ansible-playbook playbooks/converge.yml
+    ansible-playbook playbooks/50-kube-verify.yml
+    ansible-playbook playbooks/60-kube_weave-install.yml
+    ansible-playbook playbooks/70-kube_csi_cephfs-install.yml
+    ansible-playbook playbooks/70-kube_csi_cephfs-verify.yml
+    ansible-playbook playbooks/80-kube_dashboard-install.yml
+    ansible-playbook playbooks/80-kube_ingress_nginx-install.yml
+    ansible-playbook playbooks/80-kube_cert_manager-install.yml
     
     # Confirm the version and status of Kubernetes
     kubectl version
