@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Remove Fedora 33 support
+  - Remove Ubuntu 20.10 support
   - Support Fedora 35
   - Support Ubuntu 21.10
   - Upgrade minimal Ansible community package support to 4.6.0
