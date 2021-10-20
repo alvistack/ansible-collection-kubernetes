@@ -4,11 +4,15 @@
 
 ### Major Changes
 
+## 20211020.1.1 - 2021-10-20
+
+### Major Changes
+
   - Remove Fedora 33 support
   - Remove Ubuntu 20.10 support
   - Support Fedora 35
   - Support Ubuntu 21.10
-  - Upgrade minimal Ansible community package support to 4.6.0
+  - Upgrade minimal Ansible community package support to 4.7.0
   - Install dependencies with package manager
   - Rename prefix with `kube_`
   - Predefine `ceph_release` with latest available per distribution

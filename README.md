@@ -13,7 +13,7 @@ This Ansible collection provides Ansible playbooks and roles for the deployment 
 
 ## Requirements
 
-This collection require Ansible community package 4.6 or higher.
+This collection require Ansible community package 4.7 or higher.
 
 This collection was designed for:
 
