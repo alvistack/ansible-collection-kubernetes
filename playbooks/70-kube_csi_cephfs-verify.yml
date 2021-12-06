@@ -18,10 +18,29 @@
   remote_user: root
   become: true
   tasks:
+    - name: kubectl version
+      command: kubectl version
+      register: result
+      changed_when: result is not succeeded
+
+    - name: kubectl get pod --all-namespaces
+      shell: |
+        set -euxo pipefail
+        kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
+      args:
+        executable: "/bin/bash"
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      retries: 60
+
     - name: setup csi-cephfs as default storageclass
       vars:
         ansible_python_interpreter: "python3"
       kubernetes.core.k8s:
+        state: "present"
+        wait: true
         definition:
           apiVersion: storage.k8s.io/v1
           kind: StorageClass
@@ -29,17 +48,18 @@
             name: csi-cephfs
             annotations:
               storageclass.kubernetes.io/is-default-class: "true"
-        state: present
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
-      retries: 15
+      changed_when: result is not succeeded
+      retries: 60
 
     - name: create pvc
       vars:
         ansible_python_interpreter: "python3"
       kubernetes.core.k8s:
         state: "present"
+        wait: true
         definition:
           apiVersion: v1
           kind: PersistentVolumeClaim
@@ -55,13 +75,15 @@
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
-      retries: 15
+      changed_when: result is not succeeded
+      retries: 60
 
     - name: create pod
       vars:
         ansible_python_interpreter: "python3"
       kubernetes.core.k8s:
         state: "present"
+        wait: true
         definition:
           apiVersion: v1
           kind: Pod
@@ -71,7 +93,7 @@
           spec:
             containers:
               - name: busybox
-                image: busybox:latest
+                image: docker.io/busybox:latest
                 command:
                   - sleep
                   - "3600"
@@ -85,4 +107,53 @@
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
-      retries: 15
+      changed_when: result is not succeeded
+      retries: 60
+
+    - name: kubectl get pod --all-namespaces
+      shell: |
+        set -euxo pipefail
+        kubectl get pod --all-namespaces | egrep -e 'default\s+busybox\s+[0-9]+\/[0-9]+\s+Running'
+      args:
+        executable: "/bin/bash"
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      retries: 60
+
+    - name: delete pod
+      vars:
+        ansible_python_interpreter: "python3"
+      kubernetes.core.k8s:
+        state: "absent"
+        wait: true
+        definition:
+          apiVersion: v1
+          kind: Pod
+          metadata:
+            name: busybox
+            namespace: default
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      retries: 60
+
+    - name: delete pvc
+      vars:
+        ansible_python_interpreter: "python3"
+      kubernetes.core.k8s:
+        state: "absent"
+        wait: true
+        definition:
+          apiVersion: v1
+          kind: PersistentVolumeClaim
+          metadata:
+            name: root
+            namespace: default
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      until: result is succeeded
+      changed_when: result is not succeeded
+      retries: 60
