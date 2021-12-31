@@ -4,12 +4,12 @@
 
 ### Major Changes
 
-  - Support Debian Testing
-
-## 20211231.1.1 - 2021-12-31
+## 20211231.1.3 - 2021-12-31
 
 ### Major Changes
 
+  - Support Fedora Rawhide
+  - Support Debian Testing
   - Remove openSUSE Leap 15.2 support
   - Upgrade minimal Ansible community package support to 4.10
 
