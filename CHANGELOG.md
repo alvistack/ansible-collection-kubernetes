@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Support Debian Testing
+
 ## 20211231.1.1 - 2021-12-31
 
 ### Major Changes
