@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20211231.1.1 - 2021-12-31
+
+### Major Changes
+
+  - Remove openSUSE Leap 15.2 support
   - Upgrade minimal Ansible community package support to 4.10
 
 ## 20211020.1.1 - 2021-10-20
