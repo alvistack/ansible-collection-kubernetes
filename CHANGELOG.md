@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Remove Ubuntu 21.04 support
   - Skip package upgrade before running molecule
 
 ## 20211231.1.3 - 2021-12-31
