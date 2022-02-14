@@ -20,7 +20,8 @@
   tasks:
     - name: reboot
       reboot:
-        reboot_timeout: 300
+        connect_timeout: 600
+        reboot_timeout: 600
         test_command: bash -c "(whoami)"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
@@ -28,4 +29,3 @@
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
-      retries: 60
