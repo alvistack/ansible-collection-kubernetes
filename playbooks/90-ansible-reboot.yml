@@ -26,6 +26,3 @@
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
-      register: result
-      changed_when: result is not succeeded
-      until: result is succeeded
