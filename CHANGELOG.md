@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Remove Kubernetes 1.20 suport
   - Support Ansible community package 5.4.0
 
 ## 20220211.1.1 - 2022-02-11
