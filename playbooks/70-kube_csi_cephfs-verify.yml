@@ -94,7 +94,7 @@
             containers:
               - name: busybox
                 image: docker.io/busybox:latest
-                ansible.builtin.command:
+                command:
                   - sleep
                   - "3600"
                 volumeMounts:
