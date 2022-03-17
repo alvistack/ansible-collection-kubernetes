@@ -19,12 +19,12 @@
   become: true
   tasks:
     - name: kubectl version
-      command: kubectl version
+      ansible.builtin.command: kubectl version
       register: result
       changed_when: result is not succeeded
 
     - name: kubectl get --raw='/readyz?verbose'
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:

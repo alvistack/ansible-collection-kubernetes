@@ -20,34 +20,34 @@
   gather_facts: false
   tasks:
     - name: cp -rfT /etc/skel /root
-      raw: |
+      ansible.builtin.raw: |
         cp -rfT /etc/skel /root
       changed_when: false
       failed_when: false
 
     - name: setenforce 0
-      raw: |
+      ansible.builtin.raw: |
         setenforce 0
         sed -i 's/^SELINUX=.*$/SELINUX=permissive/g' /etc/selinux/config
       changed_when: false
       failed_when: false
 
     - name: systemctl stop firewalld.service
-      raw: |
+      ansible.builtin.raw: |
         systemctl stop firewalld.service
         systemctl disable firewalld.service
       changed_when: false
       failed_when: false
 
     - name: systemctl stop ufw.service
-      raw: |
+      ansible.builtin.raw: |
         systemctl stop ufw.service
         systemctl disable ufw.service
       changed_when: false
       failed_when: false
 
     - name: redhat | subscription-manager register
-      raw: |
+      ansible.builtin.raw: |
         subscription-manager register \
           --username={{ lookup('env', 'REDHAT_USERNAME') }} \
           --password={{ lookup('env', 'REDHAT_PASSWORD') }} \
@@ -56,7 +56,7 @@
       failed_when: false
 
     - name: debian | apt-get install -y ca-certificates curl gcc iproute2 python3 sudo
-      raw: |
+      ansible.builtin.raw: |
         apt-get update
         apt-get dist-upgrade -y
         apt-get install -y ca-certificates curl gcc iproute2 python3 sudo
@@ -64,7 +64,7 @@
       failed_when: false
 
     - name: redhat | yum install -y ca-certificates curl gcc iproute python3 sudo
-      raw: |
+      ansible.builtin.raw: |
         yum makecache
         yum update -y
         yum install -y ca-certificates curl gcc iproute python3 sudo
@@ -72,7 +72,7 @@
       failed_when: false
 
     - name: suse | zypper -n install -y ca-certificates curl gcc iproute2 python3 sudo
-      raw: |
+      ansible.builtin.raw: |
         zypper -n --gpg-auto-import-keys refresh
         zypper -n update -y
         zypper -n install -y ca-certificates curl gcc iproute2 python3 sudo

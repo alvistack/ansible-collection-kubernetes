@@ -19,12 +19,12 @@
   become: true
   tasks:
     - name: kubectl version
-      command: kubectl version
+      ansible.builtin.command: kubectl version
       register: result
       changed_when: result is not succeeded
 
     - name: kubectl get pod --all-namespaces
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
@@ -94,7 +94,7 @@
             containers:
               - name: busybox
                 image: docker.io/busybox:latest
-                command:
+                ansible.builtin.command:
                   - sleep
                   - "3600"
                 volumeMounts:
@@ -111,7 +111,7 @@
       retries: 60
 
     - name: kubectl get pod --all-namespaces
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         kubectl get pod --all-namespaces | egrep -e 'default\s+busybox\s+[0-9]+\/[0-9]+\s+Running'
       args:

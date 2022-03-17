@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: reboot
-      reboot:
+      ansible.builtin.reboot:
         connect_timeout: 600
         reboot_timeout: 600
         test_command: bash -c "(whoami)"

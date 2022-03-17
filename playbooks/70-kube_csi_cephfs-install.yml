@@ -23,7 +23,7 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: ceph_common
       tags: ceph_common
 
@@ -32,7 +32,7 @@
   become: true
   tasks:
     - name: fetch ceph client.admin key
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         ceph auth get-key client.admin
       args:
@@ -43,12 +43,12 @@
       tags: kube_csi_cephfs
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_addon_manager
       tags: kube_addon_manager
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_csi_cephfs
       vars:
         kube_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
