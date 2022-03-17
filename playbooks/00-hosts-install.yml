@@ -19,41 +19,41 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: python
       tags: python
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: bootstrap
       tags: bootstrap
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: git
       tags: git
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: vim
       tags: vim
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: locales
       tags: locales
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: timezone
       tags: timezone
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: chrony
       tags: chrony
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: sshd
       tags: sshd

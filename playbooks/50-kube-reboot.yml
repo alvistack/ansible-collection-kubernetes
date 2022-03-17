@@ -19,7 +19,7 @@
   become: true
   tasks:
     - name: kubectl get --raw='/readyz?verbose'
-      command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed')"
+      ansible.builtin.command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed')"
       loop: "{{ ansible_play_hosts }}"
       delegate_to: "{{ item }}"
       run_once: true
@@ -29,7 +29,7 @@
       retries: 60
 
     - name: reboot
-      reboot:
+      ansible.builtin.reboot:
         connect_timeout: 600
         reboot_timeout: 600
         test_command: bash -c "(kubectl get --raw='/readyz?verbose' | grep 'check passed') && sleep 60"

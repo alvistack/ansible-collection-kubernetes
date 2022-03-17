@@ -19,17 +19,17 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_kubectl
       tags: kube_kubectl
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_kubelet
       tags: kube_kubelet
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_kubeadm
       tags: kube_kubeadm
 
@@ -38,7 +38,7 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: etcd
       tags: etcd
 
@@ -47,7 +47,7 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_master
       tags: kube_master
 
@@ -56,7 +56,7 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_node
       tags: kube_node
 
@@ -65,22 +65,22 @@
   become: true
   tasks:
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: sonobuoy
       tags: sonobuoy
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: operator_sdk
       tags: operator_sdk
 
     - name: include role
-      include_role:
+      ansible.builtin.include_role:
         name: kube_kubectl
       tags: kube_kubectl
 
     - name: base64 encode
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         tar zcfP - {{ _params | join(' ') }} | base64 -w 0
       vars:
@@ -96,7 +96,7 @@
       tags: kube_kubectl
 
     - name: base64 decode
-      shell: |
+      ansible.builtin.shell: |
         set -euxo pipefail
         echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
