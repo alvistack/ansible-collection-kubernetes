@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Ubuntu 22.04
   - Support Ansible community package 5.5.0
   - Remove Kubernetes 1.20 suport
   - Support Ansible community package 5.4.0
