@@ -61,7 +61,7 @@ restic unlock \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
     $RESTIC_OPTS
-restic backup . \
+nice -n 10 restic backup . \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
     $RESTIC_OPTS
@@ -70,7 +70,7 @@ restic backup . \
 rmdir $CEPHFS_SNAPSHOT_DIR
 
 # RESTIC - Rotation
-restic forget \
+nice -n 10 restic forget \
     --prune \
     --group-by host \
     --keep-hourly $RESTIC_KEEP_HOURLY \
