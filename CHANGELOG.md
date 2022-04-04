@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+  - Support Fedora 36
   - Support Ubuntu 22.04
   - Support Ansible community package 5.5.0
   - Remove Kubernetes 1.20 suport

@@ -21,7 +21,7 @@ This collection was designed for:
   - CentOS 7, 8 Stream
   - openSUSE Leap 15.3, Tumbleweed
   - Debian 10, 11, Testing
-  - Fedora 34, 35, Rawhide
+  - Fedora 34, 35, 36, Rawhide
   - RHEL 7, 8
 
 ## Quick Start
