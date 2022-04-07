@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Support openSUSE Leap 15.4
+
 ## 20220407.1.2 - 2022-04-07
 
 ### Major Changes
