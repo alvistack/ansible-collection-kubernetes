@@ -20,7 +20,7 @@ driver:
     name: libvirt
 platforms:
   - name: ${MOLECULE_INSTANCE_NAME}-1
-    box: alvistack/opensuse-tumbleweed
+    box: alvistack/centos-9-stream
     cpu: 2
     memory: 8192
     provider_raw_config_args:
@@ -35,7 +35,7 @@ platforms:
       - etcd
       - kube_master
   - name: ${MOLECULE_INSTANCE_NAME}-2
-    box: alvistack/opensuse-tumbleweed
+    box: alvistack/centos-9-stream
     cpu: 2
     memory: 8192
     provider_raw_config_args:
@@ -48,7 +48,7 @@ platforms:
     groups:
       - kube_node
   - name: ${MOLECULE_INSTANCE_NAME}-3
-    box: alvistack/opensuse-tumbleweed
+    box: alvistack/centos-9-stream
     cpu: 2
     memory: 8192
     provider_raw_config_args:
