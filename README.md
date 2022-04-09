@@ -22,7 +22,7 @@ This collection was designed for:
   - openSUSE Leap 15.3, Leap 15.4, Tumbleweed
   - Debian 10, 11, Testing
   - Fedora 34, 35, 36, Rawhide
-  - RHEL 7, 8
+  - RHEL 7, 8, 9
 
 ## Quick Start
 
