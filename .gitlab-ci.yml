@@ -89,7 +89,7 @@
     else
       exit 0
     fi
-    sed -i "s/VERSION/$_VERSION/g" galaxy.yml
+    sed -i "s/version: .*/version: $_VERSION/g" galaxy.yml
     ansible-galaxy collection build
     ansible-galaxy collection publish --token $ANSIBLE_GALAXY_TOKEN *.tar.gz
 
