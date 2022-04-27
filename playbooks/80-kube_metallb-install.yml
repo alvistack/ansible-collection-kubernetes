@@ -20,10 +20,10 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_addon_manager
-      tags: kube_addon_manager
+        name: alvistack.kube_addon_manager
+      tags: alvistack.kube_addon_manager
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_metallb
-      tags: kube_metallb
+        name: alvistack.kube_metallb
+      tags: alvistack.kube_metallb

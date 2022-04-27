@@ -20,5 +20,5 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: zram_generator
-      tags: zram_generator
+        name: alvistack.zram_generator
+      tags: alvistack.zram_generator
