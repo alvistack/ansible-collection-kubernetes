@@ -28,7 +28,7 @@ This collection was designed for:
 
 ### Bootstrap Ansible and Roles
 
-Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then install Ansible:
+Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then install Ansible (see https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack):
 
     # GIT checkout development branch
     mkdir -p /opt/ansible-collection-kubernetes
@@ -41,9 +41,8 @@ Start by cloning the repository, checkout the corresponding branch, and init wit
     git submodule update --init --recursive
     
     # Bootstrap Ansible
-    # See https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack
-    echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_20.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_20.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    echo 'deb http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
     apt update
     apt install ansible
     
@@ -124,8 +123,8 @@ Once update now run the playbooks:
 
 You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) test cases if you have [Vagrant](https://www.vagrantup.com/) and [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Ubuntu 20.04
-    molecule converge -s ubuntu-20.04
+    # Run Molecule on Ubuntu 22.04
+    molecule converge -s ubuntu-22.04
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
