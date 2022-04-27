@@ -20,18 +20,18 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_kubectl
-      tags: kube_kubectl
+        name: alvistack.kube_kubectl
+      tags: alvistack.kube_kubectl
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_kubelet
-      tags: kube_kubelet
+        name: alvistack.kube_kubelet
+      tags: alvistack.kube_kubelet
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_kubeadm
-      tags: kube_kubeadm
+        name: alvistack.kube_kubeadm
+      tags: alvistack.kube_kubeadm
 
 - hosts: etcd
   remote_user: root
@@ -39,8 +39,8 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: etcd
-      tags: etcd
+        name: alvistack.etcd
+      tags: alvistack.etcd
 
 - hosts: kube_master
   remote_user: root
@@ -48,8 +48,8 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_master
-      tags: kube_master
+        name: alvistack.kube_master
+      tags: alvistack.kube_master
 
 - hosts: kube_node:!kube_master
   remote_user: root
@@ -57,8 +57,8 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_node
-      tags: kube_node
+        name: alvistack.kube_node
+      tags: alvistack.kube_node
 
 - hosts: ansible
   remote_user: root
@@ -66,18 +66,18 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: sonobuoy
-      tags: sonobuoy
+        name: alvistack.sonobuoy
+      tags: alvistack.sonobuoy
 
     - name: include role
       ansible.builtin.include_role:
-        name: operator_sdk
-      tags: operator_sdk
+        name: alvistack.operator_sdk
+      tags: alvistack.operator_sdk
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_kubectl
-      tags: kube_kubectl
+        name: alvistack.kube_kubectl
+      tags: alvistack.kube_kubectl
 
     - name: base64 encode
       ansible.builtin.shell: |
@@ -93,7 +93,7 @@
       delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
-      tags: kube_kubectl
+      tags: alvistack.kube_kubectl
 
     - name: base64 decode
       ansible.builtin.shell: |
@@ -103,4 +103,4 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
-      tags: kube_kubectl
+      tags: alvistack.kube_kubectl
