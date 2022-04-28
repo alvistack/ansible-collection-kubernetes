@@ -22,4 +22,3 @@
 - import_playbook: 30-cri_o-install.yml
 
 - import_playbook: 50-kube-install.yml
-- import_playbook: 60-kube_weave-install.yml
