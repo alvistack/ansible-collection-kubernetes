@@ -20,11 +20,6 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.cilium
-      tags: alvistack.cilium
-
-    - name: include role
-      ansible.builtin.include_role:
         name: alvistack.kube_cilium
       tags: alvistack.kube_cilium
 
