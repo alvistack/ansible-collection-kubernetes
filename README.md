@@ -75,13 +75,13 @@ For production environment we should backed with [Ceph File System](https://docs
 
 Traditionally we could use [Docker](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#docker) or [containerd](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#containerd) as [Kubernetes container runtime (CRI)](https://kubernetes.io/blog/2016/12/container-runtime-interface-cri-in-kubernetes/). Now a day, this collection is default with the modern [CRI-O](https://kubernetes.io/docs/setup/production-environment/container-runtimes/#cri-o) implementation.
 
-Moreover, we are using [Weave Net](https://github.com/weaveworks/weave) as [Kubernetes network plugin (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) so we could support [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+Moreover, we are using [Cilium](https://cilium.io/) as [Kubernetes network plugin (CNI)](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/network-plugins/) so we could support [Kubernetes Network Policies](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
 This deployment will setup the follow components:
 
   - [Kubernetes](https://kubernetes.io/)
-      - CRI: [CRI-O](https://cri-o.io/)
-      - CNI: [Weave Net](https://github.com/weaveworks/weave)
+      - CRI: [CRI-O](https://github.com/cri-o/cri-o)
+      - CNI: [Cilium](https://github.com/cilium/cilium)
       - CSI: [CSI CephFS](https://github.com/ceph/ceph-csi)
       - Addons:
           - [Kubernetes Dashboard](https://github.com/kubernetes/dashboard)
@@ -107,7 +107,7 @@ Once update now run the playbooks:
     cd /opt/ansible-collection-kubernetes
     ansible-playbook playbooks/converge.yml
     ansible-playbook playbooks/50-kube-verify.yml
-    ansible-playbook playbooks/60-kube_weave-install.yml
+    ansible-playbook playbooks/60-kube_cilium-install.yml
     ansible-playbook playbooks/70-kube_csi_cephfs-install.yml
     ansible-playbook playbooks/70-kube_csi_cephfs-verify.yml
     ansible-playbook playbooks/80-kube_dashboard-install.yml

@@ -18,6 +18,10 @@
 	path = roles/alvistack.chrony
 	url = https://github.com/alvistack/ansible-role-chrony.git
 	branch = develop
+[submodule "roles/alvistack.cilium"]
+	path = roles/alvistack.cilium
+	url = https://github.com/alvistack/ansible-role-cilium.git
+	branch = develop
 [submodule "roles/alvistack.conmon"]
 	path = roles/alvistack.conmon
 	url = https://github.com/alvistack/ansible-role-conmon.git
@@ -61,6 +65,10 @@
 [submodule "roles/alvistack.kube_cert_manager"]
 	path = roles/alvistack.kube_cert_manager
 	url = https://github.com/alvistack/ansible-role-kube_cert_manager.git
+	branch = develop
+[submodule "roles/alvistack.kube_cilium"]
+	path = roles/alvistack.kube_cilium
+	url = https://github.com/alvistack/ansible-role-kube_cilium.git
 	branch = develop
 [submodule "roles/alvistack.kube_csi_cephfs"]
 	path = roles/alvistack.kube_csi_cephfs

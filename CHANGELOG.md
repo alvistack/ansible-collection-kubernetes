@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Cilium as default CNI
+
 ## 20220427.1.1 - 2022-04-27
 
 ### Major Changes
