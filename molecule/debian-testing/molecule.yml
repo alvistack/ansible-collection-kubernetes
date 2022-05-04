@@ -46,7 +46,8 @@ platforms:
       - "disk_driver :cache => 'writeback'"
       - "storage :file, bus: 'virtio', cache: 'writeback'"
     groups:
-      - kube_node
+      - etcd
+      - kube_master
   - name: ${MOLECULE_INSTANCE_NAME}-3
     box: alvistack/debian-testing
     cpu: 2
@@ -59,6 +60,7 @@ platforms:
       - "disk_driver :cache => 'writeback'"
       - "storage :file, bus: 'virtio', cache: 'writeback'"
     groups:
+      - etcd
       - kube_node
 lint: |
   set -euxo pipefail
