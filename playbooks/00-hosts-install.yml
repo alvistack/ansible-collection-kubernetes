@@ -20,40 +20,40 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.python
-      tags: alvistack.python
+        name: python
+      tags: python
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.bootstrap
-      tags: alvistack.bootstrap
+        name: bootstrap
+      tags: bootstrap
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.git
-      tags: alvistack.git
+        name: git
+      tags: git
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.vim
-      tags: alvistack.vim
+        name: vim
+      tags: vim
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.locales
-      tags: alvistack.locales
+        name: locales
+      tags: locales
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.timezone
-      tags: alvistack.timezone
+        name: timezone
+      tags: timezone
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.chrony
-      tags: alvistack.chrony
+        name: chrony
+      tags: chrony
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.sshd
-      tags: alvistack.sshd
+        name: sshd
+      tags: sshd

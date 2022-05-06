@@ -20,5 +20,5 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kernel
-      tags: alvistack.kernel
+        name: kernel
+      tags: kernel

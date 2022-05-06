@@ -24,8 +24,8 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.ceph_common
-      tags: alvistack.ceph_common
+        name: ceph_common
+      tags: ceph_common
 
 - hosts: kube_master
   remote_user: root
@@ -40,16 +40,16 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
-      tags: alvistack.kube_csi_cephfs
+      tags: kube_csi_cephfs
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kube_addon_manager
-      tags: alvistack.kube_addon_manager
+        name: kube_addon_manager
+      tags: kube_addon_manager
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kube_csi_cephfs
+        name: kube_csi_cephfs
       vars:
         kube_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
-      tags: alvistack.kube_csi_cephfs
+      tags: kube_csi_cephfs

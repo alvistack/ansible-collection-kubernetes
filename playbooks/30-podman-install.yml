@@ -20,35 +20,35 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.crun
-      tags: alvistack.crun
+        name: crun
+      tags: crun
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.containers_common
-      tags: alvistack.containers_common
+        name: containers_common
+      tags: containers_common
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.containernetworking_plugins
-      tags: alvistack.containernetworking_plugins
+        name: containernetworking_plugins
+      tags: containernetworking_plugins
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.conmon
-      tags: alvistack.conmon
+        name: conmon
+      tags: conmon
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.skopeo
-      tags: alvistack.skopeo
+        name: skopeo
+      tags: skopeo
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.buildah
-      tags: alvistack.buildah
+        name: buildah
+      tags: buildah
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.podman
-      tags: alvistack.podman
+        name: podman
+      tags: podman

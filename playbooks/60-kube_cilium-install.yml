@@ -20,13 +20,13 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kube_addon_manager
-      tags: alvistack.kube_addon_manager
+        name: kube_addon_manager
+      tags: kube_addon_manager
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.kube_cilium
-      tags: alvistack.kube_cilium
+        name: kube_cilium
+      tags: kube_cilium
 
 - hosts: ansible
   remote_user: root
@@ -34,5 +34,5 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.cilium
-      tags: alvistack.cilium
+        name: cilium
+      tags: cilium

@@ -20,15 +20,15 @@
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.ansible
-      tags: alvistack.ansible
+        name: ansible
+      tags: ansible
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.rclone
-      tags: alvistack.rclone
+        name: rclone
+      tags: rclone
 
     - name: include role
       ansible.builtin.include_role:
-        name: alvistack.restic
-      tags: alvistack.restic
+        name: restic
+      tags: restic
