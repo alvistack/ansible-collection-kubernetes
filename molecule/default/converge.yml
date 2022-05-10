@@ -15,4 +15,3 @@
 # limitations under the License.
 
 - import_playbook: ../../playbooks/converge.yml
-- import_playbook: ../../playbooks/60-kube_cilium-install.yml
