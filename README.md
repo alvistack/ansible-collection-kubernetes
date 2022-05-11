@@ -21,14 +21,14 @@ This collection was designed for:
   - CentOS 7, 8 Stream, 9 Stream
   - openSUSE Leap 15.3, Leap 15.4, Tumbleweed
   - Debian 10, 11, Testing
-  - Fedora 34, 35, 36, Rawhide
+  - Fedora 35, 36, Rawhide
   - RHEL 7, 8, 9
 
 ## Quick Start
 
 ### Bootstrap Ansible and Roles
 
-Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then install Ansible (see https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack):
+Start by cloning the repository, checkout the corresponding branch, and init with `git submodule`, then install Ansible (see <https://software.opensuse.org/download/package?package=ansible&project=home%3Aalvistack>):
 
     # GIT checkout development branch
     mkdir -p /opt/ansible-collection-kubernetes
