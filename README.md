@@ -128,6 +128,16 @@ You could also run our [Molecule](https://molecule.readthedocs.io/en/stable/) te
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on running Molecule.
 
+## Versioning
+
+### `YYYYMMDD.Y.Z`
+
+Release tags could be find from [GitHub Release](https://github.com/alvistack/ansible-collection-kubernetes/tags) of this repository. Thus using these tags will ensure you are running the most up to date stable version of this image.
+
+### `YYYYMMDD.0.0`
+
+Version tags ended with `.0.0` are rolling release rebuild by [GitLab pipeline](https://gitlab.com/alvistack/ansible-collection-kubernetes/-/pipelines) in weekly basis. Thus using these tags will ensure you are running the latest packages provided by the base image project.
+
 ## License
 
   - Code released under [Apache License 2.0](LICENSE)
