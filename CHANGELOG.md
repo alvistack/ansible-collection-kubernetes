@@ -4,6 +4,12 @@
 
 ### Major Changes
 
+## 20220608.1.1 - 2022-06-08
+
+### Major Changes
+
+  - Support Ansible community package 5.9.0
+
 ## 20220520.1.1 - 2022-05-20
 
 ### Major Changes
