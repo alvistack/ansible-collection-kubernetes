@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+  - Remove Ubuntu 21.10 support
+
 ## 20220622.1.1 - 2022-06-22
 
 ### Major Changes
