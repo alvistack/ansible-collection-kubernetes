@@ -8,9 +8,9 @@
 [![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
 [![Ansible Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes)
 
-Ansible collection for deploying Kubernetes.
+Ansible Collection for [Kubernetes](https://github.com/kubernetes/kubernetes).
 
-This Ansible collection provides Ansible playbooks and roles for the deployment and configuration of an [Kubernetes](https://github.com/kubernetes/kubernetes) environment.
+This Ansible collection provides Ansible playbooks and roles for the deployment and configuration of a [Certified Kubernetes](https://www.cncf.io/certification/software-conformance/) environment.
 
 ## Requirements
 
