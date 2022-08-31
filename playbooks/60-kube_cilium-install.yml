@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master
+- name: 60-kube_cilium-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
@@ -28,7 +29,8 @@
         name: kube_cilium
       tags: kube_cilium
 
-- hosts: ansible
+- name: 60-kube_cilium-install | ansible
+  hosts: ansible
   remote_user: root
   become: true
   tasks:

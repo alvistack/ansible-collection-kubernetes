@@ -14,11 +14,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: all
+- name: 70-kube_csi_cephfs-install | all
+  hosts: all
   remote_user: root
   become: true
 
-- hosts: kube_master:kube_node
+- name: 70-kube_csi_cephfs-install | kube_master:kube_node
+  hosts: kube_master:kube_node
   remote_user: root
   become: true
   tasks:
@@ -27,7 +29,8 @@
         name: ceph_common
       tags: ceph_common
 
-- hosts: kube_master
+- name: 70-kube_csi_cephfs-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
