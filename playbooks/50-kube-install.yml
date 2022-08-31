@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master:kube_node
+- name: 50-kube-install | kube_master:kube_node
+  hosts: kube_master:kube_node
   remote_user: root
   become: true
   tasks:
@@ -33,7 +34,8 @@
         name: kube_kubeadm
       tags: kube_kubeadm
 
-- hosts: etcd
+- name: 50-kube-install | etcd
+  hosts: etcd
   remote_user: root
   become: true
   tasks:
@@ -42,7 +44,8 @@
         name: etcd
       tags: etcd
 
-- hosts: kube_master
+- name: 50-kube-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
@@ -51,7 +54,8 @@
         name: kube_master
       tags: kube_master
 
-- hosts: kube_node:!kube_master
+- name: 50-kube-install | kube_node:!kube_master
+  hosts: kube_node:!kube_master
   remote_user: root
   become: true
   tasks:
@@ -60,7 +64,8 @@
         name: kube_node
       tags: kube_node
 
-- hosts: ansible
+- name: 50-kube-install | ansible
+  hosts: ansible
   remote_user: root
   become: true
   tasks:

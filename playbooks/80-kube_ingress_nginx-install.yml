@@ -14,7 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- hosts: kube_master
+- name: 80-kube_ingress_nginx-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
