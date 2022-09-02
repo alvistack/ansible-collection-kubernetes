@@ -14,5 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: ../../playbooks/60-kube_flannel-install.yml
-- import_playbook: ../../playbooks/verify.yml
+- name: import playbook ../../playbooks/60-kube_flannel-install
+  import_playbook: ../../playbooks/60-kube_flannel-install.yml
+
+- name: import playbook ../../playbooks/verify
+  import_playbook: ../../playbooks/verify.yml

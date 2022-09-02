@@ -14,4 +14,5 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- import_playbook: 50-kube-verify.yml
+- name: import playbook 50-kube-verify
+  import_playbook: 50-kube-verify.yml
