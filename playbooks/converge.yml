@@ -14,20 +14,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: import playbook 00-hosts-install
+- name: import playbook 00-hosts-install.yml
   import_playbook: 00-hosts-install.yml
 
-- name: import playbook 10-kernel-install
+- name: import playbook 10-kernel-install.yml
   import_playbook: 10-kernel-install.yml
 
-- name: import playbook 20-ansible-install
+- name: import playbook 20-ansible-install.yml
   import_playbook: 20-ansible-install.yml
 
-- name: import playbook 30-podman-install
+- name: import playbook 30-podman-install.yml
   import_playbook: 30-podman-install.yml
 
-- name: import playbook 30-cri_o-install
+- name: import playbook 30-cri_o-install.yml
   import_playbook: 30-cri_o-install.yml
 
-- name: import playbook 50-kube-install
+- name: import playbook 50-kube-install.yml
   import_playbook: 50-kube-install.yml
