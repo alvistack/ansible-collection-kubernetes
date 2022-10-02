@@ -35,9 +35,10 @@
   become: true
   tasks:
     - name: fetch ceph client.admin key
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        ceph auth get-key client.admin
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          ceph auth get-key client.admin
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['ceph_mon'][0] }}"

@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+  - Support Ubuntu 22.10
+  - Support Fedora 37
+
 ## 20220915.1.1 - 2022-09-15
 
 ### Major Changes
