@@ -32,7 +32,8 @@
       failed_when: false
 
     - name: crictl pull image
-      ansible.builtin.command: crictl pull {{ item }}
+      ansible.builtin.command:
+        cmd: crictl pull {{ item }}
       loop: "{{ result.stdout_lines }}"
       changed_when: result is not succeeded
 
@@ -48,6 +49,7 @@
       failed_when: false
 
     - name: crictl rmi
-      ansible.builtin.command: crictl rmi {{ item }}
+      ansible.builtin.command:
+        cmd: crictl rmi {{ item }}
       loop: "{{ result.stdout_lines }}"
       changed_when: result is not succeeded

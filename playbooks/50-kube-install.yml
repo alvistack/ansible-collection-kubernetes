@@ -85,9 +85,10 @@
       tags: kube_kubectl
 
     - name: base64 encode
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          tar zcfP - {{ _params | join(' ') }} | base64 -w 0
       vars:
         _params:
           - "/etc/etcd/pki"
@@ -101,9 +102,10 @@
       tags: kube_kubectl
 
     - name: base64 decode
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
         executable: "/bin/bash"
       register: base64_decode_result

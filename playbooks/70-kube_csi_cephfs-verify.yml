@@ -20,14 +20,16 @@
   become: true
   tasks:
     - name: kubectl version
-      ansible.builtin.command: kubectl version
+      ansible.builtin.command:
+        cmd: kubectl version
       register: result
       changed_when: result is not succeeded
 
     - name: kubectl get pod --all-namespaces
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
         executable: "/bin/bash"
       when: inventory_hostname == groups['kube_master'][0]
@@ -112,9 +114,10 @@
       retries: 60
 
     - name: kubectl get pod --all-namespaces
-      ansible.builtin.shell: |
-        set -euxo pipefail
-        kubectl get pod --all-namespaces | egrep -e 'default\s+busybox\s+[0-9]+\/[0-9]+\s+Running'
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          kubectl get pod --all-namespaces | egrep -e 'default\s+busybox\s+[0-9]+\/[0-9]+\s+Running'
       args:
         executable: "/bin/bash"
       when: inventory_hostname == groups['kube_master'][0]
