@@ -71,9 +71,9 @@ platforms:
       - kube_node
 lint: |
   set -euxo pipefail
+  flake8
   yamllint .
   ansible-lint
-  flake8
 dependency:
   name: galaxy
   options:
