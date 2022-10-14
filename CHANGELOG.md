@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20221014.1.1 - 2022-10-14
+
+### Major Changes
+
+  - Support Ansible community package 6.5.0
   - Support Ubuntu 22.10
   - Support Fedora 37
 
