@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+-   Remove Fedora 35 support
 -   Remove openSUSE Leap 15.3 support
 
 ## 20221014.1.1 - 2022-10-14
