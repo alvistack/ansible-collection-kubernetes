@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20221110.1.1 - 2022-11-10
+
+### Major Changes
+
+-   Support Ansible community package 6.6.0
 -   Remove Fedora 35 support
 -   Remove openSUSE Leap 15.3 support
 
