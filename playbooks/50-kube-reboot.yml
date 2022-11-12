@@ -22,9 +22,7 @@
     - name: kubectl get --raw='/readyz?verbose'
       ansible.builtin.command:
         cmd: bash -c "kubectl get --raw='/readyz?verbose' | grep 'check passed'"
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
+      when: inventory_hostname == ansible_play_hosts[0]
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
@@ -37,6 +35,4 @@
         pre_reboot_delay: 60
         post_reboot_delay: 60
         test_command: bash -c "kubectl get --raw='/readyz?verbose' | grep 'check passed'"
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
+      throttle: 1
