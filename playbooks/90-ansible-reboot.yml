@@ -26,6 +26,4 @@
         pre_reboot_delay: 60
         post_reboot_delay: 60
         test_command: bash -c "whoami"
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
+      throttle: 1

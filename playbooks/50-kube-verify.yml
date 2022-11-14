@@ -32,9 +32,7 @@
           kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
         executable: "/bin/bash"
-      loop: "{{ ansible_play_hosts }}"
-      delegate_to: "{{ item }}"
-      run_once: true
+      when: inventory_hostname == ansible_play_hosts[0]
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
