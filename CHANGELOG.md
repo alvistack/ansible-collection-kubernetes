@@ -4,6 +4,12 @@
 
 ### Major Changes
 
+## 20221126.1.1 - 2022-11-26
+
+### Major Changes
+
+-   Support Ansible community package 7.0.0
+
 ## 20221110.1.1 - 2022-11-10
 
 ### Major Changes
