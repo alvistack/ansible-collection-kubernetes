@@ -15,4 +15,4 @@
 # limitations under the License.
 
 # kube_master
-kube_release: "1.24"
+kube_release: "1.25"
