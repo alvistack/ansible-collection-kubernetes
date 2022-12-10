@@ -4,6 +4,9 @@
 
 ### Major Changes
 
+-   Support Kubernetes 1.26
+-   Remove Kubernetes 1.23 support
+
 ## 20221209.1.1 - 2022-12-09
 
 ### Major Changes
