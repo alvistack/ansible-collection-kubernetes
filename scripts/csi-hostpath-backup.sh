@@ -75,7 +75,7 @@ ionice -c2 nice -n19 restic backup . \
 # HOSTPATH - Cleanup
 umount -lf $HOSTPATH_SNAPSHOT_DIR
 rmdir $HOSTPATH_SNAPSHOT_DIR
-lvchange -fan $HOSTPATH_VG/$HOSTPATH_SNAPSHOT
+lvchange -fy -an $HOSTPATH_VG/$HOSTPATH_SNAPSHOT
 lvremove -fy $HOSTPATH_VG/$HOSTPATH_SNAPSHOT
 
 # RESTIC - Rotation
