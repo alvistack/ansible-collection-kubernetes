@@ -20,11 +20,11 @@ PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
 TIMESTAMP=${TIMESTAMP:-$(date +%s)}
 
-CEPHFS_DIR=${CEPHFS_DIR:-"/mnt/ceph"}
+CEPHFS_DIR=${CEPHFS_DIR:-"/var/lib/csi-cephfs"}
 CEPHFS_SNAPSHOT_DIR=${CEPHFS_SNAPSHOT_DIR:-"$CEPHFS_DIR/.snap/$TIMESTAMP"}
 
 RESTIC_OPTS=${RESTIC_OPTS:-"--verbose"}
-RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/ceph"}
+RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/csi-cephfs"}
 RESTIC_PASSWORD_FILE=${RESTIC_PASSWORD_FILE:-"/root/.ssh/id_rsa"}
 
 RESTIC_KEEP_HOURLY=${RESTIC_KEEP_HOURLY:-"24"}
@@ -49,10 +49,8 @@ restic init \
     $RESTIC_OPTS
 fi
 
-# CEPHFS - Mount
-mount $CEPHFS_DIR || echo $?
-
 # CEPHFS - Snapshot
+mount $CEPHFS_DIR || echo $?
 mkdir -p $CEPHFS_SNAPSHOT_DIR
 
 # RESTIC - Backup

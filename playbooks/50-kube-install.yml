@@ -76,6 +76,11 @@
 
     - name: include role
       ansible.builtin.include_role:
+        name: helm
+      tags: helm
+
+    - name: include role
+      ansible.builtin.include_role:
         name: operator_sdk
       tags: operator_sdk
 
