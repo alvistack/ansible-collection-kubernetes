@@ -20,10 +20,10 @@ PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
 TIMESTAMP=${TIMESTAMP:-$(date +%s)}
 
-RESTIC_MOUNT_DIR=${RESTIC_MOUNT_DIR:-"/root/restores/restic/ceph"}
+RESTIC_MOUNT_DIR=${RESTIC_MOUNT_DIR:-"/root/restores/restic/csi-cephfs"}
 
 RESTIC_OPTS=${RESTIC_OPTS:-"--verbose"}
-RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/ceph"}
+RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/csi-cephfs"}
 RESTIC_PASSWORD_FILE=${RESTIC_PASSWORD_FILE:-"/root/.ssh/id_rsa"}
 
 exec 9>$PID_FILE
