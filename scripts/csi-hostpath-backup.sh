@@ -62,7 +62,7 @@ mkdir -p $HOSTPATH_SNAPSHOT_DIR
 mount -o ro /dev/$HOSTPATH_VG/$HOSTPATH_SNAPSHOT $HOSTPATH_SNAPSHOT_DIR
 
 # RESTIC - Backup
-cd $HOSTPATH_SNAPSHOT_DIR
+pushd $HOSTPATH_SNAPSHOT_DIR
 restic unlock \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
@@ -71,11 +71,11 @@ ionice -c2 nice -n19 restic backup . \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
     $RESTIC_OPTS
+popd
 
 # HOSTPATH - Cleanup
 umount -lf $HOSTPATH_SNAPSHOT_DIR
 rmdir $HOSTPATH_SNAPSHOT_DIR
-lvchange -fy -an $HOSTPATH_VG/$HOSTPATH_SNAPSHOT
 lvremove -fy $HOSTPATH_VG/$HOSTPATH_SNAPSHOT
 
 # RESTIC - Rotation

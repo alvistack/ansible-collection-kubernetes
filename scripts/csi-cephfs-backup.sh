@@ -54,7 +54,7 @@ mount $CEPHFS_DIR || echo $?
 mkdir -p $CEPHFS_SNAPSHOT_DIR
 
 # RESTIC - Backup
-cd $CEPHFS_SNAPSHOT_DIR
+pushd $CEPHFS_SNAPSHOT_DIR
 restic unlock \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
@@ -63,6 +63,7 @@ ionice -c2 nice -n19 restic backup . \
     --repo $RESTIC_REPOSITORY \
     --password-file $RESTIC_PASSWORD_FILE \
     $RESTIC_OPTS
+popd
 
 # CEPHFS - Cleanup
 rmdir $CEPHFS_SNAPSHOT_DIR
