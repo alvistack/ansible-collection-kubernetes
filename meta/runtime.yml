@@ -14,4 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-requires_ansible: ">=4.10"
+requires_ansible: ">=2.11"
