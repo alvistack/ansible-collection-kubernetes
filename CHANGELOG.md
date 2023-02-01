@@ -4,6 +4,12 @@
 
 ### Major Changes
 
+## 20230201.1.1 - 2023-02-01
+
+### Major Changes
+
+-   Support Ansible community package 7.2.0
+
 -   Support Kubernetes 1.26
 -   Remove Kubernetes 1.23 support
 
