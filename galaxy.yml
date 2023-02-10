@@ -30,6 +30,6 @@ issues: https://github.com/alvistack/ansible-collection-kubernetes/issues
 
 dependencies: {}
 tags:
-  - system
+  - linux
 authors:
   - "Wong Hoi Sing Edison <hswong3i@pantarei-design.com>"
