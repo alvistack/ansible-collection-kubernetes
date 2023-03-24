@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+-   Support Ubuntu 23.04
 -   Support Kubernetes 1.27
 
 ## 20230301.1.1 - 2023-03-01
