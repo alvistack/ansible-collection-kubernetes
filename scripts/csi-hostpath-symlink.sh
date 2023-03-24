@@ -16,11 +16,11 @@
 
 set -euxo pipefail
 
-kubectl get pv -o name | while read line
+kubectl get pv --output=name | while read line
 do
-    namespace="$(kubectl get $line -o jsonpath='{.spec.claimRef.namespace}')"
-    name="$(kubectl get $line -o jsonpath='{.spec.claimRef.name}')"
-    path="volumes/$(kubectl get $line -o jsonpath='{.spec.csi.volumeHandle}')"
+    namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
+    name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
+    path="volumes/$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}')"
 
     mkdir -p symlinks/$namespace
     cd symlinks/$namespace

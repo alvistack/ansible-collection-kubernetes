@@ -16,11 +16,11 @@
 
 set -euxo pipefail
 
-kubectl get pv -o name | while read line
+kubectl get pv --output=name | while read line
 do
-    namespace="$(kubectl get $line -o jsonpath='{.spec.claimRef.namespace}')"
-    name="$(kubectl get $line -o jsonpath='{.spec.claimRef.name}')"
-    path="volumes/csi/csi-vol-$(kubectl get $line -o jsonpath='{.spec.csi.volumeHandle}' | sed 's/^0001-0004-ceph-0000000000000001-//g')"
+    namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
+    name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
+    path="volumes/csi/csi-vol-$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}' | sed 's/^0001-0004-ceph-0000000000000001-//g')"
 
     if [[ -f $path/.meta ]]
     then
