@@ -18,7 +18,7 @@ This collection require Ansible community package 4.10 or higher.
 
 This collection was designed for:
 
--   Ubuntu 18.04, 20.04, 22.04, 22.10
+-   Ubuntu 18.04, 20.04, 22.04, 22.10, 23.04
 -   CentOS 7, 8 Stream, 9 Stream
 -   openSUSE Leap 15.4, Tumbleweed
 -   Debian 10, 11, Testing
@@ -64,8 +64,8 @@ Simply execule our default Molecule test case and it will deploy all default com
     molecule test -s default
 
     # Confirm the version and status of Kubernetes
-    kubectl version
-    kubectl get node --output wide
+    kubectl version --output=yaml
+    kubectl get node --output=yaml
     kubectl get pod --all-namespaces
 
 ### Production
@@ -116,8 +116,8 @@ Once update now run the playbooks:
     ansible-playbook playbooks/80-kube_cert_manager-install.yml
 
     # Confirm the version and status of Kubernetes
-    kubectl version
-    kubectl get node --output wide
+    kubectl version --output=yaml
+    kubectl get node --output=yaml
     kubectl get pod --all-namespaces
 
 ### Molecule

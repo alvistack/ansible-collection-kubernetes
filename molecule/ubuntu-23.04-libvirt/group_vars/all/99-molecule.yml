@@ -1,4 +1,4 @@
-#!/bin/bash
+---
 
 # Copyright 2022 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
@@ -14,17 +14,4 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -euxo pipefail
-
-kubectl get pv --output=name | while read line
-do
-    namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
-    name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
-    path="volumes/$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}')"
-
-    mkdir -p symlinks/$namespace
-    cd symlinks/$namespace
-    rm -rf $name
-    ln -fs ../../$path $name
-    cd ../../
-done
+kube_release: "1.25"
