@@ -64,8 +64,8 @@ Simply execule our default Molecule test case and it will deploy all default com
     molecule test -s default
 
     # Confirm the version and status of Kubernetes
-    kubectl version
-    kubectl get node --output wide
+    kubectl version --output=yaml
+    kubectl get node --output=yaml
     kubectl get pod --all-namespaces
 
 ### Production
@@ -116,8 +116,8 @@ Once update now run the playbooks:
     ansible-playbook playbooks/80-kube_cert_manager-install.yml
 
     # Confirm the version and status of Kubernetes
-    kubectl version
-    kubectl get node --output wide
+    kubectl version --output=yaml
+    kubectl get node --output=yaml
     kubectl get pod --all-namespaces
 
 ### Molecule
