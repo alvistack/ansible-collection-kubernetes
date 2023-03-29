@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20230329.1.1 - 2023-03-29
+
+### Major Changes
+
+-   Support Ansible community package 7.4.0
 -   Support Ubuntu 23.04
 -   Support Kubernetes 1.27
 
