@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+-   Support Fedora 38
 -   Remove Kubernetes 1.24 support
 
 ## 20230329.1.1 - 2023-03-29
