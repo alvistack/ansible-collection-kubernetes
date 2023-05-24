@@ -178,9 +178,12 @@
 
 ### Major Changes
 
--   Bugfix [ansible-lint `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
--   Bugfix [ansible-lint `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
--   Bugfix [ansible-lint `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
+-   Bugfix [ansible-lint
+    `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
+-   Bugfix [ansible-lint
+    `no-handler`](https://github.com/ansible-community/ansible-lint/pull/1402)
+-   Bugfix [ansible-lint
+    `unnamed-task`](https://github.com/ansible-community/ansible-lint/pull/1413)
 -   Install Python package with `pipx`
 -   Simplify Python dependency with system packages
 -   Support RHEL 8 with Molecule
@@ -209,7 +212,8 @@
 -   Upgrade minimal Ansible Lint support to 4.3.2
 -   Shutdown Kubernetes containers before shutting down the system
 -   Shutdown CRI-O containers before shutting down the system
--   Attach/Detach RBD or CephFS after/before `ceph.target` during startup/shutdown
+-   Attach/Detach RBD or CephFS after/before `ceph.target` during
+    startup/shutdown
 -   Upgrade Travis CI test as Ubuntu Focal based
 -   Upgrade minimal Ansible support to 2.10.0
 -   Support openSUSE Leap 15.2
@@ -266,10 +270,12 @@
 
 -   Avoid EPEL Repo and IUS Repo for CentOS/RHEL 7
 -   Handle controller setup with `ansible-install.yml`
--   Copy keys for controller by `ceph-install.yml` and `kubernetes-install.yml`
+-   Copy keys for controller by `ceph-install.yml` and
+    `kubernetes-install.yml`
 -   Replace default `cephfs-provisioner` with `csi-cephfs`
 
 ## 4.0.0 - 2019-11-05
 
 -   Initial release for Ansible 2.9 or higher
--   Support both Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap 15.1
+-   Support both Ubuntu 16.04/18.04 or RHEL/CentOS 7 or openSUSE Leap
+    15.1
