@@ -4,6 +4,8 @@
 
 ### Major Changes
 
+-   Support openSUSE Leap 15.5
+
 ## 20230512.1.1 - 2023-05-12
 
 ### Major Changes
