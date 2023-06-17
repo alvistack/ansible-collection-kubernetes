@@ -147,13 +147,6 @@ build:ubuntu-20.04-libvirt:
     _BOX: "ubuntu-20.04"
     _PROVIDER: "libvirt"
 
-build:ubuntu-18.04-libvirt:
-  <<: *job-molecule-test
-  stage: build
-  variables:
-    _BOX: "ubuntu-18.04"
-    _PROVIDER: "libvirt"
-
 test:centos-9-stream-libvirt:
   <<: *job-molecule-test
   stage: test
@@ -235,15 +228,6 @@ test:debian-11-libvirt:
   allow_failure: true
   retry: 0
 
-test:debian-10-libvirt:
-  <<: *job-molecule-test
-  stage: test
-  variables:
-    _BOX: "debian-10"
-    _PROVIDER: "libvirt"
-  allow_failure: true
-  retry: 0
-
 test:fedora-rawhide-libvirt:
   <<: *job-molecule-test
   stage: test
@@ -304,4 +288,3 @@ deploy:ansible-galaxy:
   needs:
     - build:ubuntu-22.04-libvirt
     - build:ubuntu-20.04-libvirt
-    - build:ubuntu-18.04-libvirt
