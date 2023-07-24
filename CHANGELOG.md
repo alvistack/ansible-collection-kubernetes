@@ -4,6 +4,13 @@
 
 ### Major Changes
 
+## 20230724.1.2 - 2023-07-24
+
+### Major Changes
+
+-   Support Ansible community package 8.2.0
+-   Remove Ubuntu 22.10 support
+
 ## 20230623.1.1 - 2023-06-23
 
 ### Major Changes
