@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+-   Support Kubernetes 1.28
 -   Support Ansible community package 8.3.0
 
 ## 20230724.1.2 - 2023-07-24
