@@ -4,6 +4,11 @@
 
 ### Major Changes
 
+## 20230914.1.1 - 2023-09-14
+
+### Major Changes
+
+-   Support Ansible community package 8.4.0
 -   Remove Kubernetes 1.25 support
 -   Support Kubernetes 1.28
 -   Support Ansible community package 8.3.0
