@@ -4,6 +4,7 @@
 
 ### Major Changes
 
+-   Support Fedora 39
 -   Support Ubuntu 23.10
 
 ## 20230914.1.1 - 2023-09-14
