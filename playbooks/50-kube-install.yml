@@ -96,9 +96,8 @@
           tar zcfP - {{ _params | join(' ') }} | base64 -w 0
       vars:
         _params:
-          - "/etc/etcd/pki"
-          - "/etc/kubernetes/admin.conf"
-          - "/etc/kubernetes/pki"
+          - "/etc/etcd"
+          - "/etc/kubernetes"
       args:
         executable: "/bin/bash"
       delegate_to: "{{ groups['kube_master'][0] }}"
