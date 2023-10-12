@@ -2,14 +2,13 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
-### Major Changes
+## 20231012.1.1 - 2023-10-12
 
+-   Support Ansible community package 8.5.0
 -   Support Fedora 39
 -   Support Ubuntu 23.10
 
 ## 20230914.1.1 - 2023-09-14
-
-### Major Changes
 
 -   Support Ansible community package 8.4.0
 -   Remove Kubernetes 1.25 support
@@ -18,20 +17,14 @@
 
 ## 20230724.1.2 - 2023-07-24
 
-### Major Changes
-
 -   Support Ansible community package 8.2.0
 -   Remove Ubuntu 22.10 support
 
 ## 20230623.1.1 - 2023-06-23
 
-### Major Changes
-
 -   Support Ansible community package 8.1.0
 
 ## 20230617.1.1 - 2023-06-17
-
-### Major Changes
 
 -   Remove Ubuntu 18.04 support
 -   Remove Debian 10 support
@@ -40,15 +33,11 @@
 
 ## 20230512.1.1 - 2023-05-12
 
-### Major Changes
-
 -   Remove Fedora 36 support
 -   Support Fedora 38
 -   Remove Kubernetes 1.24 support
 
 ## 20230329.1.1 - 2023-03-29
-
-### Major Changes
 
 -   Support Ansible community package 7.4.0
 -   Support Ubuntu 23.04
@@ -56,13 +45,9 @@
 
 ## 20230301.1.1 - 2023-03-01
 
-### Major Changes
-
 -   Support Ansible community package 7.3.0
 
 ## 20230201.1.1 - 2023-02-01
-
-### Major Changes
 
 -   Support Ansible community package 7.2.0
 -   Support Kubernetes 1.26
@@ -70,19 +55,13 @@
 
 ## 20221209.1.1 - 2022-12-09
 
-### Major Changes
-
 -   Support Ansible community package 7.1.0
 
 ## 20221126.1.1 - 2022-11-26
 
-### Major Changes
-
 -   Support Ansible community package 7.0.0
 
 ## 20221110.1.1 - 2022-11-10
-
-### Major Changes
 
 -   Support Ansible community package 6.6.0
 -   Remove Fedora 35 support
@@ -90,60 +69,42 @@
 
 ## 20221014.1.1 - 2022-10-14
 
-### Major Changes
-
 -   Support Ansible community package 6.5.0
 -   Support Ubuntu 22.10
 -   Support Fedora 37
 
 ## 20220915.1.1 - 2022-09-15
 
-### Major Changes
-
 -   Support Ansible community package 6.4.0
 
 ## 20220824.1.1 - 2022-08-24
-
-### Major Changes
 
 -   Support Ansible community package 6.3.0
 
 ## 20220803.1.1 - 2022-08-03
 
-### Major Changes
-
 -   Support Ansible community package 6.2.0
 
 ## 20220714.1.1 - 2022-07-14
-
-### Major Changes
 
 -   Support Ansible community package 6.1.0
 -   Remove Ubuntu 21.10 support
 
 ## 20220622.1.1 - 2022-06-22
 
-### Major Changes
-
 -   Support Ansible community package 6.0.0
 
 ## 20220608.1.1 - 2022-06-08
 
-### Major Changes
-
 -   Support Ansible community package 5.9.0
 
 ## 20220520.1.1 - 2022-05-20
-
-### Major Changes
 
 -   Support Ansible community package 5.8.0
 -   Remove Fedora 34 support
 -   Cilium as default CNI
 
 ## 20220427.1.1 - 2022-04-27
-
-### Major Changes
 
 -   Rename Ansible Role with FQCN
 -   Support Ansible community package 5.7.0
@@ -152,8 +113,6 @@
 -   Support openSUSE Leap 15.4
 
 ## 20220407.1.2 - 2022-04-07
-
-### Major Changes
 
 -   Support Ansible community package 5.6.0
 -   Support Fedora 36
@@ -164,14 +123,10 @@
 
 ## 20220211.1.1 - 2022-02-11
 
-### Major Changes
-
 -   Remove Ubuntu 21.04 support
 -   Skip package upgrade before running molecule
 
 ## 20211231.1.3 - 2021-12-31
-
-### Major Changes
 
 -   Support Fedora Rawhide
 -   Support Debian Testing
@@ -179,8 +134,6 @@
 -   Upgrade minimal Ansible community package support to 4.10
 
 ## 20211020.1.1 - 2021-10-20
-
-### Major Changes
 
 -   Remove Fedora 33 support
 -   Remove Ubuntu 20.10 support
@@ -194,23 +147,17 @@
 
 ## 20210718.1.1 - 2021-07-18
 
-### Major Changes
-
 -   Upgrade minimal Ansible community package support to 4.2.0
 -   Support Debian 11
 -   Support openSUSE Leap 15.3
 
 ## 20210602.1.1 - 2021-06-02
 
-### Major Changes
-
 -   Upgrade minimal Ansible support to 4.0.0
 -   Support Fedora 34
 -   Support Ubuntu 21.04
 
 ## 20210313.1.1 - 2021-03-13
-
-### Major Changes
 
 -   Bugfix [ansible-lint
     `namespace`](https://github.com/ansible-community/ansible-lint/pull/1451)
@@ -229,8 +176,6 @@
 
 ## 4.6.0 - 2020-12-28
 
-### Major Changes
-
 -   Simplify Molecule scenario for vagrant-libvirt
 -   Migrate from Travis CI to GitLab CI
 -   Split Ceph related to `alvistack/ansible-collection-ceph`
@@ -240,8 +185,6 @@
 -   Bugfix graceful shutdown deadlock due to systemd dependencies
 
 ## 4.5.0 - 2020-08-26
-
-### Major Changes
 
 -   Upgrade minimal Ansible Lint support to 4.3.2
 -   Shutdown Kubernetes containers before shutting down the system
@@ -255,8 +198,6 @@
 
 ## 4.4.0 - 2020-06-04
 
-### Major Changes
-
 -   Install with static binary archive
 -   Default with `crun`
 -   Support Fedora 32
@@ -269,8 +210,6 @@
 -   `molecule -s default` with delegated to localhost
 
 ## 4.3.0 - 2020-04-22
-
-### Major Changes
 
 -   Support CentOS/RHEL 8
 -   Support Ubuntu 20.04
@@ -289,8 +228,6 @@
 
 ## 4.2.0 - 2020-02-15
 
-### Major Changes
-
 -   Migrate molecule driver to Libvirt
 -   Migrate molecule verifier to Ansible
 -   Support Ubuntu 19.10
@@ -299,8 +236,6 @@
 -   Default with `mainline` kernel
 
 ## 4.1.0 - 2020-01-15
-
-### Major Changes
 
 -   Avoid EPEL Repo and IUS Repo for CentOS/RHEL 7
 -   Handle controller setup with `ansible-install.yml`
