@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20231012.1.1 - 2023-10-12
+
+-   Support Ansible community package 8.5.0
 -   Support Fedora 39
 -   Support Ubuntu 23.10
 
