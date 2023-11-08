@@ -2,6 +2,10 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20231108.1.2 - 2023-11-08
+
+-   Support Ansible community package 9.0.0
+
 ## 20231108.1.1 - 2023-11-08
 
 -   Support Ansible community package 8.6.0
