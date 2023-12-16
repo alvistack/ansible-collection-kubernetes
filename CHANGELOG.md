@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+-   Remove openSUSE Leap 15.4 support
 -   Support Kubernetes 1.29
 
 ## 20231108.1.2 - 2023-11-08
