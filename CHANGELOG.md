@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+-   Remove Fedora 37 support
 -   Remove openSUSE Leap 15.4 support
 -   Support Kubernetes 1.29
 
