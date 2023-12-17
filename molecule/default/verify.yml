@@ -17,5 +17,11 @@
 - name: import playbook ../../playbooks/60-kube_flannel-install.yml
   import_playbook: ../../playbooks/60-kube_flannel-install.yml
 
+- name: import playbook ../../playbooks/50-kube-reboot.yml
+  import_playbook: ../../playbooks/50-kube-reboot.yml
+
+- name: import playbook ../../playbooks/90-ansible-reboot.yml
+  import_playbook: ../../playbooks/90-ansible-reboot.yml
+
 - name: import playbook ../../playbooks/verify.yml
   import_playbook: ../../playbooks/verify.yml
