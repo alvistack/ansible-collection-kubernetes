@@ -1,17 +1,17 @@
 [all]
-rhel9 ansible_host=54.254.94.130 ansible_connection=ssh ansible_user=root
+localhost ansible_host=127.0.0.1 ansible_connection=local
 
 [ansible]
-#rhel9
+localhost
 
 [etcd]
-rhel9
+localhost
 
 [kube_master]
-rhel9
+localhost
 
 [kube_node]
-rhel9
+localhost
 
 [ceph_mon]
-#rhel9
+localhost
