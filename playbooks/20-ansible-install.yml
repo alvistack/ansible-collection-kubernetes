@@ -22,14 +22,11 @@
     - name: include role
       ansible.builtin.include_role:
         name: ansible
-      tags: ansible
 
     - name: include role
       ansible.builtin.include_role:
         name: rclone
-      tags: rclone
 
     - name: include role
       ansible.builtin.include_role:
         name: restic
-      tags: restic

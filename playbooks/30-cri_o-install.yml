@@ -22,29 +22,23 @@
     - name: include role
       ansible.builtin.include_role:
         name: crun
-      tags: crun
 
     - name: include role
       ansible.builtin.include_role:
         name: containers_common
-      tags: containers_common
 
     - name: include role
       ansible.builtin.include_role:
         name: containernetworking_plugins
-      tags: containernetworking_plugins
 
     - name: include role
       ansible.builtin.include_role:
         name: conmon
-      tags: conmon
 
     - name: include role
       ansible.builtin.include_role:
         name: cri_o
-      tags: cri_o
 
     - name: include role
       ansible.builtin.include_role:
         name: cri_tools
-      tags: cri_tools

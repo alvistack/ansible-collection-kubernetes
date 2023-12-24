@@ -22,9 +22,7 @@
     - name: include role
       ansible.builtin.include_role:
         name: kube_addon_manager
-      tags: kube_addon_manager
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_flannel
-      tags: kube_flannel

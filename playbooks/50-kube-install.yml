@@ -22,17 +22,14 @@
     - name: include role
       ansible.builtin.include_role:
         name: kube_kubectl
-      tags: kube_kubectl
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_kubelet
-      tags: kube_kubelet
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_kubeadm
-      tags: kube_kubeadm
 
 - name: 50-kube-install | etcd
   hosts: etcd
@@ -42,7 +39,6 @@
     - name: include role
       ansible.builtin.include_role:
         name: etcd
-      tags: etcd
 
 - name: 50-kube-install | kube_master
   hosts: kube_master
@@ -52,7 +48,6 @@
     - name: include role
       ansible.builtin.include_role:
         name: kube_master
-      tags: kube_master
 
 - name: 50-kube-install | kube_node:!kube_master
   hosts: kube_node:!kube_master
@@ -62,7 +57,6 @@
     - name: include role
       ansible.builtin.include_role:
         name: kube_node
-      tags: kube_node
 
 - name: 50-kube-install | ansible
   hosts: ansible
@@ -72,22 +66,18 @@
     - name: include role
       ansible.builtin.include_role:
         name: sonobuoy
-      tags: sonobuoy
 
     - name: include role
       ansible.builtin.include_role:
         name: helm
-      tags: helm
 
     - name: include role
       ansible.builtin.include_role:
         name: operator_sdk
-      tags: operator_sdk
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_kubectl
-      tags: kube_kubectl
 
     - name: base64 encode
       ansible.builtin.shell:
@@ -104,7 +94,6 @@
       delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
-      tags: kube_kubectl
 
     - name: base64 decode
       ansible.builtin.shell:
@@ -115,4 +104,3 @@
         executable: "/bin/bash"
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded
-      tags: kube_kubectl

@@ -27,7 +27,6 @@
     - name: include role
       ansible.builtin.include_role:
         name: ceph_common
-      tags: ceph_common
 
 - name: 70-kube_csi_rbd-install | kube_master
   hosts: kube_master
@@ -44,16 +43,13 @@
       delegate_to: "{{ groups['ceph_mon'][0] }}"
       register: ceph_client_admin_result
       changed_when: ceph_client_admin_result is not succeeded
-      tags: kube_csi_rbd
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_addon_manager
-      tags: kube_addon_manager
 
     - name: include role
       ansible.builtin.include_role:
         name: kube_csi_rbd
       vars:
         kube_csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
-      tags: kube_csi_rbd
