@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20231225.1.2 - 2023-12-25
+
+-   Support Ansible community package 9.1.0
 -   Remove Kubernetes 1.26 support
 -   Remove Fedora 37 support
 -   Remove openSUSE Leap 15.4 support
