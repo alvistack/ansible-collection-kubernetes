@@ -2,6 +2,8 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+-   Remove Ubuntu 23.04 support
+
 ## 20231225.1.2 - 2023-12-25
 
 -   Support Ansible community package 9.1.0
