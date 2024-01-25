@@ -13,9 +13,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-# kube_master
-kube_release: "1.29"
-
-# ceph_common
-ceph_release: "18.2"
