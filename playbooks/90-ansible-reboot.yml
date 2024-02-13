@@ -27,3 +27,5 @@
         post_reboot_delay: 60
         test_command: bash -c "whoami"
       throttle: 1
+      changed_when: false
+      failed_when: false

@@ -40,3 +40,5 @@
         post_reboot_delay: 60
         test_command: bash -c "kubectl get --raw='/readyz?verbose' | grep 'check passed'"
       throttle: 1
+      changed_when: false
+      failed_when: false
