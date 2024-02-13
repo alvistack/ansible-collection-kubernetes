@@ -16,6 +16,9 @@
 
 set -euxo pipefail
 
+# https://github.com/restic/restic/issues/1988
+export GOGC=20
+
 PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
 TIMESTAMP=${TIMESTAMP:-$(date +%s)}
