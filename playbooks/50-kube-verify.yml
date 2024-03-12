@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +24,7 @@
           set -euxo pipefail
           kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       when: inventory_hostname == ansible_play_hosts[0]
       register: result
       changed_when: result is not succeeded
