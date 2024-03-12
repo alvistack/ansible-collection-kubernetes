@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -31,7 +30,7 @@
           set -euxo pipefail
           kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
@@ -40,9 +39,9 @@
 
     - name: setup csi-cephfs as default storageclass
       vars:
-        ansible_python_interpreter: "python3"
+        ansible_python_interpreter: python3
       kubernetes.core.k8s:
-        state: "present"
+        state: present
         wait: true
         definition:
           apiVersion: storage.k8s.io/v1
@@ -59,9 +58,9 @@
 
     - name: create pvc
       vars:
-        ansible_python_interpreter: "python3"
+        ansible_python_interpreter: python3
       kubernetes.core.k8s:
-        state: "present"
+        state: present
         wait: true
         definition:
           apiVersion: v1
@@ -83,9 +82,9 @@
 
     - name: create pod
       vars:
-        ansible_python_interpreter: "python3"
+        ansible_python_interpreter: python3
       kubernetes.core.k8s:
-        state: "present"
+        state: present
         wait: true
         definition:
           apiVersion: v1
@@ -119,7 +118,7 @@
           set -euxo pipefail
           kubectl get pod --all-namespaces | egrep -e 'default\s+busybox\s+[0-9]+\/[0-9]+\s+Running'
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       until: result is succeeded
@@ -128,9 +127,9 @@
 
     - name: delete pod
       vars:
-        ansible_python_interpreter: "python3"
+        ansible_python_interpreter: python3
       kubernetes.core.k8s:
-        state: "absent"
+        state: absent
         wait: true
         definition:
           apiVersion: v1
@@ -146,9 +145,9 @@
 
     - name: delete pvc
       vars:
-        ansible_python_interpreter: "python3"
+        ansible_python_interpreter: python3
       kubernetes.core.k8s:
-        state: "absent"
+        state: absent
         wait: true
         definition:
           apiVersion: v1

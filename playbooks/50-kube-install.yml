@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -86,11 +85,11 @@
           tar zcfP - {{ _params | join(' ') }} | base64 -w 0
       vars:
         _params:
-          - "/etc/etcd/pki"
-          - "/etc/kubernetes/admin.conf"
-          - "/etc/kubernetes/pki"
+          - /etc/etcd/pki
+          - /etc/kubernetes/admin.conf
+          - /etc/kubernetes/pki
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       delegate_to: "{{ groups['kube_master'][0] }}"
       register: base64_encode_result
       changed_when: base64_encode_result is not succeeded
@@ -101,6 +100,6 @@
           set -euxo pipefail
           echo -n {{ base64_encode_result.stdout | quote }} | base64 -d | tar zx -C /
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       register: base64_decode_result
       changed_when: base64_decode_result is not succeeded

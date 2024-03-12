@@ -1,5 +1,4 @@
 ---
-
 # Copyright 2024 Wong Hoi Sing Edison <hswong3i@pantarei-design.com>
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,7 +24,7 @@
           set -euxo pipefail
           kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | sed 's/^docker.io\///g' | sort -u
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       register: result
       delegate_to: "{{ groups['kube_master'][0] }}"
       changed_when: false
@@ -43,7 +42,7 @@
           set -euxo pipefail
           crictl image | grep -- '<none>' | awk -F' ' '{print $3}'
       args:
-        executable: "/bin/bash"
+        executable: /bin/bash
       register: result
       changed_when: false
       failed_when: false
