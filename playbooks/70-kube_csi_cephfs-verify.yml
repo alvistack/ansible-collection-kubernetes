@@ -13,25 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 70-kube_csi_cephfs-verify | ceph_mon
-  hosts: ceph_mon
-  remote_user: root
-  become: true
-  tasks:
-    - name: ceph fs subvolumegroup create cephfs csi
-      ansible.builtin.shell:
-        cmd: |
-          set -euxo pipefail
-          ceph fs subvolumegroup create \
-            {{ kube_csi_cephfs_fs_name }} \
-            {{ kube_csi_cephfs_subvolume_group }}
-      args:
-        executable: /bin/bash
-      when: inventory_hostname == groups['ceph_mon'][0]
-      delegate_to: "{{ groups['ceph_mon'][0] }}"
-      changed_when: false
-      failed_when: false
-
 - name: 70-kube_csi_cephfs-verify | kube_master
   hosts: kube_master
   remote_user: root
