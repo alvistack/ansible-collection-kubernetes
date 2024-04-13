@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+-   Support Ubuntu 24.04
 -   Support Kubernetes 1.30
 
 ## 20240328.1.1 - 2024-03-28
