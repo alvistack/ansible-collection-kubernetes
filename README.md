@@ -53,8 +53,8 @@ init with `git submodule`, then install Ansible (see
     git submodule update --init --recursive
 
     # Bootstrap Ansible
-    echo 'deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_22.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
-    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_22.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
+    echo 'deb http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04/ /' | tee /etc/apt/sources.list.d/home:alvistack.list
+    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | gpg --dearmor | tee /etc/apt/trusted.gpg.d/home_alvistack.gpg > /dev/null
     apt update
     apt install ansible
 
@@ -163,8 +163,8 @@ You could also run our
 have [Vagrant](https://www.vagrantup.com/) and
 [Libvirt](https://libvirt.org/) installed, e.g.
 
-    # Run Molecule on Ubuntu 22.04
-    molecule converge -s ubuntu-22.04
+    # Run Molecule on Ubuntu 24.04
+    molecule converge -s ubuntu-24.04
 
 Please refer to [.gitlab-ci.yml](.gitlab-ci.yml) for more information on
 running Molecule.
