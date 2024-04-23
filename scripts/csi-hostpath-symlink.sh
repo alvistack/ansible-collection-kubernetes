@@ -18,13 +18,17 @@ set -euxo pipefail
 
 kubectl get pv --output=name | while read line
 do
-    namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
-    name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
-    path="volumes/$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}')"
+    _namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
+    _name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
+    _status="$(kubectl get $line --output=jsonpath='{.status.phase}')"
+    _path="volumes/$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}')"
 
-    mkdir -p symlinks/$namespace
-    cd symlinks/$namespace
-    rm -rf $name
-    ln -fs ../../$path $name
-    cd ../../
+    if [[ "$status" == "Bound" ]]
+    then
+        mkdir -p symlinks/$_namespace
+        cd symlinks/$_namespace
+        rm -rf $_name
+        ln -fs ../../$_path $_name
+        cd ../../
+    fi
 done

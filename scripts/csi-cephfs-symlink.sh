@@ -18,18 +18,22 @@ set -euxo pipefail
 
 kubectl get pv --output=name | while read line
 do
-    namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
-    name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
-    path="volumes/csi/csi-vol-$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}' | sed 's/^0001-0004-ceph-0000000000000001-//g')"
+    _namespace="$(kubectl get $line --output=jsonpath='{.spec.claimRef.namespace}')"
+    _name="$(kubectl get $line --output=jsonpath='{.spec.claimRef.name}')"
+    _status="$(kubectl get $line --output=jsonpath='{.status.phase}')"
+    _path="volumes/csi/csi-vol-$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}' | sed 's/^0001-0004-ceph-0000000000000001-//g')"
 
-    if [[ -f $path/.meta ]]
+    if [[ -f $_path/.meta ]]
     then
-        path="$(cat $path/.meta | egrep -e '^path = ' | sed 's/^path = \///g')"
+        _path="$(cat $_path/.meta | egrep -e '^path = ' | sed 's/^path = \///g')"
     fi
 
-    mkdir -p symlinks/$namespace
-    cd symlinks/$namespace
-    rm -rf $name
-    ln -fs ../../$path $name
-    cd ../../
+    if [[ "$status" == "Bound" ]]
+    then
+        mkdir -p symlinks/$_namespace
+        cd symlinks/$_namespace
+        rm -rf $_name
+        ln -fs ../../$_path $_name
+        cd ../../
+    fi
 done
