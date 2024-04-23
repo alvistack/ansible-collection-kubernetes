@@ -23,7 +23,7 @@ do
     _status="$(kubectl get $line --output=jsonpath='{.status.phase}')"
     _path="volumes/$(kubectl get $line --output=jsonpath='{.spec.csi.volumeHandle}')"
 
-    if [[ "$status" == "Bound" ]]
+    if [[ "$_status" == "Bound" ]]
     then
         mkdir -p symlinks/$_namespace
         cd symlinks/$_namespace

@@ -28,7 +28,7 @@ do
         _path="$(cat $_path/.meta | egrep -e '^path = ' | sed 's/^path = \///g')"
     fi
 
-    if [[ "$status" == "Bound" ]]
+    if [[ "$_status" == "Bound" ]]
     then
         mkdir -p symlinks/$_namespace
         cd symlinks/$_namespace
