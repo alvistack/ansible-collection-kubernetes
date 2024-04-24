@@ -2,6 +2,8 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20240424.1.1 - 2024-04-01
+
 -   Support Fedora 40
 -   Support Ansible community package 9.5.0
 -   Support Ubuntu 24.04
