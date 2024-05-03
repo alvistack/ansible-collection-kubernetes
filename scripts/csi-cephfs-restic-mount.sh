@@ -21,7 +21,7 @@ export GOGC=20
 
 PID_FILE="/var/run/${0##*/}.pid"
 LOG_FILE="/var/log/${0##*/}.log"
-TIMESTAMP=${TIMESTAMP:-$(date +%s)}
+TIMESTAMP=${TIMESTAMP:-$(date --iso-8601=second)}
 
 RESTIC_MOUNT_DIR=${RESTIC_MOUNT_DIR:-"/root/restores/restic/csi-cephfs"}
 
