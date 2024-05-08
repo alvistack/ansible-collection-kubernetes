@@ -27,7 +27,7 @@ RESTIC_MOUNT_DIR=${RESTIC_MOUNT_DIR:-"/root/restores/restic/csi-hostpath"}
 
 RESTIC_OPTS=${RESTIC_OPTS:-"--verbose"}
 RESTIC_REPOSITORY=${RESTIC_REPOSITORY:-"/root/backups/restic/csi-hostpath"}
-RESTIC_PASSWORD_FILE=${RESTIC_PASSWORD_FILE:-"/root/.ssh/id_rsa"}
+RESTIC_PASSWORD_FILE=${RESTIC_PASSWORD_FILE:-"/root/.ssh/id_ed25519"}
 
 exec 9>$PID_FILE
 flock -n 9 || exit 1
