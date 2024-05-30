@@ -2,6 +2,8 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Remove Fedora 38 support
+
 ## 20240424.1.1 - 2024-04-01
 
 - Support Fedora 40
