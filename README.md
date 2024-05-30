@@ -30,7 +30,7 @@ This collection was designed for:
 - AlmaLinux 8, 9
 - openSUSE Leap 15.5, Tumbleweed
 - Debian 11, 12, Testing
-- Fedora 38, 39, 40, Rawhide
+- Fedora 39, 40, Rawhide
 - CentOS 7, 8 Stream, 9 Stream
 - RHEL 7, 8, 9
 
