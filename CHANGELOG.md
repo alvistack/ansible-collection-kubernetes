@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20240612.1.1 - 2024-06-12
+
+- Support Ansible community package 10.0.0
 - Remove Fedora 38 support
 
 ## 20240424.1.1 - 2024-04-01
