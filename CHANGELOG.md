@@ -2,6 +2,8 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Support Kubernetes 1.31
+
 ## 20240818.1.1 - 2024-08-18
 
 - Support Ansible community package 10.3.0
