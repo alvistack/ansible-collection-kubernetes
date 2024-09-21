@@ -95,7 +95,7 @@
           spec:
             containers:
               - name: busybox
-                image: docker.io/busybox:latest
+                image: docker.io/library/busybox:latest
                 command:
                   - sleep
                   - "3600"
