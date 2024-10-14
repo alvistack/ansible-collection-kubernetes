@@ -26,7 +26,7 @@ This collection require Ansible community package 4.10 or higher.
 
 This collection was designed for:
 
-- Ubuntu 20.04, 22.04, 24.04
+- Ubuntu 20.04, 22.04, 24.04, 24.10
 - AlmaLinux 8, 9
 - openSUSE Leap 15.5, Tumbleweed
 - Debian 11, 12, Testing
