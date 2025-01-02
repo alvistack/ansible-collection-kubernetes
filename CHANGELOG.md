@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Remove openSUSE Leap 15.5 support
 - Remove Fedora 39 support
 
 - Support Ansible community package 11.0.0
