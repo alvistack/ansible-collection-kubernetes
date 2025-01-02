@@ -185,15 +185,6 @@ test:opensuse-leap-15.6-libvirt:
   allow_failure: true
   retry: 0
 
-test:opensuse-leap-15.5-libvirt:
-  <<: *job-molecule-test
-  stage: test
-  variables:
-    _BOX: opensuse-leap-15.5
-    _PROVIDER: libvirt
-  allow_failure: true
-  retry: 0
-
 test:debian-testing-libvirt:
   <<: *job-molecule-test
   stage: test
@@ -208,15 +199,6 @@ test:debian-12-libvirt:
   stage: test
   variables:
     _BOX: debian-12
-    _PROVIDER: libvirt
-  allow_failure: true
-  retry: 0
-
-test:debian-11-libvirt:
-  <<: *job-molecule-test
-  stage: test
-  variables:
-    _BOX: debian-11
     _PROVIDER: libvirt
   allow_failure: true
   retry: 0
@@ -239,20 +221,20 @@ test:fedora-41-libvirt:
   allow_failure: true
   retry: 0
 
+test:fedora-41-libvirt:
+  <<: *job-molecule-test
+  stage: test
+  variables:
+    _BOX: fedora-41
+    _PROVIDER: libvirt
+  allow_failure: true
+  retry: 0
+
 test:fedora-40-libvirt:
   <<: *job-molecule-test
   stage: test
   variables:
     _BOX: fedora-40
-    _PROVIDER: libvirt
-  allow_failure: true
-  retry: 0
-
-test:fedora-39-libvirt:
-  <<: *job-molecule-test
-  stage: test
-  variables:
-    _BOX: fedora-39
     _PROVIDER: libvirt
   allow_failure: true
   retry: 0
