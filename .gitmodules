@@ -70,17 +70,17 @@
 	path = roles/helm_csi_cephfs
 	url = https://github.com/alvistack/ansible-role-helm_csi_cephfs.git
 	branch = develop
-[submodule "roles/helm_csi_flannel"]
-	path = roles/helm_csi_flannel
-	url = https://github.com/alvistack/ansible-role-helm_csi_flannel.git
-	branch = develop
-[submodule "roles/helm_csi_ingress_nginx"]
-	path = roles/helm_csi_ingress_nginx
-	url = https://github.com/alvistack/ansible-role-helm_csi_ingress_nginx.git
-	branch = develop
 [submodule "roles/helm_csi_rbd"]
 	path = roles/helm_csi_rbd
 	url = https://github.com/alvistack/ansible-role-helm_csi_rbd.git
+	branch = develop
+[submodule "roles/helm_flannel"]
+	path = roles/helm_flannel
+	url = https://github.com/alvistack/ansible-role-helm_flannel.git
+	branch = develop
+[submodule "roles/helm_ingress_nginx"]
+	path = roles/helm_ingress_nginx
+	url = https://github.com/alvistack/ansible-role-helm_ingress_nginx.git
 	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
