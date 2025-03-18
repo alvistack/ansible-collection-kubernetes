@@ -58,45 +58,33 @@
 	path = roles/helm
 	url = https://github.com/alvistack/ansible-role-helm.git
 	branch = develop
+[submodule "roles/helm_cert_manager"]
+	path = roles/helm_cert_manager
+	url = https://github.com/alvistack/ansible-role-helm_cert_manager.git
+	branch = develop
+[submodule "roles/helm_cilium"]
+	path = roles/helm_cilium
+	url = https://github.com/alvistack/ansible-role-helm_cilium.git
+	branch = develop
+[submodule "roles/helm_csi_cephfs"]
+	path = roles/helm_csi_cephfs
+	url = https://github.com/alvistack/ansible-role-helm_csi_cephfs.git
+	branch = develop
+[submodule "roles/helm_csi_flannel"]
+	path = roles/helm_csi_flannel
+	url = https://github.com/alvistack/ansible-role-helm_csi_flannel.git
+	branch = develop
+[submodule "roles/helm_csi_ingress_nginx"]
+	path = roles/helm_csi_ingress_nginx
+	url = https://github.com/alvistack/ansible-role-helm_csi_ingress_nginx.git
+	branch = develop
+[submodule "roles/helm_csi_rbd"]
+	path = roles/helm_csi_rbd
+	url = https://github.com/alvistack/ansible-role-helm_csi_rbd.git
+	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
 	url = https://github.com/alvistack/ansible-role-kernel.git
-	branch = develop
-[submodule "roles/kube_addon_manager"]
-	path = roles/kube_addon_manager
-	url = https://github.com/alvistack/ansible-role-kube_addon_manager.git
-	branch = develop
-[submodule "roles/kube_cert_manager"]
-	path = roles/kube_cert_manager
-	url = https://github.com/alvistack/ansible-role-kube_cert_manager.git
-	branch = develop
-[submodule "roles/kube_cilium"]
-	path = roles/kube_cilium
-	url = https://github.com/alvistack/ansible-role-kube_cilium.git
-	branch = develop
-[submodule "roles/kube_csi_cephfs"]
-	path = roles/kube_csi_cephfs
-	url = https://github.com/alvistack/ansible-role-kube_csi_cephfs.git
-	branch = develop
-[submodule "roles/kube_csi_hostpath"]
-	path = roles/kube_csi_hostpath
-	url = https://github.com/alvistack/ansible-role-kube_csi_hostpath.git
-	branch = develop
-[submodule "roles/kube_csi_rbd"]
-	path = roles/kube_csi_rbd
-	url = https://github.com/alvistack/ansible-role-kube_csi_rbd.git
-	branch = develop
-[submodule "roles/kube_dashboard"]
-	path = roles/kube_dashboard
-	url = https://github.com/alvistack/ansible-role-kube_dashboard.git
-	branch = develop
-[submodule "roles/kube_flannel"]
-	path = roles/kube_flannel
-	url = https://github.com/alvistack/ansible-role-kube_flannel.git
-	branch = develop
-[submodule "roles/kube_ingress_nginx"]
-	path = roles/kube_ingress_nginx
-	url = https://github.com/alvistack/ansible-role-kube_ingress_nginx.git
 	branch = develop
 [submodule "roles/kube_kubeadm"]
 	path = roles/kube_kubeadm
@@ -114,21 +102,9 @@
 	path = roles/kube_master
 	url = https://github.com/alvistack/ansible-role-kube_master.git
 	branch = develop
-[submodule "roles/kube_metallb"]
-	path = roles/kube_metallb
-	url = https://github.com/alvistack/ansible-role-kube_metallb.git
-	branch = develop
 [submodule "roles/kube_node"]
 	path = roles/kube_node
 	url = https://github.com/alvistack/ansible-role-kube_node.git
-	branch = develop
-[submodule "roles/kube_registry"]
-	path = roles/kube_registry
-	url = https://github.com/alvistack/ansible-role-kube_registry.git
-	branch = develop
-[submodule "roles/kube_weave"]
-	path = roles/kube_weave
-	url = https://github.com/alvistack/ansible-role-kube_weave.git
 	branch = develop
 [submodule "roles/locales"]
 	path = roles/locales

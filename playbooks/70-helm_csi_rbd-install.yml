@@ -13,15 +13,38 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 80-kube_cert_manager-install | kube_master
-  hosts: kube_master
+- name: 70-helm_csi_rbd-install | all
+  hosts: all
+  remote_user: root
+  become: true
+
+- name: 70-helm_csi_rbd-install | kube_master:kube_node
+  hosts: kube_master:kube_node
   remote_user: root
   become: true
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_addon_manager
+        name: ceph_common
+
+- name: 70-helm_csi_rbd-install | kube_master
+  hosts: kube_master
+  remote_user: root
+  become: true
+  tasks:
+    - name: fetch ceph client.admin key
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          ceph auth get-key client.admin
+      args:
+        executable: /bin/bash
+      delegate_to: "{{ groups['ceph_mon'][0] }}"
+      register: ceph_client_admin_result
+      changed_when: ceph_client_admin_result is not succeeded
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_cert_manager
+        name: helm_csi_rbd
+      vars:
+        helm_csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"

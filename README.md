@@ -144,12 +144,11 @@ Once update now run the playbooks:
     cd /opt/ansible-collection-kubernetes
     ansible-playbook playbooks/converge.yml
     ansible-playbook playbooks/50-kube-verify.yml
-    ansible-playbook playbooks/60-kube_cilium-install.yml
-    ansible-playbook playbooks/70-kube_csi_cephfs-install.yml
-    ansible-playbook playbooks/70-kube_csi_cephfs-verify.yml
-    ansible-playbook playbooks/80-kube_dashboard-install.yml
-    ansible-playbook playbooks/80-kube_ingress_nginx-install.yml
-    ansible-playbook playbooks/80-kube_cert_manager-install.yml
+    ansible-playbook playbooks/60-helm_cilium-install.yml
+    ansible-playbook playbooks/70-helm_csi_cephfs-install.yml
+    ansible-playbook playbooks/70-helm_csi_cephfs-verify.yml
+    ansible-playbook playbooks/80-helm_ingress_nginx-install.yml
+    ansible-playbook playbooks/80-helm_cert_manager-install.yml
 
     # Confirm the version and status of Kubernetes
     kubectl version --output=yaml
