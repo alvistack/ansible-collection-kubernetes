@@ -13,12 +13,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 70-kube_csi_rbd-install | all
+- name: 70-helm_csi_cephfs-install | all
   hosts: all
   remote_user: root
   become: true
 
-- name: 70-kube_csi_rbd-install | kube_master:kube_node
+- name: 70-helm_csi_cephfs-install | kube_master:kube_node
   hosts: kube_master:kube_node
   remote_user: root
   become: true
@@ -27,7 +27,7 @@
       ansible.builtin.include_role:
         name: ceph_common
 
-- name: 70-kube_csi_rbd-install | kube_master
+- name: 70-helm_csi_cephfs-install | kube_master
   hosts: kube_master
   remote_user: root
   become: true
@@ -45,10 +45,6 @@
 
     - name: include role
       ansible.builtin.include_role:
-        name: kube_addon_manager
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: kube_csi_rbd
+        name: helm_csi_cephfs
       vars:
-        kube_csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        helm_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"

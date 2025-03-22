@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: import playbook ../../playbooks/60-kube_cilium-install.yml
-  import_playbook: ../../playbooks/60-kube_cilium-install.yml
+- name: import playbook ../../playbooks/60-helm_cilium-install.yml
+  import_playbook: ../../playbooks/60-helm_cilium-install.yml
 
 - name: import playbook ../../playbooks/50-kube-reboot.yml
   import_playbook: ../../playbooks/50-kube-reboot.yml

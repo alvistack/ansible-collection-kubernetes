@@ -13,15 +13,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 60-kube_cilium-install | kube_master
+- name: 80-helm_cert_manager-install | kube_master
   hosts: kube_master
   remote_user: root
   become: true
   tasks:
     - name: include role
       ansible.builtin.include_role:
-        name: kube_addon_manager
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: kube_cilium
+        name: helm_cert_manager

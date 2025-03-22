@@ -13,7 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 70-kube_csi_cephfs-verify | kube_master
+- name: 70-helm_csi_rbd-verify | kube_master
   hosts: kube_master
   remote_user: root
   become: true
@@ -28,7 +28,7 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          kubectl get pod --all-namespaces | egrep -e 'csi-cephfs\s+csi-cephfs-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
+          kubectl get pod --all-namespaces | egrep -e 'csi-rbd\s+csi-rbd-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
         executable: /bin/bash
       when: inventory_hostname == groups['kube_master'][0]
@@ -37,7 +37,7 @@
       changed_when: result is not succeeded
       retries: 60
 
-    - name: setup csi-cephfs as default storageclass
+    - name: setup csi-rbd as default storageclass
       vars:
         ansible_python_interpreter: python3
       kubernetes.core.k8s:
@@ -47,7 +47,7 @@
           apiVersion: storage.k8s.io/v1
           kind: StorageClass
           metadata:
-            name: csi-cephfs
+            name: csi-rbd
             annotations:
               storageclass.kubernetes.io/is-default-class: "true"
       when: inventory_hostname == groups['kube_master'][0]
@@ -70,7 +70,7 @@
             namespace: default
           spec:
             accessModes:
-              - ReadWriteMany
+              - ReadWriteOnce
             resources:
               requests:
                 storage: 100Mi

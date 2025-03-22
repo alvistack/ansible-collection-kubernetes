@@ -13,6 +13,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: 50-kube-install | all
+  hosts: all
+  remote_user: root
+  become: true
+  tasks:
+    - name: include role
+      ansible.builtin.include_role:
+        name: sonobuoy
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: operator_sdk
+
 - name: 50-kube-install | kube_master:kube_node
   hosts: kube_master:kube_node
   remote_user: root
@@ -62,18 +79,6 @@
   remote_user: root
   become: true
   tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: sonobuoy
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: helm
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: operator_sdk
-
     - name: include role
       ansible.builtin.include_role:
         name: kube_kubectl
