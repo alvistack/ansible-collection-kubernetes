@@ -13,42 +13,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 70-helm_csi_cephfs-install | all
+- name: 70-helm_csi_hostpath-install | all
   hosts: all
   remote_user: root
   become: true
 
-- name: 70-helm_csi_cephfs-install | kube_master:kube_node
-  hosts: kube_master:kube_node
+- name: 70-helm_csi_hostpath-install | helm_master
+  hosts: helm_master
   remote_user: root
   become: true
   tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: ceph_common
-
-- name: 70-helm_csi_cephfs-install | kube_master
-  hosts: kube_master
-  remote_user: root
-  become: true
-  tasks:
-    - name: fetch ceph client.admin key
-      ansible.builtin.shell:
-        cmd: |
-          set -euxo pipefail
-          ceph auth get-key client.admin
-      args:
-        executable: /bin/bash
-      delegate_to: "{{ groups['ceph_mon'][0] }}"
-      register: ceph_client_admin_result
-      changed_when: ceph_client_admin_result is not succeeded
-
     - name: include role
       ansible.builtin.include_role:
         name: helm_csi_snapshotter
 
     - name: include role
       ansible.builtin.include_role:
-        name: helm_csi_cephfs
-      vars:
-        helm_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        name: helm_csi_hostpath
