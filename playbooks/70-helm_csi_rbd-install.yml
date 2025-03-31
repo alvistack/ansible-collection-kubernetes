@@ -45,6 +45,10 @@
 
     - name: include role
       ansible.builtin.include_role:
+        name: helm_csi_snapshotter
+
+    - name: include role
+      ansible.builtin.include_role:
         name: helm_csi_rbd
       vars:
         helm_csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
