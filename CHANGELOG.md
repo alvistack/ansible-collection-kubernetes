@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20250331.1.1 - 2025-03-31
+
+- Support Ansible community package 11.4.0
 - Add VolumeSnapshotClass and VolumeGroupSnapshotClass support
 - Rename prefix with `helm_`
 - Simplify with Helm
