@@ -18,20 +18,56 @@
   remote_user: root
   become: true
 
-- name: 70-helm_csi_cephfs-install | kube_master:kube_node
-  hosts: kube_master:kube_node
+- name: 70-helm_csi_cephfs-install | ceph_mon
+  hosts: ceph_mon
   remote_user: root
   become: true
   tasks:
-    - name: include role
-      ansible.builtin.include_role:
-        name: ceph_common
+    - name: ceph health detail
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          ceph crash archive-all && ceph health detail | grep 'HEALTH_OK'
+      args:
+        executable: /bin/bash
+      when: inventory_hostname == groups['ceph_mon'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
 
 - name: 70-helm_csi_cephfs-install | kube_master
   hosts: kube_master
   remote_user: root
   become: true
   tasks:
+    - name: kubectl get --raw='/readyz?verbose'
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+      args:
+        executable: /bin/bash
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
+
+    - name: kubectl version --output=yaml
+      ansible.builtin.command:
+        cmd: kubectl version --output=yaml
+      register: result
+      changed_when: result is not succeeded
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: ceph_common
+
     - name: fetch ceph client.admin key
       ansible.builtin.shell:
         cmd: |

@@ -18,6 +18,29 @@
   remote_user: root
   become: true
   tasks:
+    - name: kubectl get --raw='/readyz?verbose'
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+      args:
+        executable: /bin/bash
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
+
+    - name: kubectl version --output=yaml
+      ansible.builtin.command:
+        cmd: kubectl version --output=yaml
+      register: result
+      changed_when: result is not succeeded
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm
+
     - name: include role
       ansible.builtin.include_role:
         name: helm_cilium

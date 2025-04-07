@@ -13,6 +13,29 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+- name: 70-helm_csi_rbd-verify | all
+  hosts: all
+  remote_user: root
+  become: true
+
+- name: 70-helm_csi_rbd-verify | ceph_mon
+  hosts: ceph_mon
+  remote_user: root
+  become: true
+  tasks:
+    - name: ceph health detail
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          ceph crash archive-all && ceph health detail | grep 'HEALTH_OK'
+      args:
+        executable: /bin/bash
+      when: inventory_hostname == groups['ceph_mon'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
+
 - name: 70-helm_csi_rbd-verify | kube_master
   hosts: kube_master
   remote_user: root
@@ -33,8 +56,8 @@
         executable: /bin/bash
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: setup csi-rbd as default storageclass
@@ -52,8 +75,8 @@
               storageclass.kubernetes.io/is-default-class: "true"
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: create pvc
@@ -76,8 +99,30 @@
                 storage: 100Mi
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
+
+    - name: create volume snapshot
+      vars:
+        ansible_python_interpreter: python3
+      kubernetes.core.k8s:
+        state: present
+        wait: true
+        definition:
+          apiVersion: snapshot.storage.k8s.io/v1
+          kind: VolumeSnapshot
+          metadata:
+            name: root-snapshot
+            namespace: default
+          spec:
+            volumeSnapshotClassName: csi-rbd
+            source:
+              persistentVolumeClaimName: root
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: create pod
@@ -109,8 +154,8 @@
                   claimName: root
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: kubectl get pod --all-namespaces
@@ -122,8 +167,8 @@
         executable: /bin/bash
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: delete pod
@@ -140,8 +185,26 @@
             namespace: default
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
+
+    - name: delete volume snapshot
+      vars:
+        ansible_python_interpreter: python3
+      kubernetes.core.k8s:
+        state: absent
+        wait: true
+        definition:
+          apiVersion: snapshot.storage.k8s.io/v1
+          kind: VolumeSnapshot
+          metadata:
+            name: root-snapshot
+            namespace: default
+      when: inventory_hostname == groups['kube_master'][0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60
 
     - name: delete pvc
@@ -158,6 +221,6 @@
             namespace: default
       when: inventory_hostname == groups['kube_master'][0]
       register: result
-      until: result is succeeded
       changed_when: result is not succeeded
+      until: result is succeeded
       retries: 60

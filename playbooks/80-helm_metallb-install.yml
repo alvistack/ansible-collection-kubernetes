@@ -13,12 +13,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 70-helm_csi_hostpath-install | all
-  hosts: all
-  remote_user: root
-  become: true
-
-- name: 70-helm_csi_hostpath-install | kube_master
+- name: 80-helm_metallb-install | kube_master
   hosts: kube_master
   remote_user: root
   become: true
@@ -48,8 +43,4 @@
 
     - name: include role
       ansible.builtin.include_role:
-        name: helm_csi_snapshotter
-
-    - name: include role
-      ansible.builtin.include_role:
-        name: helm_csi_hostpath
+        name: helm_metallb

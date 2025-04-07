@@ -90,6 +90,10 @@
 	path = roles/helm_ingress_nginx
 	url = https://github.com/alvistack/ansible-role-helm_ingress_nginx.git
 	branch = develop
+[submodule "roles/helm_metallb"]
+	path = roles/helm_metallb
+	url = https://github.com/alvistack/ansible-role-helm_metallb.git
+	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
 	url = https://github.com/alvistack/ansible-role-kernel.git
