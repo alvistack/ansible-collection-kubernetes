@@ -82,6 +82,10 @@
 	path = roles/helm_csi_snapshotter
 	url = https://github.com/alvistack/ansible-role-helm_csi_snapshotter.git
 	branch = develop
+[submodule "roles/helm_dashboard"]
+	path = roles/helm_dashboard
+	url = https://github.com/alvistack/ansible-role-helm_dashboard.git
+	branch = develop
 [submodule "roles/helm_flannel"]
 	path = roles/helm_flannel
 	url = https://github.com/alvistack/ansible-role-helm_flannel.git
