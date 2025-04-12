@@ -21,7 +21,7 @@
     - name: reboot
       ansible.builtin.reboot:
         connect_timeout: 300
-        reboot_timeout: 300
+        reboot_timeout: 3600
         pre_reboot_delay: 60
         post_reboot_delay: 60
         test_command: bash -c "whoami"
