@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20250423.1.2 - 2025-04-23
+
+- Support Ansible community package 11.5.0
 - Support Ubuntu 25.04
 
 ## 20250331.1.1 - 2025-03-31
