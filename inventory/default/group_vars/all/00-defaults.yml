@@ -15,7 +15,7 @@
 # limitations under the License.
 
 # kube_master
-kube_release: "1.32"
+kube_release: "1.33"
 
 # ceph_common
 ceph_release: "19.2"
