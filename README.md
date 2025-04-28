@@ -3,14 +3,10 @@
 <a href="https://alvistack.com" title="AlviStack" target="_blank"><img src="/alvistack.svg" height="75" alt="AlviStack"></a>
 <a href="https://landscape.cncf.io/?selected=alvi-stack-ansible-collection-for-kubernetes" title="Certified Kubernetes" target="_blank"><img src="https://github.com/cncf/artwork/blob/master/projects/kubernetes/certified-kubernetes/versionless/color/certified-kubernetes-color.svg" height="75" alt="Certified Kubernetes"></a>
 
-[![Gitlab pipeline
-status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-collection-kubernetes/master)](https://gitlab.com/alvistack/ansible-collection-kubernetes/-/pipelines)
-[![GitHub
-tag](https://img.shields.io/github/tag/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/tags)
-[![GitHub
-license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
-[![Ansible
-Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes)
+[![Gitlab pipeline status](https://img.shields.io/gitlab/pipeline/alvistack/ansible-collection-kubernetes/master)](https://gitlab.com/alvistack/ansible-collection-kubernetes/-/pipelines)
+[![GitHub tag](https://img.shields.io/github/tag/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/tags)
+[![GitHub license](https://img.shields.io/github/license/alvistack/ansible-collection-kubernetes.svg)](https://github.com/alvistack/ansible-collection-kubernetes/blob/master/LICENSE)
+[![Ansible Collection](https://img.shields.io/badge/galaxy-alvistack.kubernetes-blue.svg)](https://galaxy.ansible.com/alvistack/kubernetes)
 
 Ansible Collection for
 [Kubernetes](https://github.com/kubernetes/kubernetes).
@@ -30,7 +26,7 @@ This collection was designed for:
 - AlmaLinux 8, 9
 - openSUSE Leap 15.6, Tumbleweed
 - Debian 12, Testing
-- Fedora 40, 41, Rawhide
+- Fedora 40, 41, 42, Rawhide
 - CentOS 7, 8 Stream, 9 Stream
 - RHEL 7, 8, 9
 

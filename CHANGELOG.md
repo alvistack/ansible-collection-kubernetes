@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Support Fedora 42
 - Support Kubernetes 1.33
 
 ## 20250423.1.2 - 2025-04-23
