@@ -2,6 +2,8 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Support Debian 13
+
 ## 20250817.1.1 - 2025-08-17
 
 - Support Ansible community package 11.9.0
