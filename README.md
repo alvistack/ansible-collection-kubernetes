@@ -25,7 +25,7 @@ This collection was designed for:
 - Ubuntu 20.04, 22.04, 24.04, 24.10, 25.04
 - AlmaLinux 8, 9
 - openSUSE Leap 15.6, Tumbleweed
-- Debian 12, Testing
+- Debian 12, 13, Testing
 - Fedora 40, 41, 42, Rawhide
 - CentOS 7, 8 Stream, 9 Stream
 - RHEL 7, 8, 9
