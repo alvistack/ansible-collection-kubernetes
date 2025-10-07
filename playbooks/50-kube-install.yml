@@ -87,9 +87,9 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          tar zcfP - {{ _params | join(' ') }} | base64 -w 0
+          tar zcfP - {{ params | join(' ') }} | base64 -w 0
       vars:
-        _params:
+        params:
           - /etc/etcd/pki
           - /etc/kubernetes/admin.conf
           - /etc/kubernetes/pki
