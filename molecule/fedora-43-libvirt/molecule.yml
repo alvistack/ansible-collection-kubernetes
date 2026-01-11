@@ -21,7 +21,7 @@ driver:
   provision: true
 platforms:
   - name: ${_MOLECULE_INSTANCE_NAME}-1
-    box: alvistack/fedora-41
+    box: alvistack/fedora-43
     cpu: 2
     memory: 8192
     provider_raw_config_args:
@@ -38,7 +38,7 @@ platforms:
       - etcd
       - kube_master
   - name: ${_MOLECULE_INSTANCE_NAME}-2
-    box: alvistack/fedora-41
+    box: alvistack/fedora-43
     cpu: 2
     memory: 8192
     provider_raw_config_args:
@@ -54,7 +54,7 @@ platforms:
       - etcd
       - kube_master
   - name: ${_MOLECULE_INSTANCE_NAME}-3
-    box: alvistack/fedora-41
+    box: alvistack/fedora-43
     cpu: 2
     memory: 8192
     provider_raw_config_args:
