@@ -49,8 +49,8 @@ init with `git submodule`, then install Ansible (see
     git submodule update --init --recursive
 
     # Bootstrap Ansible
-    printf "Components:\nEnabled: yes\nX-Repolib-Name: alvistack\nSigned-By: /etc/apt/keyrings/home-alvistack.asc\nSuites: /\nTypes: deb\nURIs: http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04\n" | tee /etc/apt/sources.list.d/home-alvistack.sources > /dev/null
-    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | tee /etc/apt/keyrings/home-alvistack.asc > /dev/null
+    printf "Components:\nEnabled: yes\nX-Repolib-Name: alvistack\nSigned-By: /etc/apt/keyrings/home-alvistack.asc\nSuites: /\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04\n" | tee /etc/apt/sources.list.d/home-alvistack.sources > /dev/null
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | tee /etc/apt/keyrings/home-alvistack.asc > /dev/null
     apt update
     apt install ansible
 
