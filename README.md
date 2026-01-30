@@ -24,7 +24,7 @@ This collection was designed for:
 
 - Ubuntu 20.04, 22.04, 24.04, 25.04, 25.10
 - AlmaLinux 8, 9, 10
-- openSUSE Leap 15.6, Tumbleweed
+- openSUSE Leap 15.6, Leap 16.0, Tumbleweed
 - Debian 12, 13, Testing
 - Fedora 42, 43, Rawhide
 - CentOS 7, 8 Stream, 9 Stream, 10 Stream
@@ -49,8 +49,8 @@ init with `git submodule`, then install Ansible (see
     git submodule update --init --recursive
 
     # Bootstrap Ansible
-    printf "Components:\nEnabled: yes\nX-Repolib-Name: alvistack\nSigned-By: /etc/apt/keyrings/home-alvistack.asc\nSuites: /\nTypes: deb\nURIs: http://downloadcontent.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04\n" | tee /etc/apt/sources.list.d/home-alvistack.sources > /dev/null
-    curl -fsSL https://downloadcontent.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | tee /etc/apt/keyrings/home-alvistack.asc > /dev/null
+    printf "Components:\nEnabled: yes\nX-Repolib-Name: alvistack\nSigned-By: /etc/apt/keyrings/home-alvistack.asc\nSuites: /\nTypes: deb\nURIs: http://download.opensuse.org/repositories/home:/alvistack/xUbuntu_24.04\n" | tee /etc/apt/sources.list.d/home-alvistack.sources > /dev/null
+    curl -fsSL https://download.opensuse.org/repositories/home:alvistack/xUbuntu_24.04/Release.key | tee /etc/apt/keyrings/home-alvistack.asc > /dev/null
     apt update
     apt install ansible
 
