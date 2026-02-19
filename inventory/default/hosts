@@ -4,6 +4,21 @@ localhost ansible_host=127.0.0.1 ansible_connection=local
 [ansible]
 localhost
 
+[ceph_mon]
+localhost
+
+[ceph_mgr]
+localhost
+
+[ceph_osd]
+localhost
+
+[ceph_mds]
+localhost
+
+[ceph_rgw]
+localhost
+
 [etcd]
 localhost
 
@@ -11,7 +26,4 @@ localhost
 localhost
 
 [kube_node]
-localhost
-
-[ceph_mon]
 localhost

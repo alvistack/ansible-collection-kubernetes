@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Support Ceph 20.2 Tentacle
 - Support openSUSE Leap 16.0
 - Support RHEL 10
 - Support Fedora 43
