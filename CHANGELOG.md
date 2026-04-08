@@ -2,6 +2,7 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+- Support Ubuntu 26.04
 - Remove Ubuntu 25.04 support
 - Support Ceph 20.2 Tentacle
 - Support openSUSE Leap 16.0
