@@ -21,10 +21,10 @@
     - name: check
       ansible.builtin.shell:
         cmd: |
-          set -ex
+          set -e
           ceph crash archive-all
-          ceph health detail | grep 'HEALTH_OK'
-          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+          [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
+          [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
           [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
       when: inventory_hostname == ansible_play_hosts[0]
       register: result
@@ -39,10 +39,10 @@
         pre_reboot_delay: 60
         post_reboot_delay: 60
         test_command: |
-          set -ex
+          set -e
           ceph crash archive-all
-          ceph health detail | grep 'HEALTH_OK'
-          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+          [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
+          [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
           [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
       throttle: 1
       changed_when: false
@@ -60,7 +60,7 @@
         pre_reboot_delay: 60
         post_reboot_delay: 60
         test_command: |
-          set -ex
+          set -e
           whoami
       throttle: 1
       changed_when: false
