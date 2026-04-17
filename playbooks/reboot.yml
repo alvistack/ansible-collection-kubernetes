@@ -22,7 +22,8 @@
       ansible.builtin.shell:
         cmd: |
           cat > /tmp/test_command.sh <<\EOF
-          set -e
+          #!/bin/bash
+          set -euxo pipefail
           ceph crash archive-all
           [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
           [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
@@ -30,7 +31,6 @@
           EOF
           chmod a+x /tmp/test_command.sh
           /tmp/test_command.sh
-      when: inventory_hostname == ansible_play_hosts[0]
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
