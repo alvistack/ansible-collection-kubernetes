@@ -13,8 +13,55 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: import playbook 50-kube-reboot.yml
-  import_playbook: 50-kube-reboot.yml
+- name: reboot | !ansible
+  hosts: !ansible
+  remote_user: root
+  become: true
+  tasks:
+    - name: check
+      ansible.builtin.shell:
+        cmd: |
+          set -ex
+          ceph crash archive-all
+          ceph health detail | grep 'HEALTH_OK'
+          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
+      when: inventory_hostname == ansible_play_hosts[0]
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
 
-- name: import playbook 90-ansible-reboot.yml
-  import_playbook: 90-ansible-reboot.yml
+    - name: reboot
+      ansible.builtin.reboot:
+        connect_timeout: 300
+        reboot_timeout: 3600
+        pre_reboot_delay: 60
+        post_reboot_delay: 60
+        test_command: |
+          set -ex
+          ceph crash archive-all
+          ceph health detail | grep 'HEALTH_OK'
+          kubectl get --raw='/readyz?verbose' | grep 'check passed'
+          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
+      throttle: 1
+      changed_when: false
+      failed_when: false
+
+- name: reboot | ansible
+  hosts: ansible
+  remote_user: root
+  become: true
+  tasks:
+    - name: reboot
+      ansible.builtin.reboot:
+        connect_timeout: 300
+        reboot_timeout: 3600
+        pre_reboot_delay: 60
+        post_reboot_delay: 60
+        test_command: |
+          set -ex
+          whoami
+      throttle: 1
+      changed_when: false
+      failed_when: false
