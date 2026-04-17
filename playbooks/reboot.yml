@@ -28,7 +28,7 @@
           ceph crash archive-all
           [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
           [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
-          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
+          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -v -E '(Running|Completed)') -eq 0 ]
           EOF
           chmod a+x /.test_command.sh
           /.test_command.sh
