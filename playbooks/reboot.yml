@@ -21,7 +21,8 @@
     - name: check
       ansible.builtin.shell:
         cmd: |
-          cat > /tmp/test_command.sh <<\EOF
+          set -euxo pipefail
+          cat > /.test_command.sh <</EOF
           #!/bin/bash
           set -euxo pipefail
           ceph crash archive-all
@@ -29,8 +30,10 @@
           [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
           [ $(kubectl get pod --all-namespaces --no-headers | grep -c -E '(Pending|Failed|CrashLoopBackOff)') -eq 0 ]
           EOF
-          chmod a+x /tmp/test_command.sh
-          /tmp/test_command.sh
+          chmod a+x /.test_command.sh
+          /.test_command.sh
+      args:
+        executable: /bin/bash
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
@@ -42,7 +45,7 @@
         reboot_timeout: 3600
         pre_reboot_delay: 60
         post_reboot_delay: 60
-        test_command: /tmp/test_command.sh
+        test_command: /.test_command.sh
       throttle: 1
       changed_when: false
       failed_when: false
