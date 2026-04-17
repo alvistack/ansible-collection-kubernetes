@@ -22,7 +22,7 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          cat > /.test_command.sh <</EOF
+          cat > /.test_command.sh <<\EOF
           #!/bin/bash
           set -euxo pipefail
           ceph crash archive-all
