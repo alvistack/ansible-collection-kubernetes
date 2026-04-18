@@ -18,6 +18,12 @@
   remote_user: root
   become: true
   tasks:
+    - name: crictl rmi -aq
+      ansible.builtin.command:
+        cmd: crictl rmi -aq
+      changed_when: false
+      failed_when: false
+    
     - name: fetch image list
       ansible.builtin.shell:
         cmd: |
@@ -34,21 +40,5 @@
       ansible.builtin.command:
         cmd: crictl pull {{ item }}
       loop: "{{ result.stdout_lines }}"
-      changed_when: result is not succeeded
-
-    - name: fetch untagged image list
-      ansible.builtin.shell:
-        cmd: |
-          set -euxo pipefail
-          crictl image | grep -- '<none>' | awk -F' ' '{print $3}'
-      args:
-        executable: /bin/bash
-      register: result
       changed_when: false
       failed_when: false
-
-    - name: crictl rmi
-      ansible.builtin.command:
-        cmd: crictl rmi {{ item }}
-      loop: "{{ result.stdout_lines }}"
-      changed_when: result is not succeeded
