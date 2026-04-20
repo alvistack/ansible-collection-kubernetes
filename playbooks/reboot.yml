@@ -22,11 +22,19 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
+          cat > /.reboot_command.sh <<\EOF
+          #!/bin/bash
+          set -euxo pipefail
+          kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
+          reboot
+          EOF
+          chmod a+x /.reboot_command.sh
           cat > /.test_command.sh <<\EOF
           #!/bin/bash
           set -euxo pipefail
           ceph crash archive-all
           [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
+          kubectl uncordon $(hostname)
           [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
           [ $(kubectl get pod --all-namespaces --no-headers | grep -c -v -E '(Running|Completed)') -eq 0 ]
           EOF
@@ -45,6 +53,7 @@
         reboot_timeout: 3600
         pre_reboot_delay: 60
         post_reboot_delay: 60
+        reboot_command: /.reboot_command.sh
         test_command: /.test_command.sh
       throttle: 1
       changed_when: false
