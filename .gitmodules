@@ -86,6 +86,10 @@
 	path = roles/helm_dashboard
 	url = https://github.com/alvistack/ansible-role-helm_dashboard.git
 	branch = develop
+[submodule "roles/helm_envoy_gateway"]
+	path = roles/helm_envoy_gateway
+	url = https://github.com/alvistack/ansible-role-helm_envoy_gateway.git
+	branch = develop
 [submodule "roles/helm_flannel"]
 	path = roles/helm_flannel
 	url = https://github.com/alvistack/ansible-role-helm_flannel.git
@@ -97,6 +101,10 @@
 [submodule "roles/helm_metallb"]
 	path = roles/helm_metallb
 	url = https://github.com/alvistack/ansible-role-helm_metallb.git
+	branch = develop
+[submodule "roles/helm_nginx_gateway_fabric"]
+	path = roles/helm_nginx_gateway_fabric
+	url = https://github.com/alvistack/ansible-role-helm_nginx_gateway_fabric.git
 	branch = develop
 [submodule "roles/kernel"]
 	path = roles/kernel
