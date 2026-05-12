@@ -58,6 +58,10 @@
 	path = roles/helm
 	url = https://github.com/alvistack/ansible-role-helm.git
 	branch = develop
+[submodule "roles/helm_awx_operator"]
+	path = roles/helm_awx_operator
+	url = https://github.com/alvistack/ansible-role-helm_awx_operator.git
+	branch = develop
 [submodule "roles/helm_cert_manager"]
 	path = roles/helm_cert_manager
 	url = https://github.com/alvistack/ansible-role-helm_cert_manager.git
