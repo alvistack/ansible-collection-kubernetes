@@ -98,6 +98,10 @@
 	path = roles/helm_flannel
 	url = https://github.com/alvistack/ansible-role-helm_flannel.git
 	branch = develop
+[submodule "roles/helm_gitlab"]
+	path = roles/helm_gitlab
+	url = https://github.com/alvistack/ansible-role-helm_gitlab.git
+	branch = develop
 [submodule "roles/helm_ingress_nginx"]
 	path = roles/helm_ingress_nginx
 	url = https://github.com/alvistack/ansible-role-helm_ingress_nginx.git
