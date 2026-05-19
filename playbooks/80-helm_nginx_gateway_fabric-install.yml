@@ -13,8 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: 50-kube-reboot | kube_master:kube_node:!ansible:!ceph_mon
-  hosts: kube_master:kube_node:!ansible:!ceph_mon
+- name: 80-helm_nginx_gateway_fabric-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
@@ -25,19 +25,22 @@
           kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
         executable: /bin/bash
-      when: inventory_hostname == ansible_play_hosts[0]
+      when: inventory_hostname == groups['kube_master'][0]
       register: result
       changed_when: result is not succeeded
       until: result is succeeded
       retries: 60
 
-    - name: reboot
-      ansible.builtin.reboot:
-        connect_timeout: 300
-        reboot_timeout: 3600
-        pre_reboot_delay: 60
-        post_reboot_delay: 60
-        test_command: bash -c "kubectl get --raw='/readyz?verbose' | grep 'check passed'"
-      throttle: 1
-      changed_when: false
-      failed_when: false
+    - name: kubectl version --output=yaml
+      ansible.builtin.command:
+        cmd: kubectl version --output=yaml
+      register: result
+      changed_when: result is not succeeded
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm_nginx_gateway_fabric

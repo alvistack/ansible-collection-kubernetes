@@ -13,8 +13,64 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: import playbook 50-kube-reboot.yml
-  import_playbook: 50-kube-reboot.yml
+- name: reboot | all:!ansible
+  hosts: all:!ansible
+  remote_user: root
+  become: true
+  tasks:
+    - name: check
+      ansible.builtin.shell:
+        cmd: |
+          set -euxo pipefail
+          cat > /.reboot_command.sh <<\EOF
+          #!/bin/bash
+          set -euxo pipefail
+          kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
+          reboot
+          EOF
+          chmod a+x /.reboot_command.sh
+          cat > /.test_command.sh <<\EOF
+          #!/bin/bash
+          set -euxo pipefail
+          ceph crash archive-all
+          [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
+          kubectl uncordon $(hostname)
+          [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
+          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -v -E '(Running|Completed)') -eq 0 ]
+          EOF
+          chmod a+x /.test_command.sh
+          /.test_command.sh
+      args:
+        executable: /bin/bash
+      register: result
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
 
-- name: import playbook 90-ansible-reboot.yml
-  import_playbook: 90-ansible-reboot.yml
+    - name: reboot
+      ansible.builtin.reboot:
+        connect_timeout: 300
+        reboot_timeout: 3600
+        pre_reboot_delay: 60
+        post_reboot_delay: 60
+        reboot_command: /.reboot_command.sh
+        test_command: /.test_command.sh
+      throttle: 1
+      changed_when: false
+      failed_when: false
+
+- name: reboot | ansible
+  hosts: ansible
+  remote_user: root
+  become: true
+  tasks:
+    - name: reboot
+      ansible.builtin.reboot:
+        connect_timeout: 300
+        reboot_timeout: 3600
+        pre_reboot_delay: 60
+        post_reboot_delay: 60
+        test_command: whoami
+      throttle: 1
+      changed_when: false
+      failed_when: false

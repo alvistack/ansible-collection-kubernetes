@@ -13,32 +13,34 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-- name: crictl-pull | kube_master:kube_node
-  hosts: kube_master:kube_node
+- name: 80-helm_ingress_nginx-install | kube_master
+  hosts: kube_master
   remote_user: root
   become: true
   tasks:
-    - name: crictl rmi -aq
-      ansible.builtin.command:
-        cmd: crictl rmi -aq
-      changed_when: false
-      failed_when: false
-    
-    - name: fetch image list
+    - name: kubectl get --raw='/readyz?verbose'
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          kubectl get pods --all-namespaces -o jsonpath="{.items[*].spec.containers[*].image}" | tr -s '[[:space:]]' '\n' | sed 's/^docker.io\///g' | sort -u
+          kubectl get --raw='/readyz?verbose' | grep 'check passed'
       args:
         executable: /bin/bash
+      when: inventory_hostname == groups['kube_master'][0]
       register: result
-      delegate_to: "{{ groups['kube_master'][0] }}"
-      changed_when: false
-      failed_when: false
+      changed_when: result is not succeeded
+      until: result is succeeded
+      retries: 60
 
-    - name: crictl pull image
+    - name: kubectl version --output=yaml
       ansible.builtin.command:
-        cmd: crictl pull {{ item }}
-      loop: "{{ result.stdout_lines }}"
-      changed_when: false
-      failed_when: false
+        cmd: kubectl version --output=yaml
+      register: result
+      changed_when: result is not succeeded
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm
+
+    - name: include role
+      ansible.builtin.include_role:
+        name: helm_awx_operator
