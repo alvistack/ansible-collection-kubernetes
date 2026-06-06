@@ -2,6 +2,9 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20260606.1.1 - 2026-06-06
+
+- Support Ansible community package 14.0.0
 - Support Ubuntu 26.04
 - Remove Ubuntu 25.04 support
 - Support Ceph 20.2 Tentacle
