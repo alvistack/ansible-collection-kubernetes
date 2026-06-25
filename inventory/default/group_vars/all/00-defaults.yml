@@ -18,4 +18,4 @@
 ceph_release: "20.2"
 
 # kube_master
-kube_release: "1.35"
+kube_release: "1.36"
