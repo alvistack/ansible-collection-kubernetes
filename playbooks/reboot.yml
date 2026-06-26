@@ -25,18 +25,31 @@
           cat > /.reboot_command.sh <<\EOF
           #!/bin/bash
           set -euxo pipefail
-          kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
+          if [[ -x "$(command -v kubectl)" ]]; then
+            kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
+            systemctl stop kubelet.service
+            crictl ps -aq | xargs crictl rm
+            systemctl stop crio.service
+          fi
+          if [[ -x "$(command -v ceph)" ]]; then
+            umount -lfa -t ceph
+            systemctl stop ceph.target
+          fi
           reboot
           EOF
           chmod a+x /.reboot_command.sh
           cat > /.test_command.sh <<\EOF
           #!/bin/bash
           set -euxo pipefail
-          ceph crash archive-all
-          [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
-          kubectl uncordon $(hostname)
-          [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
-          [ $(kubectl get pod --all-namespaces --no-headers | grep -c -v -E '(Running|Completed)') -eq 0 ]
+          if [[ -x "$(command -v ceph)" ]]; then
+            ceph crash archive-all
+            [ $(ceph health detail | grep -c 'HEALTH_OK') -eq 1 ]
+          fi
+          if [[ -x "$(command -v kubectl)" ]]; then
+            kubectl uncordon $(hostname)
+            [ $(kubectl get --raw='/readyz?verbose' | grep -c 'check passed') -eq 1 ]
+            [ $(kubectl get pod --all-namespaces --no-headers | grep -c -v -E '(Running|Completed)') -eq 0 ]
+          fi
           EOF
           chmod a+x /.test_command.sh
           /.test_command.sh
