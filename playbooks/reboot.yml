@@ -28,7 +28,7 @@
           if [[ -x "$(command -v kubectl)" ]]; then
             kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
             systemctl stop kubelet.service
-            crictl ps -aq | xargs crictl rm
+            crictl ps -aq | xargs crictl rm --force
             systemctl stop crio.service
           fi
           if [[ -x "$(command -v ceph)" ]]; then
