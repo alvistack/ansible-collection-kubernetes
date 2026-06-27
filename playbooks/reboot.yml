@@ -27,13 +27,13 @@
           set -euxo pipefail
           if [[ -x "$(command -v kubectl)" ]]; then
             kubectl drain $(hostname) --force --delete-emptydir-data --ignore-daemonsets --disable-eviction
-            systemctl stop kubelet.service
+            systemctl stop kubelet.service --wait
             crictl ps -aq | xargs crictl rm --force
-            systemctl stop crio.service
+            systemctl stop crio.service --wait
           fi
           if [[ -x "$(command -v ceph)" ]]; then
             umount -lfa -t ceph
-            systemctl stop ceph.target
+            systemctl stop ceph.target --wait
           fi
           reboot
           EOF
