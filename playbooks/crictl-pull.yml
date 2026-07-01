@@ -23,7 +23,7 @@
         cmd: crictl rmi -aq
       changed_when: false
       failed_when: false
-    
+
     - name: fetch image list
       ansible.builtin.shell:
         cmd: |
