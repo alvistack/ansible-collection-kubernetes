@@ -16,11 +16,8 @@
 - name: import playbook ../../playbooks/60-helm_cilium-install.yml
   import_playbook: ../../playbooks/60-helm_cilium-install.yml
 
-- name: import playbook ../../playbooks/50-kube-reboot.yml
-  import_playbook: ../../playbooks/50-kube-reboot.yml
-
-- name: import playbook ../../playbooks/90-ansible-reboot.yml
-  import_playbook: ../../playbooks/90-ansible-reboot.yml
+- name: import playbook ../../playbooks/reboot.yml
+  import_playbook: ../../playbooks/reboot.yml
 
 - name: import playbook ../../playbooks/verify.yml
   import_playbook: ../../playbooks/verify.yml
