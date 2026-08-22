@@ -73,7 +73,7 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph mon set auth_allowed_ciphers aes,aes256k
+          ceph mon set auth_allowed_ciphers aes,aes256k >/dev/null 2>&1
           ceph auth get-or-create client.csi-cephfs \
             mds 'allow *' \
             mgr 'allow *' \
