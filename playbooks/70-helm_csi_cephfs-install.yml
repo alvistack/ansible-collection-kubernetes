@@ -74,13 +74,13 @@
         cmd: |
           set -euxo pipefail
           ceph mon set auth_allowed_ciphers aes,aes256k
-          ceph auth get-or-create client.{{ helm_csi_cephfs_user_id }} \
+          ceph auth get-or-create client.csi-cephfs \
             mds 'allow *' \
             mgr 'allow *' \
             mon 'allow *' \
             osd 'allow *' \
             --key_type=aes >/dev/null 2>&1
-          ceph auth get-key client.{{ helm_csi_cephfs_user_id }} \
+          ceph auth get-key client.csi-cephfs \
             --format plain
       args:
         executable: /bin/bash
