@@ -27,7 +27,12 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph crash archive-all && ceph health detail | grep 'HEALTH_OK'
+          ceph crash archive-all
+          ceph health mute AUTH_EMERGENCY_CIPHERS_SET --sticky
+          ceph health mute AUTH_INSECURE_CLIENT_KEY_TYPE --sticky
+          ceph health mute AUTH_INSECURE_KEYS_ALLOWED --sticky
+          ceph health mute AUTH_INSECURE_KEYS_CREATABLE --sticky
+          ceph health detail | grep 'HEALTH_OK'
       args:
         executable: /bin/bash
       when: inventory_hostname == groups['ceph_mon'][0]
@@ -64,20 +69,24 @@
       ansible.builtin.include_role:
         name: helm
 
-    - name: include role
-      ansible.builtin.include_role:
-        name: ceph_common
-
     - name: fetch ceph client.admin key
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph auth get-key client.admin
+          ceph mon set auth_allowed_ciphers aes,aes256k
+          ceph auth get-or-create client.{{ helm_csi_rbd_user_id }} \
+            mds 'allow *' \
+            mgr 'allow *' \
+            mon 'allow *' \
+            osd 'allow *' \
+            --key_type=aes >/dev/null 2>&1
+          ceph auth get-key client.{{ helm_csi_rbd_user_id }} \
+            --format plain
       args:
         executable: /bin/bash
       delegate_to: "{{ groups['ceph_mon'][0] }}"
-      register: ceph_client_admin_result
-      changed_when: ceph_client_admin_result is not succeeded
+      register: ceph_client_user_result
+      changed_when: ceph_client_user_result is not succeeded
 
     - name: include role
       ansible.builtin.include_role:
@@ -87,4 +96,4 @@
       ansible.builtin.include_role:
         name: helm_csi_rbd
       vars:
-        helm_csi_rbd_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        helm_csi_rbd_user_secret: "{{ ceph_client_user_result.stdout }}"

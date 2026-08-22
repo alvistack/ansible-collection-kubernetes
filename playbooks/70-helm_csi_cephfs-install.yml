@@ -69,20 +69,24 @@
       ansible.builtin.include_role:
         name: helm
 
-    - name: include role
-      ansible.builtin.include_role:
-        name: ceph_common
-
-    - name: fetch ceph client.admin key
+    - name: fetch ceph client.csi-cephfs key
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph auth get-key client.admin
+          ceph mon set auth_allowed_ciphers aes,aes256k
+          ceph auth get-or-create client.{{ helm_csi_cephfs_user_id }} \
+            mds 'allow *' \
+            mgr 'allow *' \
+            mon 'allow *' \
+            osd 'allow *' \
+            --key_type=aes >/dev/null 2>&1
+          ceph auth get-key client.{{ helm_csi_cephfs_user_id }} \
+            --format plain
       args:
         executable: /bin/bash
       delegate_to: "{{ groups['ceph_mon'][0] }}"
-      register: ceph_client_admin_result
-      changed_when: ceph_client_admin_result is not succeeded
+      register: ceph_client_user_result
+      changed_when: ceph_client_user_result is not succeeded
 
     - name: include role
       ansible.builtin.include_role:
@@ -92,4 +96,4 @@
       ansible.builtin.include_role:
         name: helm_csi_cephfs
       vars:
-        helm_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        helm_csi_cephfs_user_secret: "{{ ceph_client_user_result.stdout }}"

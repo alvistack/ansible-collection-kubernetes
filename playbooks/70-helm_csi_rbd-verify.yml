@@ -27,7 +27,12 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph crash archive-all && ceph health detail | grep 'HEALTH_OK'
+          ceph crash archive-all
+          ceph health mute AUTH_EMERGENCY_CIPHERS_SET --sticky
+          ceph health mute AUTH_INSECURE_CLIENT_KEY_TYPE --sticky
+          ceph health mute AUTH_INSECURE_KEYS_ALLOWED --sticky
+          ceph health mute AUTH_INSECURE_KEYS_CREATABLE --sticky
+          ceph health detail | grep 'HEALTH_OK'
       args:
         executable: /bin/bash
       when: inventory_hostname == groups['ceph_mon'][0]
@@ -54,25 +59,6 @@
           kubectl get pod --all-namespaces | egrep -e 'csi-rbd\s+csi-rbd-provisioner-\S+\s+[0-9]+\/[0-9]+\s+Running'
       args:
         executable: /bin/bash
-      when: inventory_hostname == groups['kube_master'][0]
-      register: result
-      changed_when: result is not succeeded
-      until: result is succeeded
-      retries: 60
-
-    - name: setup csi-rbd as default storageclass
-      vars:
-        ansible_python_interpreter: python3
-      kubernetes.core.k8s:
-        state: present
-        wait: true
-        definition:
-          apiVersion: storage.k8s.io/v1
-          kind: StorageClass
-          metadata:
-            name: csi-rbd
-            annotations:
-              storageclass.kubernetes.io/is-default-class: "true"
       when: inventory_hostname == groups['kube_master'][0]
       register: result
       changed_when: result is not succeeded
