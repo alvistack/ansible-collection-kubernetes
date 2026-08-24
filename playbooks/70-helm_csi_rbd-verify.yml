@@ -28,10 +28,6 @@
         cmd: |
           set -euxo pipefail
           ceph crash archive-all
-          ceph health mute AUTH_EMERGENCY_CIPHERS_SET --sticky
-          ceph health mute AUTH_INSECURE_CLIENT_KEY_TYPE --sticky
-          ceph health mute AUTH_INSECURE_KEYS_ALLOWED --sticky
-          ceph health mute AUTH_INSECURE_KEYS_CREATABLE --sticky
           ceph health detail | grep 'HEALTH_OK'
       args:
         executable: /bin/bash

@@ -28,10 +28,6 @@
         cmd: |
           set -euxo pipefail
           ceph crash archive-all
-          ceph health mute AUTH_EMERGENCY_CIPHERS_SET --sticky
-          ceph health mute AUTH_INSECURE_CLIENT_KEY_TYPE --sticky
-          ceph health mute AUTH_INSECURE_KEYS_ALLOWED --sticky
-          ceph health mute AUTH_INSECURE_KEYS_CREATABLE --sticky
           ceph health detail | grep 'HEALTH_OK'
       args:
         executable: /bin/bash
@@ -69,19 +65,15 @@
       ansible.builtin.include_role:
         name: helm
 
+    - name: include role
+      ansible.builtin.include_role:
+        name: ceph_common
+
     - name: fetch ceph client.admin key
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph mon set auth_allowed_ciphers aes,aes256k >/dev/null 2>&1
-          ceph auth get-or-create client.csi-rbd \
-            mds 'allow *' \
-            mgr 'allow *' \
-            mon 'allow *' \
-            osd 'allow *' \
-            --key_type=aes >/dev/null 2>&1
-          ceph auth get-key client.csi-rbd \
-            --format plain
+          ceph auth get-key client.admin
       args:
         executable: /bin/bash
       delegate_to: "{{ groups['ceph_mon'][0] }}"
