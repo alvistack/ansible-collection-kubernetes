@@ -27,7 +27,8 @@
       ansible.builtin.shell:
         cmd: |
           set -euxo pipefail
-          ceph crash archive-all && ceph health detail | grep 'HEALTH_OK'
+          ceph crash archive-all
+          ceph health detail | grep 'HEALTH_OK'
       args:
         executable: /bin/bash
       when: inventory_hostname == groups['ceph_mon'][0]
@@ -76,8 +77,8 @@
       args:
         executable: /bin/bash
       delegate_to: "{{ groups['ceph_mon'][0] }}"
-      register: ceph_client_admin_result
-      changed_when: ceph_client_admin_result is not succeeded
+      register: ceph_client_user_result
+      changed_when: ceph_client_user_result is not succeeded
 
     - name: include role
       ansible.builtin.include_role:
@@ -87,4 +88,4 @@
       ansible.builtin.include_role:
         name: helm_csi_cephfs
       vars:
-        helm_csi_cephfs_admin_secret: "{{ ceph_client_admin_result.stdout }}"
+        helm_csi_cephfs_user_secret: "{{ ceph_client_user_result.stdout }}"
