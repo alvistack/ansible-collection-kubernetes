@@ -2,9 +2,9 @@
 
 set -euxo pipefail
 
-# 1. Audit /etc configuration files to ensure fuse-overlayfs is strictly commented out
+# 1. Audit /etc configuration files for active (uncommented) fuse-overlayfs lines
 echo "=== Auditing /etc/ configuration files for uncommented fuse-overlayfs references ==="
-UNCOMMENTED_FUSE=$(find /etc/ -type f -exec fgrep -nH "fuse-overlayfs" {} + | grep -v '^[[:space:]]*#' || true)
+UNCOMMENTED_FUSE=$(find /etc/ -type f | xargs fgrep -nH "fuse-overlayfs" | grep -v -E ':[0-9]+:\s*#' || true)
 
 if [ -n "${UNCOMMENTED_FUSE}" ]; then
   echo "ERROR: Active (uncommented) fuse-overlayfs directive found in /etc/ configuration files:"
@@ -16,7 +16,7 @@ echo "Audit passed: All fuse-overlayfs directives in /etc are safely commented o
 # 2. Stop container services
 systemctl stop crio kubelet podman || true
 
-# 3. Unmount all active fuse-overlayfs mounts (|| true prevents exit if grep finds 0 mounts)
+# 3. Unmount all active fuse-overlayfs mounts
 cut -d ' ' -f 2 /proc/mounts | grep '/var/lib/containers/storage/overlay' | xargs -r umount -l || true
 
 # 4. Terminate lingering fuse processes
