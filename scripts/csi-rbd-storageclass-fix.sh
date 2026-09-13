@@ -12,7 +12,7 @@ fi
 
 # 2. Patch each RBD PV directly with the optimized block mount options
 echo "=== Patching spec.mountOptions on Ceph RBD PVs ==="
-echo "${RBD_PVS}" | xargs -I {} kubectl patch pv {} --type=merge -p '{"spec":{"mountOptions":["noatime","nodiratime","discard","barrier=0","commit=60"]}}'
+echo "${RBD_PVS}" | xargs -I {} kubectl patch pv {} --type=merge -p '{"spec":{"mountOptions":["noatime","discard","barrier=0","commit=60"]}}'
 
 # 3. Verify that spec.mountOptions is applied to the PV manifests
 echo "=== Verifying updated RBD PV specifications ==="

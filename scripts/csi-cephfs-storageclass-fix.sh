@@ -12,7 +12,7 @@ fi
 
 # 2. Patch each PV directly with the optimized mount options
 echo "=== Patching spec.mountOptions on CephFS PVs ==="
-echo "${CEPHFS_PVS}" | xargs -I {} kubectl patch pv {} --type=merge -p '{"spec":{"mountOptions":["noatime","nodiratime","rsize=16777216","wsize=16777216","readdir_max_bytes=4194304"]}}'
+echo "${CEPHFS_PVS}" | xargs -I {} kubectl patch pv {} --type=merge -p '{"spec":{"mountOptions":["noatime","rsize=16777216","wsize=16777216","readdir_max_bytes=4194304"]}}'
 
 # 3. Verify that spec.mountOptions is applied to the PV manifests
 echo "=== Verifying updated PV specifications ==="
