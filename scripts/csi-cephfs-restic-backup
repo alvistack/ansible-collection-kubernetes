@@ -53,7 +53,7 @@ restic init \
 fi
 
 # CEPHFS - Snapshot
-mount $CEPHFS_DIR || echo $?
+findmnt -qs "$CEPHFS_DIR" || mount "$CEPHFS_DIR"
 mkdir -p $CEPHFS_SNAPSHOT_DIR
 
 # RESTIC - Backup
