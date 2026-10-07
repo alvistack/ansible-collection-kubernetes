@@ -2,6 +2,10 @@
 
 ## YYYYMMDD.Y.Z - TBC
 
+## 20261007.1.1 - 2026-10-07
+
+- Support Ansible community package 14.5.0
+
 ## 20260606.1.1 - 2026-06-06
 
 - Support Ansible community package 14.0.0
